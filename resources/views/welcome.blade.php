@@ -9,17 +9,17 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-violet-900 text-white">
+<body class="bg-grape-950 text-white">
     <header>
-        <nav class="flex justify-between items-center gap-2 bg-violet-950 p-4 border-white border-b">
+        <nav class="flex justify-between items-center gap-2 bg-fuchsia-700 p-4 border-white border-b">
             <span>
                 <a href="/">Online Coffee</a>
             </span>
             <ul class="flex justify-center gap-2 md:gap-4 lg:gap-8">
-                <li><a href="/">Inicio</a></li>
-                <li><a href="/productos">Productos</a></li>
-                <li><a href="/tiendas">Tiendas</a></li>
-                <li><a href="/reservas">Reservas</a></li>
+                <x-header-link url="/" text="Inicio" />
+                <x-header-link url="/productos" text="Productos" />
+                <x-header-link url="/tienda" text="Tienda" />
+                <x-header-link url="/reservas" text="Reservas" />
             </ul>
             @if (Route::has('login'))
                 <div class="flex justify-center gap-2">
@@ -30,17 +30,12 @@
                             Dashboard
                         </a>
                     @else
-                        <a href="{{ route('login') }}"
-                            class="bg-purple-100 text-black rounded-lg font-semibold px-4 py-2 flex-1 whitespace-nowrap">
-                            Iniciar Sesión
-                        </a>
-
+                        <x-auth-header-button url="{{ route('login') }}" text="Iniciar sesión" />
+                        {{-- 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}"
-                                class="bg-purple-100 text-black rounded-lg font-semibold px-4 py-2 flex-1 whitespace-nowrap">
-                                Regístrate
-                            </a>
-                        @endif
+                            <x-auth-header-button url="{{ route('register') }}" text="Registrarse" />
+                        @endif 
+                        --}}
 
                     @endauth
                 </div>
@@ -85,7 +80,7 @@
             </aside>
         </section>
     </main>
-    <footer class="flex flex-col items-center gap-4 bg-purple-950 border-white border-t p-8">
+    <footer class="flex flex-col items-center gap-4 bg-azure-800 border-white border-t p-8">
         <section class="flex justify-between gap-2 w-full ">
             <div>
                 <p>Aquí no hay limites</p>
