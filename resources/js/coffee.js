@@ -20,56 +20,56 @@ const light4 = new THREE.PointLight(0x6366f1, 10);
 light4.position.set(-1, 1, -1.5);
 scene.add(light4);
 
-const ambientLight = new THREE.AmbientLight(0x5b21b6);
+const light5 = new THREE.SpotLight(0xf1abfc, 20);
+light5.position.set(0, 3, 0);
+scene.add(light5);  
+
+const ambientLight = new THREE.AmbientLight(0x691a75);
 scene.add(ambientLight);
 
 const camera = new THREE.PerspectiveCamera(
-  75,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  1000
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
 );
-camera.position.set(0.8, 1.4, 1.0);
+camera.position.set(1, 1.8, 1);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, canvas: document.getElementById("coffee") });
 renderer.setSize(window.innerWidth, window.innerHeight);
-const container = document.getElementById("coffee");
-container.appendChild(renderer.domElement);
-
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.target.set(0, 1, 0);
 
 const fbxLoader = new GLTFLoader();
 
 const coffee = await new Promise((resolve, reject) => {
-    fbxLoader.load(
-        "/models/coffee.glb", resolve, undefined, reject
-      );
-})
+    fbxLoader.load("/models/coffee.glb", resolve, undefined, reject);
+});
+
+coffee.scene.position.set(0, 0, 0);
 
 coffee.scene.scale.set(0.1, 0.1, 0.1);
+
+camera.lookAt(coffee.scene.position);
 
 scene.add(coffee.scene);
 
 window.addEventListener("resize", onWindowResize, false);
 function onWindowResize() {
-  const container = document.getElementById("coffee");
-  const width = window.innerWidth;
-  const height = container.clientHeight;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
     camera.aspect = width / height;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, height);
-  render();
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+    render();
 }
 
 function animate() {
-  requestAnimationFrame(animate);
-  controls.update();
-  render();
+    requestAnimationFrame(animate);
+    coffee.scene.rotation.y += 0.005;
+    render();
 }
 
 function render() {
-  renderer.render(scene, camera);
+    renderer.render(scene, camera);
 }
 
 animate();
