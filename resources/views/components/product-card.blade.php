@@ -1,7 +1,7 @@
-<li class="bg-white p-2 text-black">
+<li class="bg-white p-2 text-black rounded-sm">
     <img class="rounded-md" src="{{ $image }}" alt="{{ $text }}">
-    <div class="flex justify-between">
-        <div>
+    <div class="flex justify-between p-2">
+        <div class="">
             <h2 class="text-fuchsia-900 font-semibold">{{ $text }}</h2>
             <p class="text-red-700 font-bold">{{ $precio }}</p>
         </div>

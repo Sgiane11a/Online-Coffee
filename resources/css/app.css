@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-display: swap;
+    font-family: 'Vibur';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/vibur-v23-latin-regular.woff2') format('woff2');
+  }
+
 [x-cloak] {
     display: none;
 }
@@ -10,4 +18,54 @@ body {
     min-height: 100dvh;
     display: grid;
     grid-template-rows: auto 1fr auto;
+}
+
+.bg-gradient-header {
+    background: linear-gradient(
+        #561d95,
+        #351065
+    );
+}
+.bg-gradient-section {
+    background: radial-gradient(
+        #691a75 0%,
+        #44044e 40%,
+        #351065 100%
+    );
+}
+
+.title {
+    padding-inline: 2.5rem;
+    font-family: "Vibur";
+    color: #fff;
+    animation: pulsate 25s ease-in-out infinite;
+}
+
+@keyframes pulsate {
+    9%,
+    10%,
+    25%,
+    30%,
+    32%,
+    40%,
+    46% {
+        color: #f8d0fe;
+        text-shadow: none;
+    }
+
+    0%,
+    9.1%,
+    10.1%,
+    20.1%,
+    25.1%,
+    30.1%,
+    32.1%,
+    40.1%,
+    46.1%,
+    100% {
+        color: #fff;
+        text-shadow:  0 0 5px #d946ef, 0 0 10px #d946ef, 0 0 20px #bc26d3, 0 0 40px #bc26d3,
+            0 0 80px #bc26d3, 0 0 160px #bc26d3;
+    }
+
 }
