@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const scene = new THREE.Scene();
@@ -22,7 +21,7 @@ scene.add(light4);
 
 const light5 = new THREE.SpotLight(0xf1abfc, 20);
 light5.position.set(0, 3, 0);
-scene.add(light5);  
+scene.add(light5);
 
 const ambientLight = new THREE.AmbientLight(0x691a75);
 scene.add(ambientLight);
@@ -35,7 +34,11 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.set(1, 1.8, 1);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, canvas: document.getElementById("coffee") });
+const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true,
+    canvas: document.getElementById("coffee"),
+});
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 const fbxLoader = new GLTFLoader();
@@ -64,7 +67,7 @@ function onWindowResize() {
 
 function animate() {
     requestAnimationFrame(animate);
-    coffee.scene.rotation.y += 0.005;
+    coffee.scene.rotation.y += 0.0025;
     render();
 }
 
