@@ -1,8 +1,8 @@
-@extends('layouts.index')
+@extends('layouts.home')
 
 @vite(['resources/js/coffee.js', 'resources/js/slider.js'])
 
-@section('content')
+@section('main')
     <main class="">
         <section class="flex justify-center items-center border-b-2 border-azure-100 py-12 bg-gradient-section">
             <div class="flex flex-col justify-center items-center">
@@ -13,7 +13,7 @@
         {{-- <section class="flex justify-center items-center border-b-2 border-azure-100 p-4">
             <aside class="flex flex-col justify-center items-center gap-8 text-center">
                 <h1 class="text-3xl font-bold">¡Obtén varios beneficios aquí!</h1>
-                <a class="bg-purple-100 text-black rounded-lg font-semibold px-4 py-2" href="">Quiero ser
+                <a class="bg-fuchsia-100 text-black rounded-lg font-semibold px-4 py-2" href="">Quiero ser
                     miembro</a>
             </aside> -->
         </section> --}}

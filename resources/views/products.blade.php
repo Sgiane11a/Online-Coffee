@@ -3,7 +3,7 @@
 @section('content')
     <main class="px-4 py-8">
         <section class="flex flex-col gap-16">
-            <h1 class="text-5xl text-center font-extrabold">Productos</h1>
+            <h1 class="text-8xl text-center font-extrabold title">Productos</h1>
             <ul class="flex gap-6 justify-center">
                 <x-product-button url="/snaksSalado" text="Snaks Salados" variant='default' />
                 <x-product-button url="/bebidas" text="Bebidas" variant='default' />

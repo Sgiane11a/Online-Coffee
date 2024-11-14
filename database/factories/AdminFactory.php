@@ -2,22 +2,22 @@
 
 namespace Database\Factories;
 
-use App\Models\Administrator;
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Administrator>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Admin>
  */
-class AdministratorFactory extends Factory
+class AdminFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Administrator::class;
+    protected $model = Admin::class;
 
     /**
      * The current password being used by the factory.
