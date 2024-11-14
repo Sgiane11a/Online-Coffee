@@ -19,7 +19,6 @@ Route::middleware([
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
-
     Route::middleware('guest:admin')->group(function () {
         Route::get('login', [AdminController::class, 'create'])
             ->name('login');
