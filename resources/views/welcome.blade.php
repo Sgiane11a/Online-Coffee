@@ -1,7 +1,8 @@
-@extends('layouts.index')
-@vite(['resources/js/coffee.js'])
+@extends('layouts.home')
 
-@section('content')
+@vite(['resources/js/coffee.js', 'resources/js/slider.js'])
+
+@section('main')
     <main class="">
         <section class="flex justify-center items-center border-b-2 border-azure-100 py-12 bg-gradient-section">
             <div class="flex flex-col justify-center items-center">
@@ -12,12 +13,32 @@
         {{-- <section class="flex justify-center items-center border-b-2 border-azure-100 p-4">
             <aside class="flex flex-col justify-center items-center gap-8 text-center">
                 <h1 class="text-3xl font-bold">¡Obtén varios beneficios aquí!</h1>
-                <a class="bg-purple-100 text-black rounded-lg font-semibold px-4 py-2" href="">Quiero ser
+                <a class="bg-fuchsia-100 text-black rounded-lg font-semibold px-4 py-2" href="">Quiero ser
                     miembro</a>
             </aside> -->
         </section> --}}
-        <section class="flex justify-center border-b-2 border-azure-100 h-96">
-            <h1>My carrousel - tamaño por el momento xd</h1>
+        <section class="flex justify-center border-b-2 border-azure-100">
+            <div id="welcome-slide" class="splide" aria-labelledby="carousel-heading">
+                <div class="splide__arrows z-30 absolute flex justify-between items-center h-full w-full p-2">
+                    <button class="splide__arrow splide__arrow--prev">
+                        <svg class="h-16 text-fuchsia-900 bg-fuchsia-100 rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M2 12A10 10 0 0 1 12 2a10 10 0 0 1 10 10a10 10 0 0 1-10 10A10 10 0 0 1 2 12m16-1h-8l3.5-3.5l-1.42-1.42L6.16 12l5.92 5.92l1.42-1.42L10 13h8z"/></svg>
+                    </button>
+                    <button class="splide__arrow splide__arrow--next">
+                        <svg class="h-16 text-fuchsia-900 bg-fuchsia-100 rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12A10 10 0 0 1 12 2a10 10 0 0 1 10 10M6 13h8l-3.5 3.5l1.42 1.42L17.84 12l-5.92-5.92L10.5 7.5L14 11H6z"/></svg>
+                    </button>
+                </div>
+
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />
+                        <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />
+                        <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />
+                        <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />
+                        <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />
+                        <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />
+                    </ul>
+                </div>
+            </div>
         </section>
         <section class="flex justify-center items-center gap-8 py-8 px-32 h-96">
             <div class="grid grid-cols-2 gap-2">
