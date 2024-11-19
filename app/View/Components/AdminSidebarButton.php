@@ -6,20 +6,20 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ProductCard extends Component
+class AdminSidebarButton extends Component
 {
+    public string $url;
+    public string $icon;
+    public string $text;
+
     /**
      * Create a new component instance.
      */
-    public $image;
-    public $text;
-    public $precio;
-
-    public function __construct($image, $text, $precio)
+    public function __construct($url, $icon, $text)
     {
-        $this->image = $image;
+        $this->url = $url;
+        $this->icon = $icon;
         $this->text = $text;
-        $this->precio = $precio;
     }
 
     /**
@@ -27,6 +27,6 @@ class ProductCard extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.product-card');
+        return view('components.admin-sidebar-button');
     }
 }
