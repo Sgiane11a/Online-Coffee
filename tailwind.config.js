@@ -27,7 +27,7 @@ export default {
                     900: "#561d95",
                     950: "#351065",
                 },
-                azure: {
+                blueberry: {
                     50: "#eff5ff",
                     100: "#dbe8fe",
                     200: "#bfd7fe",
@@ -40,7 +40,7 @@ export default {
                     900: "#1e478a",
                     950: "#172e54",
                 },
-                fuchsia: {
+                raspberry: {
                     50: "#fef4ff",
                     100: "#fce8ff",
                     200: "#f8d0fe",

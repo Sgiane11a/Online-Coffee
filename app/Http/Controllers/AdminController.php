@@ -7,14 +7,27 @@ use App\Http\Requests\Auth\AdminLoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\User;
+
 
 class AdminController extends Controller
 {
     public function dashboard(): View
     {
-        return view('admin.dashboard');
+        $totalUsers = User::count();
+        return view('admin.dashboard', compact('totalUsers'));
     }
-    
+
+    public function shop(): View
+    {
+        return view('admin.store.index');
+    }
+
+    public function forum(): View
+    {
+        return view('admin.forum');
+    }
+
     /**
      * Display the login view.
      */
