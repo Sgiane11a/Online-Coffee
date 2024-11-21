@@ -23,19 +23,20 @@ Sigue estos pasos para instalar y configurar el proyecto:
 
     ```bash
     git clone https://github.com/tu_usuario/nombre_de_tu_fork.git
+    cd nombre_de_tu_fork
     ```
 
 2. **Instala las Dependencias de PHP:**
 
     ```bash
-    cd nombre_de_tu_fork
     composer install
     ```
 
 3. **Configuración del Entorno:**
 
-    - Copia el archivo `.env.example` y renómbralo como `.env`.
-    (mv .env.example .env)
+    ```bash
+    php init
+    ```
 
 4. **Genera una Clave:**
 

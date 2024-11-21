@@ -1,0 +1,23 @@
+<?php
+
+// Definir las rutas de los archivos
+$source = __DIR__ . '/.env.example';
+$destination = __DIR__ . '/.env';
+
+echo "Configurando .env...\n";
+// Verificar si el archivo .env.example existe
+if (file_exists($source)) {
+    // Verificar si el archivo .env ya existe
+    if (file_exists($destination)) {
+        echo ".env ya existe. No se copiará el archivo.\n";
+    } else {
+        // Copiar el archivo si .env no existe
+        if (copy($source, $destination)) {
+            echo ".env.example ha sido copiado a .env\n";
+        } else {
+            echo "Error al copiar el archivo.\n";
+        }
+    }
+} else {
+    echo "No se encontró el archivo .env.example\n";
+}
