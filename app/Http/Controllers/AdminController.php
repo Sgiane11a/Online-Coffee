@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use App\Models\User;
+use App\Models\Product;
 
 
 class AdminController extends Controller
@@ -20,7 +21,8 @@ class AdminController extends Controller
 
     public function shop(): View
     {
-        return view('admin.store.index');
+        $totalProducts = Product::count();
+        return view('admin.store.index', compact('totalProducts'));
     }
 
     public function forum(): View

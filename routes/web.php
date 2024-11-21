@@ -54,7 +54,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('dashboard', [AdminController::class, 'dashboard'])
             ->middleware(['verified'])->name('dashboard');
-
+        Route::get('index', [AdminController::class, 'index'])->name('index');
         Route::prefix('users')->name('users.')->group(function () {
 
             Route::get('/', [UserController::class, 'index'])

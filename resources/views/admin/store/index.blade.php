@@ -34,7 +34,7 @@
                             Productos totales
                         </p>
                         <p class="text-lg font-semibold text-gray-200">
-                            XD
+                            {{ $totalProducts }}
                         </p>
                     </div>
                 </div>

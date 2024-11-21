@@ -35,6 +35,7 @@ Sigue estos pasos para instalar y configurar el proyecto:
 3. **Configuración del Entorno:**
 
     - Copia el archivo `.env.example` y renómbralo como `.env`.
+    (mv .env.example .env)
 
 4. **Genera una Clave:**
 
