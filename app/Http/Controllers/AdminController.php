@@ -16,7 +16,12 @@ class AdminController extends Controller
     public function dashboard(): View
     {
         $totalUsers = User::count();
-        return view('admin.dashboard', compact('totalUsers'));
+        $totalPrecio = 0;
+
+        foreach (product::all() as $product) {
+            $totalPrecio += $product->price;
+        }
+        return view('admin.dashboard', compact('totalUsers', 'totalPrecio'));
     }
 
     public function shop(): View

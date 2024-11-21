@@ -50,10 +50,10 @@
                     </div>
                     <div>
                         <p class="mb-2 text-sm font-medium text-gray-400">
-                            Account balance
+                            Balance
                         </p>
                         <p class="text-lg font-semibold text-gray-200">
-                            $ 46,760.89
+                            {{ $totalPrecio}}
                         </p>
                     </div>
                 </div>
