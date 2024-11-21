@@ -51,7 +51,7 @@
                             Productos comprados
                         </p>
                         <p class="text-lg font-semibold text-gray-200">
-                            XD
+                            En Mantenimiento ⚠️
                         </p>
                     </div>
                 </div>

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Post;
 
 
 class AdminController extends Controller
@@ -16,12 +17,13 @@ class AdminController extends Controller
     public function dashboard(): View
     {
         $totalUsers = User::count();
+        $totalPublicaciones = Post::count();
         $totalPrecio = 0;
 
         foreach (product::all() as $product) {
             $totalPrecio += $product->price;
         }
-        return view('admin.dashboard', compact('totalUsers', 'totalPrecio'));
+        return view('admin.dashboard', compact('totalUsers', 'totalPrecio', 'totalPublicaciones'));
     }
 
     public function shop(): View

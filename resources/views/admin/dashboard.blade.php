@@ -71,7 +71,7 @@
                             New sales
                         </p>
                         <p class="text-lg font-semibold text-gray-200">
-                            376
+                            En Mantenimiento ⚠️
                         </p>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                             Pending contacts
                         </p>
                         <p class="text-lg font-semiboldtext-gray-200">
-                            35
+                            {{ $totalPublicaciones }}
                         </p>
                     </div>
                 </div>
