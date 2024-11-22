@@ -138,7 +138,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/', [PostController::class, 'admin'])
                 ->name('index');
 
-            Route::delete('delete/{post}', [PostController::class, 'destroy'])
+            Route::delete('post/delete/{post}', [PostController::class, 'destroy'])
                 ->name('delete');
         });
 
