@@ -11,7 +11,7 @@
                 @csrf
                 @method('PUT')
                 <div class="block mt-4 text-sm">
-                    <label name="category_id" class="text-gray-700 dark:text-gray-400">
+                    <label name="category_id" class="text-gray-400">
                         Producto
                     </label>
                     <select name="category_id"
@@ -27,21 +27,21 @@
                     </select>
                 </div>
                 <div class="block text-sm">
-                    <label name="name" class="text-gray-700 dark:text-gray-400">Nombre</label>
+                    <label name="name" class="text-gray-400">Nombre</label>
                     <input name="name" type="text"
-                        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                        class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape text-gray-300" 
                         value="{{ $product->name }}" placeholder="Ingresa el nombre del producto" required />
                 </div>
                 <div class="block text-sm">
-                    <label name="description" class="text-gray-700 dark:text-gray-400">Descripción</label>
+                    <label name="description" class="text-gray-400">Descripción</label>
                     <textarea name="description"
                         class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                         rows="3" placeholder="Ingresa la descripción del producto" required>{{ $product->description }}</textarea>
                 </div>
                 <div class="block text-sm">
-                    <label name="price" class="text-gray-700 dark:text-gray-400">Precio</label>
+                    <label name="price" class="text-gray-400">Precio</label>
                     <input name="price" type="number"
-                        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                        class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape text-gray-300" 
                         value="{{ $product->price }}" placeholder="Ingresa el precio del producto" required />
                 </div>
                 <div class="block text-sm">
