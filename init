@@ -14,6 +14,7 @@ if (file_exists($source)) {
         // Copiar el archivo si .env no existe
         if (copy($source, $destination)) {
             echo ".env.example ha sido copiado a .env\n";
+            echo "AVISO: No olvides colocar tus credenciales de tu cuenta de Cloudinary en el archivo .env\n";
         } else {
             echo "Error al copiar el archivo.\n";
         }

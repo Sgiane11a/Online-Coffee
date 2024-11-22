@@ -10,7 +10,7 @@ class PostController extends Controller
     function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->paginate(5);
-        return view('forum', compact('posts'));
+        return view('forum.index', compact('posts'));
     }
 
     function admin()
