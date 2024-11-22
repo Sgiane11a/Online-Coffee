@@ -11,9 +11,9 @@
                 @csrf
                 @method('PUT')
                 <div class="block text-sm">
-                    <label name="name" class="text-gray-700 dark:text-gray-400">Nombre</label>
+                    <label name="name" class="text-gray-400">Nombre</label>
                     <input name="name" type="text"
-                        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                        class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape text-gray-300" 
                         value="{{ $category->name }}" placeholder="Ingresa un nombre" />
                 </div>
                 <button type="submit"

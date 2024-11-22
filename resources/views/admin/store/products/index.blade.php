@@ -26,7 +26,7 @@
                 </div>
                 <!-- Card -->
                 <a href="{{ route('admin.store.products.create') }}"
-                    class="flex items-center p-4 gap-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                    class="flex items-center p-4 gap-4 rounded-lg shadow-xs bg-gray-800">
                     <div class="hidden lg:block">
                         <p class="text-lg font-medium text-gray-400">
                             Crear un producto
@@ -46,7 +46,7 @@
                     <table class="w-full whitespace-no-wrap">
                         <thead>
                             <tr
-                                class="text-sm font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                class="text-sm font-semibold tracking-wide text-left uppercase border-b border-gray-700 text-gray-400 bg-gray-800">
                                 <th class="px-4 py-3">Nombre</th>
                                 <th class="px-4 py-3">Precio</th>
                                 <th class="px-4 py-3 hidden lg:table-cell">Creado</th>
@@ -56,7 +56,7 @@
                         </thead>
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                             @foreach ($products as $product)
-                                <tr class="text-gray-700 dark:text-gray-400">
+                                <tr class="text-gray-400">
                                     <td class="px-4 py-3">
                                         <div class="flex items-center text-sm">
                                             <div class="relative hidden w-8 h-8 mr-3 rounded-full lg:block">

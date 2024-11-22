@@ -12,7 +12,7 @@
             @foreach ($posts as $post)
                 <div class="flex flex-col gap-1 p-4 rounded-lg shadow-xs bg-gray-800">
                     <div class="flex items-center text-sm gap-4">
-                        <div class="relative hidden w-12 h-12 rounded-full lg:block">
+                        <div class="relative w-12 h-12 rounded-full block">
                             <img class="object-cover w-full h-full rounded-full" src="{{ $post->user->profile_photo_url }}"
                                 alt="{{ $post->user->name }}" loading="lazy" />
                             <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
