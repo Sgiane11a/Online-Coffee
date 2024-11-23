@@ -12,6 +12,7 @@ Route::get('/', function () {
 });
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('/forum/posts', [PostController::class, 'guest'])->name('forum.guest');
 
 Route::middleware([
     'auth:sanctum',

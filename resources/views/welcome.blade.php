@@ -10,13 +10,6 @@
                 <canvas aria-label="Modelo 3D de un café" class="aspect-auto" id="coffee"></canvas>
             </div>
         </section>
-        {{-- <section class="flex justify-center items-center border-b-2 border-blueberry-100 p-4">
-            <aside class="flex flex-col justify-center items-center gap-8 text-center">
-                <h1 class="text-3xl font-bold">¡Obtén varios beneficios aquí!</h1>
-                <a class="bg-raspberry-100 text-black rounded-lg font-semibold px-4 py-2" href="">Quiero ser
-                    miembro</a>
-            </aside> -->
-        </section> --}}
         <section class="flex justify-center border-b-2 border-blueberry-100">
             <div id="welcome-slide" class="splide" aria-labelledby="carousel-heading">
                 <div class="splide__arrows z-30 absolute flex justify-between items-center h-full w-full p-2">
@@ -31,7 +24,7 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />
-                        <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />
+                        <x-welcome-slide image="https://www1.tecsup.edu.pe/sites/default/files/imagenes-webdrupal/105_Listado_Cover_1.png" />
                         <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />
                         <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />
                         <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />

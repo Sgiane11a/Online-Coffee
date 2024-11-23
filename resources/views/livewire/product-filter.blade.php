@@ -2,7 +2,7 @@
     <ul class="flex gap-6 justify-center">
         @foreach ($categories as $category)
             <button wire:click="filterByCategory({{ $category->id }})"
-                class="w-40 font-semibold {{ $selectedCategory == $category->id ? 'bg-raspberry-900 border-raspberry-500 border text-white p-3 rounded-xl' : 'bg-white text-black p-3 rounded-xl' }}">
+                class="w-40 font-semibold {{ $selectedCategory == $category->id ? 'bg-raspberry-900 border-raspberry-500 border text-white p-3 rounded-xl' : 'bg-white border-white border text-black p-3 rounded-xl' }}">
                 {{ $category->name }}
             </button>
         @endforeach

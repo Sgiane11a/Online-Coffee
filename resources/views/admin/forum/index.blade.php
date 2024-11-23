@@ -10,7 +10,7 @@
 
         <div class="flex flex-col gap-2 px-6">
             @foreach ($posts as $post)
-                <div class="flex flex-col gap-1 p-4 rounded-lg shadow-xs bg-gray-800">
+                <div class="flex flex-col gap-1 border border-gray-600 p-4 rounded-lg shadow-xs bg-gray-800">
                     <div class="flex items-center text-sm gap-4">
                         <div class="relative w-12 h-12 rounded-full block">
                             <img class="object-cover w-full h-full rounded-full" src="{{ $post->user->profile_photo_url }}"
@@ -19,7 +19,7 @@
                             </div>
                         </div>
                         <div class="flex flex-col gap-1">
-                            <p class="text-xs font-semibold text-gray-300">
+                            <p class="text-xs font-semibold text-grape-400">
                                 {{ $post->user->name }}
                             </p>
                             <p class="text-xs text-gray-400">

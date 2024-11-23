@@ -3,7 +3,7 @@
 @section('body')
 
     <body class="bg-grape-950 text-white">
-        <header class="sticky top-0 z-50 backdrop-blur-3xl border-blueberry-100 border-b-2">
+        <header class="z-50 border-blueberry-100 border-b-2">
             <nav class="flex justify-between items-center gap-2 font-bold text-lg lg:text-xl p-4 text-raspberry-100">
                 <span>
                     <a href="/">Online Coffee</a>
@@ -11,8 +11,7 @@
                 <ul class="hidden md:flex justify-center gap-2 md:gap-4 lg:gap-8">
                     <x-header-link url="/" text="Inicio" />
                     <x-header-link url="{{route('products')}}" text="Productos" />
-                    <x-header-link url="/tienda" text="Tienda" />
-                    <x-header-link url="/reservas" text="Reservas" />
+                    <x-header-link url="{{route('forum.guest') }}" text="Foro" />
                 </ul>
                 @if (Route::has('login'))
                     <div class="flex justify-center gap-2">

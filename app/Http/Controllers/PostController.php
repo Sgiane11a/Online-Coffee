@@ -13,6 +13,12 @@ class PostController extends Controller
         return view('forum.index', compact('posts'));
     }
 
+    function guest()
+    {
+        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
+        return view('forum.guest', compact('posts'));
+    }
+
     function admin()
     {
         $posts = Post::orderBy('created_at', 'desc')->paginate(5);
