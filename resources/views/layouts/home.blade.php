@@ -23,11 +23,6 @@
                             </a>
                         @else
                             <x-auth-header-button url="{{ route('login') }}" text="Iniciar sesión" />
-                            {{-- 
-                    @if (Route::has('register'))
-                        <x-auth-header-button url="{{ route('register') }}" text="Registrarse" />
-                    @endif 
-                    --}}
                         @endauth
                     </div>
                 @endif

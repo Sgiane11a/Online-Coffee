@@ -33,11 +33,13 @@
                         <button type="submit"
                             class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-grape-600 border border-transparent rounded-lg active:bg-grape-600 hover:bg-grape-700 focus:outline-none focus:shadow-outline-grape">
                             {{ __('Log Out') }}
-                            <span class="ml-2" aria-hidden="true"><svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                            <span class="ml-2" aria-hidden="true">
+                                <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24">
                                     <path fill="currentColor"
                                         d="m17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5M4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4z" />
-                                </svg></span>
+                                </svg>
+                            </span>
                         </button>
                     </form>
                 </div>
