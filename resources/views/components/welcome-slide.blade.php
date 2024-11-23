@@ -1,1 +1,3 @@
-<li class="splide__slide content-center"><img class="my-0 mx-auto" src="{{ $image }}" alt="Foto del cibercafé"></li>
+<li class="splide__slide content-center">
+    <img class="object-cover h-full" src="{{ $image }}" alt="Foto del cibercafé">
+</li>

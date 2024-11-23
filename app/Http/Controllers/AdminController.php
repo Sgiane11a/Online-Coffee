@@ -45,6 +45,14 @@ class AdminController extends Controller
         return view('admin.login');
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $projects = User::where('name', 'LIKE', "%{$query}%")->get();
+
+        return view('projects.index', compact('projects'));
+    }
+
     /**
      * Handle an incoming authentication request.
      */

@@ -6,9 +6,17 @@
         <aside id="navigation"
             class="z-20 h-full hidden md:block md:static md:w-64 overflow-y-auto bg-white dark:bg-gray-800 flex-shrink-0">
             <div class="py-4 text-gray-500 dark:text-gray-400">
-                <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="{{ route('admin.dashboard') }}">
-                    Panel Administrativo
-                </a>
+                <div class="flex justify-between mx-6">
+                    <a class="text-lg font-bold text-gray-800 dark:text-gray-200" href="{{ route('admin.dashboard') }}">
+                        Panel Administrativo
+                    </a>
+                    <button id="closeSidebar" class="menu md:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275t.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275z" />
+                        </svg>
+                    </button>
+                </div>
                 <ul class="mt-6">
                     <x-admin-sidebar-button url="{{ route('admin.dashboard') }}" text="Inicio"
                         icon='<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M13 9V3h8v6zM3 13V3h8v10zm10 8V11h8v10zM3 21v-6h8v6z"/></svg>' />
@@ -25,11 +33,13 @@
                         <button type="submit"
                             class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-grape-600 border border-transparent rounded-lg active:bg-grape-600 hover:bg-grape-700 focus:outline-none focus:shadow-outline-grape">
                             {{ __('Log Out') }}
-                            <span class="ml-2" aria-hidden="true"><svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                            <span class="ml-2" aria-hidden="true">
+                                <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24">
                                     <path fill="currentColor"
                                         d="m17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5M4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4z" />
-                                </svg></span>
+                                </svg>
+                            </span>
                         </button>
                     </form>
                 </div>
@@ -39,28 +49,14 @@
         <div class="flex flex-col flex-1 w-full">
             <header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
                 <div
-                    class="container flex items-center justify-between h-full px-6 mx-auto text-grape-600 dark:text-grape-300 gap-6">
-                    <button id="toggleSidebar" class="md:hidden"><svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8"
-                            viewBox="0 0 24 24">
+                    class="container flex items-center justify-between md:justify-end h-full px-6 mx-auto text-grape-600 dark:text-grape-300 gap-6">
+                    <button id="showSidebar" class="menu md:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24">
                             <path fill="currentColor"
                                 d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h16q.425 0 .713.288T21 17t-.288.713T20 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z" />
-                        </svg></button>
+                        </svg>
+                    </button>
 
-                    <!-- Search input -->
-                    <div class="flex justify-center flex-1 lg:mr-32">
-                        <div class="relative w-full max-w-xl mr-6 focus-within:text-grape-500">
-                            <div class="absolute inset-y-0 flex items-center pl-2">
-                                <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <input
-                                class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-grape-300 focus:outline-none focus:shadow-outline-grape form-input"
-                                type="text" placeholder="Search for projects" aria-label="Search" />
-                        </div>
-                    </div>
                     <ul class="flex items-center flex-shrink-0">
                         <!-- Profile menu -->
                         <li class="relative">
@@ -72,12 +68,16 @@
             @yield('main')
         </div>
         <script>
-            document.getElementById('toggleSidebar').addEventListener('click', function() {
-                var sidebar = document.getElementById('navigation');
+            function toggleSidebar() {
+                const sidebar = document.getElementById('navigation');
                 sidebar.classList.toggle('w-screen');
                 sidebar.classList.toggle('fixed');
                 sidebar.classList.toggle('hidden');
-            });
+            }
+
+            document.getElementById('showSidebar').addEventListener('click', toggleSidebar);
+            document.getElementById('closeSidebar').addEventListener('click', toggleSidebar);
         </script>
+        @livewireScripts
     </body>
 @endsection

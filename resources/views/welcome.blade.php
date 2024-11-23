@@ -56,7 +56,7 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />
-                        <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />
+                        <x-welcome-slide image="https://www1.tecsup.edu.pe/sites/default/files/imagenes-webdrupal/105_Listado_Cover_1.png" />
                         <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />
                         <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />
                         <x-welcome-slide image="https://splidejs.com/images/slides/general/01.jpg" />

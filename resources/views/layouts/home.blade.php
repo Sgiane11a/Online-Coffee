@@ -2,18 +2,16 @@
 
 @section('body')
 
-    <body class="bg-white text-blueberry-350">
-        <header class="sticky top-0 z-50 bg-white shadow-md">
-            <nav class="flex justify-between items-center gap-4 font-bold text-lg lg:text-xl px-12 py-4">
-                <a href="/" class="text-raspberry-600 font-extrabold leading-none">
-                    <div class=" text-grape-350 text-3xl">ONLINE</div>
-                    <div class="text-grape-450 text-2x1 text-center">COFFEE</div></a>
-
-                <ul class="hidden md:flex justify-center gap-6">
+    <body class="bg-grape-950 text-white">
+        <header class="z-50 border-blueberry-100 border-b-2">
+            <nav class="flex justify-between items-center gap-2 font-bold text-lg lg:text-xl p-4 text-raspberry-100">
+                <span>
+                    <a href="/">Online Coffee</a>
+                </span>
+                <ul class="hidden md:flex justify-center gap-2 md:gap-4 lg:gap-8">
+                    <x-header-link url="/" text="Inicio" />
                     <x-header-link url="{{route('products')}}" text="Productos" />
-                    <x-header-link url="/reservas" text="Reservas" />
-                    <x-header-link url="/biblioteca" text="Biblioteca" />
-                    <x-header-link url="/foro" text="Foro" />
+                    <x-header-link url="{{route('forum.guest') }}" text="Foro" />
                 </ul>
                 @if (Route::has('login'))
                     <div class="flex justify-center gap-4">
@@ -25,11 +23,6 @@
                             </a>
                         @else
                             <x-auth-header-button url="{{ route('login') }}" text="Iniciar sesión" />
-                            {{-- 
-                    @if (Route::has('register'))
-                        <x-auth-header-button url="{{ route('register') }}" text="Registrarse" />
-                    @endif 
-                    --}}
                         @endauth
 
                         <div class="md:hidden flex items-center">
