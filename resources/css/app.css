@@ -29,7 +29,8 @@ body {
 }
 
 .fa1 {
-    padding-inline: 2.5rem;
+    padding-inline: 4.5rem;
+    margin-bottom: 3.5rem;
     font-family: 'Courier New', Courier, monospace;
     color: #fff;
     animation: pulsate1 25s ease-in-out infinite;
@@ -64,7 +65,8 @@ body {
 }
 
 .fa2 {
-    padding-inline: 2.5rem;
+    padding-inline: 4.5rem;
+    margin-bottom: 3.5rem;
     font-family: 'Tahoma', sans-serif;
     color: #fff;
     animation: pulsate2 25s ease-in-out infinite;
@@ -99,8 +101,9 @@ body {
 }
 
 .fa3 {
-    padding-inline: 2.5rem;
-    font-family: "Vibur";
+    padding-inline: 4.5rem;
+    margin-bottom: 3.5rem;
+    font-family:Georgia, 'Times New Roman', Times, serif, sans-serif;
     color: #fff;
     animation: pulsate3 25s ease-in-out infinite;
 }
@@ -134,34 +137,14 @@ body {
 }
 
 .fa4 {
-    padding-inline: 2.5rem;
-    font-family: "Vibur";
+    padding-inline: 4.5rem;
+    margin-bottom: 3.5rem;
+    font-family: 'Verdana', sans-serif;
     color: #fff;
-    animation: pulsate 25s ease-in-out infinite;
+    animation: pulsate4 25s ease-in-out infinite;
 }
 
-.fa5 {
-    padding-inline: 2.5rem;
-    font-family: "Vibur";
-    color: #fff;
-    animation: pulsate 25s ease-in-out infinite;
-}
-
-.fa6 {
-    padding-inline: 2.5rem;
-    font-family: "Vibur";
-    color: #fff;
-    animation: pulsate 25s ease-in-out infinite;
-}
-
-.fa7 {
-    padding-inline: 2.5rem;
-    font-family: "Vibur";
-    color: #fff;
-    animation: pulsate 25s ease-in-out infinite;
-}
-
-@keyframes pulsate {
+@keyframes pulsate4 {
     9%,
     10%,
     25%,
@@ -184,7 +167,114 @@ body {
     46.1%,
     100% {
         color: #fff;
-        text-shadow: 0 0 5px #d946ef, 0 0 10px #d946ef, 0 0 20px #bc26d3,
-            0 0 40px #bc26d3, 0 0 80px #bc26d3, 0 0 160px #bc26d3;
+        text-shadow: 0 0 5px #465fef, 0 0 10px #465fef, 0 0 20px #3819c2,
+            0 0 40px #3819c2, 0 0 80px #3819c2, 0 0 160px #3819c2;
+    }
+}
+
+.fa5 {
+    padding-inline: 5.5rem;
+    margin-bottom: 3.5rem;
+    font-family: 'Courier New', Courier, monospace;;
+    color: #fff;
+    animation: pulsate5 25s ease-in-out infinite;
+}
+
+@keyframes pulsate5 {
+    9%,
+    10%,
+    25%,
+    30%,
+    32%,
+    40%,
+    46% {
+        color: #f8d0fe;
+        text-shadow: none;
+    }
+
+    0%,
+    9.1%,
+    10.1%,
+    20.1%,
+    25.1%,
+    30.1%,
+    32.1%,
+    40.1%,
+    46.1%,
+    100% {
+        color: #fff;
+        text-shadow: 0 0 5px #ec4d75, 0 0 10px #ec4d75, 0 0 20px #ce1c43,
+            0 0 40px #ce1c43, 0 0 80px #ce1c43, 0 0 160px #ce1c43;
+    }
+}
+
+.fa6 {
+    padding-inline: 7.5rem;
+    margin-bottom: 3.5rem;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: #fff;
+    animation: pulsate6 25s ease-in-out infinite;
+}
+
+@keyframes pulsate6 {
+    9%,
+    10%,
+    25%,
+    30%,
+    32%,
+    40%,
+    46% {
+        color: #f8d0fe;
+        text-shadow: none;
+    }
+
+    0%,
+    9.1%,
+    10.1%,
+    20.1%,
+    25.1%,
+    30.1%,
+    32.1%,
+    40.1%,
+    46.1%,
+    100% {
+        color: #fff;
+        text-shadow: 0 0 5px #46cdef, 0 0 10px #46cdef, 0 0 20px #1fb0ca,
+            0 0 40px #1fb0ca, 0 0 80px #1fb0ca, 0 0 160px #1fb0ca;
+    }
+}
+
+.fa7 {
+    padding-inline: 4.5rem;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #fff;
+    animation: pulsate7 25s ease-in-out infinite;
+}
+
+@keyframes pulsate7 {
+    9%,
+    10%,
+    25%,
+    30%,
+    32%,
+    40%,
+    46% {
+        color: #f8d0fe;
+        text-shadow: none;
+    }
+
+    0%,
+    9.1%,
+    10.1%,
+    20.1%,
+    25.1%,
+    30.1%,
+    32.1%,
+    40.1%,
+    46.1%,
+    100% {
+        color: #fff;
+        text-shadow: 0 0 5px #46efa0, 0 0 10px #46efa0, 0 0 20px #26d35a,
+            0 0 40px #26d35a, 0 0 80px #26d35a, 0 0 160px #26d35a;
     }
 }

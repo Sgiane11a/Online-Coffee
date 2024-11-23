@@ -10,6 +10,7 @@
                 <div class="text-grape-450 text-2x1 text-center">COFFEE</div></a>
 
             <ul class="hidden md:flex justify-center gap-6">
+                <x-header-link url="/" text="Inicio" />
                 <x-header-link url="{{route('products')}}" text="Productos" />
                 <x-header-link url="/reservas" text="Reservas" />
                 <x-header-link url="/biblioteca" text="Biblioteca" />
@@ -42,22 +43,22 @@
 
     </header>
         @yield('main')
-        <footer class="flex flex-col items-center gap-8 bg-indigo-900 border-blueberry-100 border-t-2 p-8 font-medium">
+        <footer class="flex flex-col items-center gap-8 bg-grape-350 border-grape-350 border-t-2 p-8 font-medium text-white">
             <section class="flex justify-between gap-2 w-full ">
                 <div class="hidden lg:flex ">
                     <p>Aquí no hay limites</p>
                 </div>
                 <ul>
-                    <li>Acerca de Online Coffee</li>
-                    <li>Termino y Condiciones</li>
-                    <li>Politica de Privacidad</li>
-                    <li>Preguntas Frecuentes</li>
-                    <li>Reglamento</li>
+                    <li><a href="">Acerca de Online Coffee</a></li>
+                    <li><a href="">Termino y Condiciones</a></li>
+                    <li><a href="">Politica de Privacidad</a></li>
+                    <li><a href="">Preguntas Frecuentes</a></li>
+                    <li><a href="">Reglamento</a></li>
                 </ul>
                 <ul>
-                    <li>Contáctanos</li>
-                    <li>Soporte</li>
-                    <li>Contacto</li>
+                    <li><a href="">Contáctanos</a></li>
+                    {{--<li>Soporte</li>--}}
+                    <li><a href="">Mapa</a></li>
                 </ul>
                 <div>
                     <h2 class="font-bold">Horario de atención:</h2>
@@ -82,7 +83,7 @@
                     </div>
                 </div>
             </section>
-            <section class="flex w-full bg-indigo-950 py-2 px-4 rounded-lg">@Online Coffee 2024</section>
+            <section class="flex w-full bg-white py-2 px-4 rounded-lg text-black">@Online Coffee 2024</section>
         </footer>
         @livewireScripts
     </body>
