@@ -1,4 +1,4 @@
 <a href="{{ $url }}"
-    class="bg-raspberry-100 text-black rounded-lg font-semibold px-4 py-2 flex-1 whitespace-nowrap">
+    class="text-grape-350 border border-raspberry-600 rounded-full px-4 py-2 hover:bg-raspberry-600 hover:text-white">
     {{ $text }}
 </a>

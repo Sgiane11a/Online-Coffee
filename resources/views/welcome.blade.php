@@ -4,12 +4,35 @@
 
 @section('main')
     <main class="">
-        <section class="flex justify-center items-center border-b-2 border-blueberry-100 py-12 bg-gradient-section">
+        {{--Encabezado(Logo)--}}
+        <section class="relative text-center bg-cover bg-center h-screen" style="background-image: url('{{asset('images/ILogo.png')}}');">
+            <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+            <div class="relative z-10 flex justify-end items-center h-full text-white py-24 px-4">
+                <div class="text-left w-full md:w-1/2 pl-2">
+                    <h1 class="text-4xl md:text-6xl font-bold">Donde las ideas cobran vida y se transforman en realidad.</h1>
+                    <p class="mt-4 text-lg md:text-xl">Descubre un entorno para combinar la productividad con el confort, donde cada detalle
+                       está pensado para inspirar tu creatividad, facilitar tu aprendizaje y fomentar la colaboración.</p>
+                    <div class="mt-6">
+                        <x-auth-header-button url="{{ route('login') }}" text="Comienza tu experiencia" />
+                    </div>    
+                </div>
+            </div>
+        </section>       
+
+        {{--Taza animada--}}     
+        <section class="flex justify-center items-center border-b-2 border-blueberry-100 py-12 bg-white">
             <div class="flex flex-col justify-center items-center">
-                <h1 class="font-extrabold text-8xl break-normal text-center title">¡Bienvenido a Online Coffee!</h1>
+                <p class="font-extrabold text-3xl break-normal text-center fa1">"Una taza de café, millones de ideas. Juntos, somos imparables”</p>
+                <p class="font-extrabold text-2xl break-normal text-center fa2">"Desde una taza, nacen las mejores conexiones entre mentes creativas."</p>
+                <p class="font-extrabold text-1xl break-normal text-center title">"El café une, inspira y acompaña: el aliado perfecto para cada proyecto."</p>
+                <p class="font-extrabold text-5xl break-normal text-center title">"Café y comunidad: ingredientes esenciales para aprender y crecer."</p>
+                <p class="font-extrabold text-4xl break-normal text-center title">"Cada día, millones de estudiantes comparten un café mientras trabajan en sus sueños."</p>
+                <p class="font-extrabold text-2xl break-normal text-center title">"¿Sabías que un café caliente puede aumentar la sensación de conexión entre las personas?"</p>
+                <p class="font-extrabold text-3xl break-normal text-center title">En el 85% de los proyectos colaborativos, las mejores ideas surgen con una taza de café en la mano.</p>
                 <canvas aria-label="Modelo 3D de un café" class="aspect-auto" id="coffee"></canvas>
             </div>
         </section>
+
         {{-- <section class="flex justify-center items-center border-b-2 border-blueberry-100 p-4">
             <aside class="flex flex-col justify-center items-center gap-8 text-center">
                 <h1 class="text-3xl font-bold">¡Obtén varios beneficios aquí!</h1>
@@ -17,6 +40,8 @@
                     miembro</a>
             </aside> -->
         </section> --}}
+
+        {{--Carrusel--}}
         <section class="flex justify-center border-b-2 border-blueberry-100">
             <div id="welcome-slide" class="splide" aria-labelledby="carousel-heading">
                 <div class="splide__arrows z-30 absolute flex justify-between items-center h-full w-full p-2">
@@ -40,6 +65,16 @@
                 </div>
             </div>
         </section>
+
+        {{--Información--}}
+        <section class="py-16 px-8 bg-white">
+            <div class="max-w-7xl mx-auto text-center">
+                <h2 class="text-3xl font-bold">Conoce nuestros servicios</h2>
+                <p class="mt-4 text-lg">Online Coffee ofrece espacios diseñados para reuniones, trabajo en equipo y relajación, con Wi-Fi de alta velocidad y ambiente cómodo.</p>
+            </div>
+        </section> 
+
+        {{--Parte de servicios--}}
         <section class="flex justify-center items-center gap-8 py-8 px-32 h-96">
             <div class="grid grid-cols-2 gap-2">
                 <div class="grid gap-4">

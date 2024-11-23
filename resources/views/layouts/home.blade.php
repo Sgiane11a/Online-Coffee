@@ -2,24 +2,25 @@
 
 @section('body')
 
-    <body class="bg-grape-950 text-white">
-        <header class="sticky top-0 z-50 backdrop-blur-3xl border-blueberry-100 border-b-2">
-            <nav class="flex justify-between items-center gap-2 font-bold text-lg lg:text-xl p-4 text-raspberry-100">
-                <span>
-                    <a href="/">Online Coffee</a>
-                </span>
-                <ul class="hidden md:flex justify-center gap-2 md:gap-4 lg:gap-8">
-                    <x-header-link url="/" text="Inicio" />
+    <body class="bg-white text-blueberry-350">
+        <header class="sticky top-0 z-50 bg-white shadow-md">
+            <nav class="flex justify-between items-center gap-4 font-bold text-lg lg:text-xl px-12 py-4">
+                <a href="/" class="text-raspberry-600 font-extrabold leading-none">
+                    <div class=" text-grape-350 text-3xl">ONLINE</div>
+                    <div class="text-grape-450 text-2x1 text-center">COFFEE</div></a>
+
+                <ul class="hidden md:flex justify-center gap-6">
                     <x-header-link url="{{route('products')}}" text="Productos" />
-                    <x-header-link url="/tienda" text="Tienda" />
                     <x-header-link url="/reservas" text="Reservas" />
+                    <x-header-link url="/biblioteca" text="Biblioteca" />
+                    <x-header-link url="/foro" text="Foro" />
                 </ul>
                 @if (Route::has('login'))
-                    <div class="flex justify-center gap-2">
+                    <div class="flex justify-center gap-4">
 
                         @auth('web')
                             <a href="{{ url('/dashboard') }}"
-                                class="bg-raspberry-100 text-black rounded-lg font-semibold px-4 py-2 flex-1 whitespace-nowrap">
+                                class="bg-raspberry-600 text-white rounded-full font-semibold px-4 py-2 hover:bg-raspberry-700">
                                 Dashboard
                             </a>
                         @else
@@ -30,10 +31,20 @@
                     @endif 
                     --}}
                         @endauth
+
+                        <div class="md:hidden flex items-center">
+                            <button id="menu-toggle" class="text-raspberry-600 focus:outline-none">
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 @endif
-
             </nav>
+
+            <x-responsive />
+
         </header>
         @yield('main')
         <footer class="flex flex-col items-center gap-8 bg-indigo-900 border-blueberry-100 border-t-2 p-8 font-medium">
