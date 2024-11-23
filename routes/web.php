@@ -155,6 +155,7 @@ Route::prefix('/')->group(function () {
     Route::get('/acercaDe', [FooterController::class, 'acercaDe']) ->name('acercaDe');
     Route::get('/privacidad', [FooterController::class, 'privacidad']) ->name('privacidad');
     Route::get('/reglamento', [FooterController::class, 'reglamento']) ->name('reglamento');
+    Route::get('/terminosCondiciones', [FooterController::class, 'terminosCondiciones']) ->name('terminos');
     Route::get('/contactanos', [FooterController::class, 'contactanos']) ->name('contactanos');
     Route::get('/preguntas', [FooterController::class, 'preguntas']) ->name('preguntas');
     Route::get('/ubicacion', [FooterController::class, 'mapa']) ->name('ubicacion');
