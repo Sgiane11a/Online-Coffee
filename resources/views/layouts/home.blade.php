@@ -46,7 +46,7 @@
         <footer class="flex flex-col items-center gap-8 bg-grape-350 border-grape-350 border-t-2 p-8 font-medium text-white">
             <section class="flex justify-between gap-2 w-full ">
                 <div class="hidden lg:flex ">
-                    <p>Aquí no hay limites</p>
+                    <img src="{{asset('images/LOGO OFFICIAS3 (1).png')}}" class="w-10 md:w-10 lg:w-20 xl:w-60 h-auto">
                 </div>
                 <ul>
                     <li><a href="{{route('acercaDe')}}">Acerca de Online Coffee</a></li>
