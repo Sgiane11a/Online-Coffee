@@ -49,11 +49,11 @@
                     <p>Aquí no hay limites</p>
                 </div>
                 <ul>
-                    <li><a href="">Acerca de Online Coffee</a></li>
+                    <li><a href="{{route('acercaDe')}}">Acerca de Online Coffee</a></li>
                     <li><a href="">Termino y Condiciones</a></li>
-                    <li><a href="">Politica de Privacidad</a></li>
-                    <li><a href="">Preguntas Frecuentes</a></li>
-                    <li><a href="">Reglamento</a></li>
+                    <li><a href="{{route('privacidad')}}">Politica de Privacidad</a></li>
+                    <li><a href="{{route('preguntas')}}">Preguntas Frecuentes</a></li>
+                    <li><a href="{{route('reglamento')}}">Reglamento</a></li>
                 </ul>
                 <ul>
                     <li><a href="">Contáctanos</a></li>
