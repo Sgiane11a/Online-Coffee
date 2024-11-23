@@ -146,16 +146,16 @@
                 <h2 class="text-2xl font-bold text-center mb-8">Algunos de nuestros productos</h2>
                 <ul class="space-y-4">
                     <li class="bg-gray p-4 shadow rounded-lg flex items-center justify-between">
-                        <span>Producto 1</span>
-                        <span>S/. 20.00</span>
+                        <span>Frapp de Cookies & Cream</span>
+                        <span>S/. 16.00</span>
                     </li>
                     <li class="bg-gray p-4 shadow rounded-lg flex items-center justify-between">
-                        <span>Producto 2</span>
-                        <span>S/. 25.00</span>
+                        <span>Pie de manzana</span>
+                        <span>S/. 5.00</span>
                     </li>
                     <li class="bg-gray p-4 shadow rounded-lg flex items-center justify-between">
-                        <span>Producto 3</span>
-                        <span>S/. 30.00</span>
+                        <span>Cappucchino</span>
+                        <span>S/. 7.00</span>
                     </li>
                 </ul>
             </div>
