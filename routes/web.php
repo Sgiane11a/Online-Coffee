@@ -7,12 +7,18 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FooterController;
+use App\Http\Controllers\BibliotecaController;
+use App\Http\Controllers\ReservacionesController;
+use App\Http\Controllers\ForoController;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/biblioteca', [bibliotecaController::class, 'index'])->name('biblioteca');
+Route::get('/reservaciones', [ReservacionesController::class, 'index'])->name('reservaciones');
 Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('/foro', [ForoController::class, 'index'])->name('foro');
 Route::get('/forum/posts', [PostController::class, 'guest'])->name('forum.guest');
 
 Route::middleware([

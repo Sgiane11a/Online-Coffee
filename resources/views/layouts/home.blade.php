@@ -12,7 +12,7 @@
             <ul class="hidden md:flex justify-center gap-6">
                 <x-header-link url="/" text="Inicio" />
                 <x-header-link url="{{route('products')}}" text="Productos" />
-                <x-header-link url="/reservas" text="Reservas" />
+                <x-header-link url="/reservaciones" text="Reservas" />
                 <x-header-link url="/biblioteca" text="Biblioteca" />
                 <x-header-link url="/foro" text="Foro" />
             </ul>
