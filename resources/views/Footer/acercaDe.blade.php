@@ -11,7 +11,7 @@
         <!-- Header -->
         <header class="text-center mb-6">
             <h1 class="text-3xl sm:text-4xl font-extrabold text-[#8C5D9A]">
-                Política de la Tienda - Online Coffee en TECSUP
+                Acerca De Online Coffee en TECSUP
             </h1>
         </header>
 
