@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FooterController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -147,3 +148,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('logout');
     });
 });
+
+
+
+Route::prefix('/')->group(function () {
+    Route::get('/acercaDe', [FooterController::class, 'acercaDe']) ->name('acercaDe');
+    Route::get('/privacidad', [FooterController::class, 'privacidad']) ->name('privacidad');
+    Route::get('/reglamento', [FooterController::class, 'reglamento']) ->name('reglamento');
+    Route::get('/contactanos', [FooterController::class, 'contactanos']) ->name('contactanos');
+    Route::get('/preguntas', [FooterController::class, 'preguntas']) ->name('preguntas');
+    Route::get('/ubicacion', [FooterController::class, 'mapa']) ->name('ubicacion');
+});
+
+    
