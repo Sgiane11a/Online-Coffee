@@ -9,18 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('reactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Usuario que reacciona
-            $table->morphs('reactable'); // Relación polimórfica
-            $table->enum('type', ['like', 'dislike']); // Tipo de reacción
+            $table->morphs('reactable'); // Esto creará reactable_id y reactable_type
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->enum('type', ['like', 'dislike']); // Asumiendo que las reacciones sean "like" o "dislike"
             $table->timestamps();
         });
-        
-        
     }
+    
+
+
 
     /**
      * Reverse the migrations.
