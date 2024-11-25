@@ -1,7 +1,10 @@
 <x-guest-layout>
+    <x-icon-home />
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+            <a href="/">
+               <img src="{{ asset('images/LOGO OFFICIAS3 (1).png') }}" alt="Logo Online Coffee" class="h-36 w-auto">
+            </a>
         </x-slot>
 
         <x-validation-errors class="mb-4" />
@@ -27,21 +30,23 @@
                     autocomplete="current-password" />
             </div>
 
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-end mt-2">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-raspberry-500"
+                    <a class="text-sm text-white hover:underline font-blod"
                         href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
+            </div>
 
+            <div class="block mt-4">
+                <label for="remember_me" class="flex items-center">
+                    <x-checkbox id="remember_me" name="remember" />
+                    <span class="ml-2 text-sm text-white">{{ __('Remember me') }}</span>
+                </label>
+            </div>
+
+            <div class="flex items-center justify-center mt-6">
                 <x-button class="ms-4">
                     {{ __('Log in') }}
                 </x-button>
