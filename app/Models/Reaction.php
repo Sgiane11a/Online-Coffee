@@ -3,16 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reaction extends Model
 {
     use HasFactory;
 
+    // Los campos que son asignables masivamente
     protected $fillable = [
-        'user_id',         // Usuario que hizo la reacción
-        'type',            // Tipo de reacción ('like' o 'dislike')
-        'reactable_id',    // ID del recurso reaccionado (post o comment)
-        'reactable_type',  // Tipo del recurso reaccionado (clase del modelo)
+        'user_id', 'reactable_id', 'reactable_type', 'type',
     ];
 
+    // Relación polimórfica
+    public function reactable()
+    {
+        return $this->morphTo();
+    }
 }
+

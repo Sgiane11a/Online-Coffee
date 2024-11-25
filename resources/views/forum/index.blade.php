@@ -23,8 +23,7 @@
                         @csrf
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                         <label class="font-semibold text-gray-500">Título</label>
-                        <input type="text" name="title" class="w-full p-2 rounded-lg shadow-xs bg-grape-50"
-                            required>
+                        <input type="text" name="title" class="w-full p-2 rounded-lg shadow-xs bg-grape-50" required>
                         <label class="font-semibold text-gray-500">Contenido</label>
                         <textarea name="content" class="w-full p-2 rounded-lg shadow-xs bg-grape-50" required></textarea>
                         <button type="submit"
@@ -54,7 +53,6 @@
                                     </p>
                                 </div>
                             </div>
-
                         </div>
                         <div class="flex-grow pl-16">
                             <p class="text-lg font-semibold text-gray-900">
@@ -69,6 +67,63 @@
                                         class="text-raspberry-600 font-semibold hover:underline">Editar</a>
                                 </div>
                             @endif
+
+                            <div class="mt-4 flex items-center gap-4">
+                                <form action="{{ route('posts.react', $post) }}" method="POST" class="flex items-center gap-2">
+                                    @csrf
+                                    <button type="submit" name="type" value="like"
+                                        class="flex items-center gap-1 text-blue-600 hover:underline">
+                                        👍
+                                    </button>
+                                    <span class="text-gray-600">{{ $post->reactions->where('type', 'like')->count() }}</span>
+                                    <button type="submit" name="type" value="dislike"
+                                        class="flex items-center gap-1 text-red-600 hover:underline">
+                                        👎
+                                    </button>
+                                    <span class="text-gray-600">{{ $post->reactions->where('type', 'dislike')->count() }}</span>
+                                </form>
+                            </div>
+
+                            <div class="mt-4">
+                                <h3 class="text-lg font-semibold text-gray-800">Comentarios</h3>
+                                @foreach ($post->comments()->with('user')->get() as $comment)
+                                    <div class="relative flex items-start gap-3 mt-4 p-2 border-t border-gray-300">
+                                        <div class="w-10 h-10 rounded-full overflow-hidden">
+                                            <img src="{{ $comment->user ? $comment->user->profile_photo_url : asset('images/default-avatar.png') }}"
+                                                alt="{{ $comment->user->name ?? 'Usuario anónimo' }}"
+                                                class="object-cover w-full h-full">
+                                        </div>
+                                        <div class="flex-grow">
+                                            <p class="font-semibold text-gray-800">{{ $comment->user->name ?? 'Usuario anónimo' }}</p>
+                                            <p class="text-sm text-gray-600">{{ $comment->content }}</p>
+                                            <p class="text-xs text-gray-500">{{ $comment->created_at->diffForHumans() }}</p>
+                                        </div>
+                                        <div class="absolute top-2 right-2 flex items-center gap-2">
+                                            @can('update', $comment)
+                                                <a href="#" class="text-blue-500 hover:text-blue-700">
+                                                    ✏️
+                                                </a>
+                                            @endcan
+                                            @can('delete', $comment)
+                                                <form action="{{ route('posts.destroyComment', $comment) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-red-500 hover:text-red-700">❌</button>
+                                                </form>
+                                            @endcan
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                <form action="{{ route('comments.store', $post) }}" method="POST" class="mt-4">
+                                    @csrf
+                                    <textarea name="content" class="w-full p-2 rounded-lg shadow-xs bg-grape-50" placeholder="Escribe un comentario..." required></textarea>
+                                    <button type="submit"
+                                        class="mt-2 px-4 py-2 text-sm font-medium text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg hover:bg-purple-700 focus:outline-none">
+                                        Comentar
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @endforeach
