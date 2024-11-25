@@ -20,7 +20,7 @@
         </section>       
 
         {{--Taza animada--}}     
-        <section class="flex justify-center items-center border-b-2 border-blueberry-100 py-12 bg-white relative">
+        <section class="flex justify-center items-center border-b-2 border-blueberry-100 py-12 bg-black relative">
             <div class="absolute left-0 top-1/4 transform -translate-y-1/4 flex flex-col items-start px-4 w-1/2">
                 <p class="font-extrabold text-3xl break-normal text-left mt-2 fa1">"Una taza de café, millones de ideas. Juntos, somos imparables”</p>
                 <p class="font-extrabold text-2xl break-normal text-left mt-2 fa2">"Desde una taza, nacen las mejores conexiones entre mentes creativas."</p>
