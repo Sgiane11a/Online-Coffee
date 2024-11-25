@@ -55,4 +55,45 @@ class PostController extends Controller
 
         return redirect()->back()->with('success', 'Post eliminado exitosamente.');
     }
+
+    //GUARDAR UN COMENTARIO 
+
+    public function storeComment(Request $request, Post $post)
+    {
+        $request->validate([
+            'content' => 'required|string|max:500',
+        ]);
+
+        $post->comments()->create([
+            'user_id' => auth()->id(),
+            'content' => $request->content,
+        ]);
+
+        return redirect()->back()->with('success', 'Comentario publicado.');
+    }
+
+    // ELIMINAR UN COMENTARIO
+    public function destroyComment(Comment $comment)
+    {
+        $this->authorize('delete', $comment); // Verifica si el usuario tiene permiso para eliminar el comentario
+        $comment->delete();
+
+        return redirect()->back()->with('success', 'Comentario eliminado.');
+    }
+
+    // GUARDAR UNA REACCION
+    public function react(Request $request, Post $post)
+    {
+        $request->validate([
+            'type' => 'required|in:like,dislike',
+        ]);
+
+        $post->reactions()->updateOrCreate(
+            ['user_id' => auth()->id()],
+            ['type' => $request->type]
+        );
+
+        return redirect()->back()->with('success', 'Reacción guardada.');
+    }
+
 }

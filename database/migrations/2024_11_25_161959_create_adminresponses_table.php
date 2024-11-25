@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('admin_responses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->boolean('is_active')->default(true); // Foro activo/inactivo
-            $table->string('title');
-            $table->text('content');
+            $table->foreignId('admin_id')->constrained('users')->onDelete('cascade'); // Usuario administrador que responde
+            $table->foreignId('post_id')->constrained()->onDelete('cascade'); // Foro asociado
+            $table->text('content'); // Contenido de la respuesta
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('adminresponses');
     }
 };

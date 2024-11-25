@@ -148,6 +148,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::delete('post/delete/{post}', [PostController::class, 'destroy'])
                 ->name('delete');
+                
         });
 
         Route::post('logout', [AdminController::class, 'destroy'])
