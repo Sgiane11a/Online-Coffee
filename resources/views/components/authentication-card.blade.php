@@ -8,7 +8,6 @@
                 {{ $logo }}
             </div>
         </div>
-
         <!-- Espacio para los componentes del formulario -->
         <div>
             {{ $slot }}

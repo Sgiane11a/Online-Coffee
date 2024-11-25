@@ -55,9 +55,9 @@ class PostController extends Controller
 
         return redirect()->back()->with('success', 'Post eliminado exitosamente.');
     }
-
+    
+    /*
     //GUARDAR UN COMENTARIO 
-
     public function storeComment(Request $request, Post $post)
     {
         $request->validate([
@@ -94,6 +94,5 @@ class PostController extends Controller
         );
 
         return redirect()->back()->with('success', 'Reacción guardada.');
-    }
-
+    }*/
 }

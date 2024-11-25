@@ -30,8 +30,6 @@
     </section>
 
     {{--Categorias (productos)--}}
-
-    
     <section>
         <div class="px-2 py-8 ">
         @livewire('product-filter')

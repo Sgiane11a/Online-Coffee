@@ -20,26 +20,34 @@
         </section>       
 
         {{--Taza animada--}}     
-        <section class="flex justify-center items-center border-b-2 border-blueberry-100 py-12 bg-black relative">
+        <section class="flex justify-center items-center border-b-2 border-blueberry-100 py-12 bg-black relative overflow-hidden">
+            <!-- Video de fondo -->
+            <video class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline>
+                <source src="{{ asset('videos/tazafondo.mp4') }}" type="video/mp4">
+                Tu navegador no soporta el formato de video.
+            </video>
+        
+            <!-- Contenido opacado -->
+            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
             <div class="absolute left-0 top-1/4 transform -translate-y-1/4 flex flex-col items-start px-4 w-1/2">
-                <p class="font-extrabold text-3xl break-normal text-left mt-2 fa1">"Una taza de café, millones de ideas. Juntos, somos imparables”</p>
+                <p class="font-extrabold text-3xl break-normal text-left mt-2 fa2">"Una taza de café, millones de ideas. Juntos, somos imparables”</p>
                 <p class="font-extrabold text-2xl break-normal text-left mt-2 fa2">"Desde una taza, nacen las mejores conexiones entre mentes creativas."</p>
-                <p class="font-extrabold text-1xl break-normal text-left mt-2 fa3">"El café une, inspira y acompaña: el aliado perfecto para cada proyecto."</p>
+                <p class="font-extrabold text-1xl break-normal text-left mt-2 fa2">"El café une, inspira y acompaña: el aliado perfecto para cada proyecto."</p>
             </div>
             
             <!-- Contenedor derecho -->
             <div class="absolute right-0 top-1/4 transform -translate-y-1/4 flex flex-col items-end px-4 w-1/2">
-                <p class="font-extrabold text-2xl break-normal text-left mt-2 fa4">"Café y comunidad: ingredientes esenciales para aprender y crecer."</p>
-                <p class="font-extrabold text-1xl break-normal text-right mt-2 fa5">"Cada día, millones de estudiantes comparten un café mientras trabajan en sus sueños."</p>
-                <p class="font-extrabold text-2xl break-normal text-right mt-2 fa6">"¿Sabías que un café caliente puede aumentar la sensación de conexión entre las personas?"</p>
+                <p class="font-extrabold text-2xl break-normal text-left mt-2 fa2">"Café y comunidad: ingredientes esenciales para aprender y crecer."</p>
+                <p class="font-extrabold text-1xl break-normal text-right mt-2 fa2">"Cada día, millones de estudiantes comparten un café mientras trabajan en sus sueños."</p>
+                <p class="font-extrabold text-2xl break-normal text-right mt-2 fa2">"¿Sabías que un café caliente puede aumentar la sensación de conexión entre las personas?"</p>
             </div>
         
             <!-- Ultimo texto-->
             <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center">
-                <p class="font-extrabold text-3xl break-normal fa7">En el 85% de los proyectos colaborativos, las mejores ideas surgen con una taza de café en la mano.</p>
+                <p class="font-extrabold text-3xl break-normal mt-2 fa2">En el 85% de los proyectos colaborativos, las mejores ideas surgen con una taza de café en la mano.</p>
             </div>
         
-            <canvas aria-label="Modelo 3D de un café" class="aspect-auto" id="coffee"></canvas>
+            <canvas aria-label="Modelo 3D de un café" class="aspect-auto z-10" id="coffee"></canvas>
         </section>
 
         {{--Carrusel--}}
