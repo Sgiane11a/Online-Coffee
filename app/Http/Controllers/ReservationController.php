@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class ReservationController extends Controller
 {
     function index(){
-        return view('user.reservations.index');
+        return view('user.reservation');
     }
 
     function guestindex()
