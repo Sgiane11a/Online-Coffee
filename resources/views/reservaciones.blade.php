@@ -19,7 +19,7 @@
     
         <!--- -->
      <div class="container">
-         <section class="grid">
+         <section class="grid1">
              <div class="card">
                  <h2 class="font-extrabold card-title">Computadoras</h2>
                  <p>Reserva de computadoras con acceso a internet de alta velocidad y software especializado. Sujeto a disponibilidad.</p>
