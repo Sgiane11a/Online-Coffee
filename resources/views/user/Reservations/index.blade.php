@@ -1,9 +1,12 @@
 
     <!-- RESERVACIONES VIEW DE USUARIO -->
 
-    @extends('layouts.home')
-
-    @section('main')
+    <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Foro
+        </h2>
+    </x-slot>
     <div class="container-imagen">
     {{--Encabezado(Logo)--}}
     <section class="relative text-left bg-cover h-50 sm:h-60 md:h-[270px]" style="background-image: url('{{ asset('images/RESERVAS.png') }}');">
@@ -67,7 +70,6 @@
         </div>
     </div>
     
-    @endsection
-    
+    </x-app-layout>    
     
     

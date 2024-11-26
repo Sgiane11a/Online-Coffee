@@ -14,7 +14,6 @@
                 <x-header-link url="{{route('products')}}" text="Productos" />
                 <x-header-link url="/reservaciones" text="Reservas" />
                 <x-header-link url="/biblioteca" text="Biblioteca" />
-                <x-header-link url="/foro" text="Foro" />
             </ul>
             @if (Route::has('login'))
                 <div class="flex justify-center gap-4">

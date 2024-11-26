@@ -1,15 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\FooterController;
-use App\Http\Controllers\BibliotecaController;
-use App\Http\Controllers\ReservacionesController;
-use App\Http\Controllers\ForoController;
+use App\Http\Controllers\ProductController;             // CONTROLADOR DE PRODUCTOS
+use App\Http\Controllers\AdminController;               // CONTROLADOR DEL PANEL ADMINISTRATIVO
+use App\Http\Controllers\CategoryController;            // CONTROLADOR DE CATEGORIAS
+use App\Http\Controllers\PostController;                // CONTROLADOR DE FORO
+use App\Http\Controllers\UserController;                // CONTROLADOR DE USUARIOS
+use App\Http\Controllers\FooterController;              // CONTROLADOR DE PIE DE PAGINA
+use App\Http\Controllers\LibraryController;             // CONTROLADOR DE LA BILIOTECA
+use App\Http\Controllers\ReservationController;         // CONTROLADOR DE RESERVACIONES
 
 // Ruta principal de bienvenida
 Route::get('/', function () {
@@ -17,16 +16,14 @@ Route::get('/', function () {
 });
 
 // Ruta pública para la biblioteca
-Route::get('/biblioteca', [bibliotecaController::class, 'index'])->name('biblioteca');
+Route::get('/biblioteca', [LibraryController::class, 'index'])->name('biblioteca');
 
 // Ruta pública para las reservaciones
-Route::get('/reservaciones', [ReservacionesController::class, 'guestindex'])->name('reservaciones');
+Route::get('/reservaciones', [ReservationController::class, 'guestindex'])->name('reservaciones');
 
 // Ruta pública para productos
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 
-// Ruta pública para el foro
-Route::get('/foro', [ForoController::class, 'index'])->name('foro');
 
 // Ruta pública para mostrar publicaciones del foro
 Route::get('/forum/posts', [PostController::class, 'guest'])->name('forum.guest');
@@ -43,10 +40,7 @@ Route::middleware([
     })->name('dashboard');
 
     // Ruta para la página de reservaciones
-    Route::get('/reservations', function () {
-        return view('reservations');
-    })->name('reservations');
-
+    Route::get('/user/reservations', [ReservationController::class, 'index'])->name('reservations');
     // Grupo de rutas para el foro autenticado
     Route::prefix('forum')->name('forum.')->group(function () {
         // Página principal del foro
@@ -61,6 +55,9 @@ Route::middleware([
             Route::delete('delete/{post}', [PostController::class, 'destroy'])->name('delete'); // Eliminar publicación
         });
     });
+
+
+
 });
 
 // Grupo de rutas para el administrador
