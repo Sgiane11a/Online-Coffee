@@ -10,4 +10,9 @@ class ReservacionesController extends Controller
     {
         return view('reservaciones');
     }
+
+    function guestindex()
+    {
+        return view('reservations');
+    }
 }

@@ -20,7 +20,7 @@ Route::get('/', function () {
 Route::get('/biblioteca', [bibliotecaController::class, 'index'])->name('biblioteca');
 
 // Ruta pública para las reservaciones
-Route::get('/reservaciones', [ReservacionesController::class, 'index'])->name('reservaciones');
+Route::get('/reservaciones', [ReservacionesController::class, 'guestindex'])->name('reservaciones');
 
 // Ruta pública para productos
 Route::get('/products', [ProductController::class, 'index'])->name('products');
