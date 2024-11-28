@@ -4,16 +4,17 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-mark class="block h-9 w-auto" />
-                    </a>
-                </div>
+                        <a href="{{ route('dashboard') }}" class="text-raspberry-600 font-extrabold leading-none">
+                            <div class=" text-grape-350 text-3xl">ONLINE</div>
+                            <div class="text-grape-450 text-2x1 text-center">COFFEE</div></a>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        Inicio
+                    </x-nav-link>
+                    <x-nav-link href="" :active="request()->routeIs('')">
+                        Productos
                     </x-nav-link>
                     <x-nav-link href="{{ route('reservations') }}" :active="request()->routeIs('reservations')">
                         Reservaciones
