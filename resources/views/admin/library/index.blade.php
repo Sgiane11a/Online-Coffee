@@ -37,7 +37,7 @@
                     </div>
                     <div>
                         <p class="text-lg font-medium text-gray-400">
-                            Productos
+                            LIBROS
                         </p>
                     </div>
                 </a>

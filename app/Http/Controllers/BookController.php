@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 class BookController extends Controller
 {
     public function index()
-    {
-        return view('admin.library.books.index');
-    }
+{
+    $books = Book::all();  // Obtiene todos los libros desde la base de datos
+    return view('admin.library.books.index', compact('books'));
+}
+
 
 
     public function create()
