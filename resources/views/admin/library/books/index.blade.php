@@ -76,7 +76,7 @@
                                     
                                     <!-- Botón Editar (vacío por ahora) -->
                                     <td class="px-4 py-3 text-sm">
-                                        <form action="#">
+                                        <form action="{{ route('admin.library.books.edit', $book->id) }}" >
                                             @csrf
                                             <button type="submit"
                                                 class="inline-block w-auto text-yellow-50 bg-yellow-600 rounded-md p-2 ">
@@ -89,8 +89,10 @@
 
                                     <!-- Botón Eliminar (vacío por ahora) -->
                                     <td class="px-4 py-3 text-sm">
-                                        <form action="#" method="POST">
+                                        <form action="{{ route('admin.library.books.delete', $book->id) }}" method="POST">
                                             @csrf
+                                            @method('DELETE')
+
                                             <button type="submit"
                                                 class="inline-block w-auto text-red-50 bg-red-700 rounded-md p-2 ">
                                                 <svg class="w-5 y-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

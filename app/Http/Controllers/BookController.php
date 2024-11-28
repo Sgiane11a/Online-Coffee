@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\Bookscategory;  // Importar la clase Bookscategory
 use App\Models\Book;  // Asegúrate de importar también el modelo Book si lo usas
 use Illuminate\Http\Request;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Cloudinary\Uploader;
 
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Cloudinary\Configuration\Configuration;
 
 class BookController extends Controller
 {
@@ -59,6 +61,80 @@ class BookController extends Controller
         return redirect()->route('admin.library.books.index')->with('success', 'Libro creado exitosamente');
     }
     
+    public function edit($id)
+    {
+        // Buscar el libro por su ID
+        $book = Book::findOrFail($id);
+        
+        // Obtener todas las categorías de libros
+        $categories = Bookscategory::all();
+        
+        // Pasar el libro y las categorías a la vista
+        return view('admin.library.books.update', compact('book', 'categories'));
+    }
+
+   
+    public function update(Request $request, $id)
+    {
+        // Validar los datos del formulario
+        $validatedData = $request->validate([
+            'category_id' => 'required|exists:book_categories,id', // Cambiado a book_categories
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'language' => 'required|string|max:50',
+            'publication_year' => 'required|integer',
+            'image' => 'nullable|image|max:2048', // Validación de imagen
+        ]);
+    
+        // Encuentra el libro por su ID
+        $book = Book::findOrFail($id);
+    
+        // Actualiza los campos del libro
+        $book->category_id = $validatedData['category_id'];
+        $book->title = $validatedData['title'];
+        $book->author = $validatedData['author'];
+        $book->language = $validatedData['language'];
+        $book->publication_year = $validatedData['publication_year'];
+    $uploadedFile = $request->file('image');
+        // Manejar la carga de la imagen si existe
+        if ($uploadedFile) {
+            Cloudinary::destroy($book->image_public_id);
+
+            $uploadResult = Cloudinary::upload($uploadedFile->getRealPath(), [
+                'folder' => 'Books'
+            ]);
+
+            $book->update([
+                'image_url' => $uploadResult->getSecurePath(),
+                'image_public_id' => $uploadResult->getPublicId(),
+            ]);
+        }
+    
+        // Guardar los cambios en el libro
+        $book->save();
+    
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('admin.library.books.index')->with('success', 'Libro actualizado correctamente');
+    }
+
+
+
+public function destroy($id)
+{
+    // Buscar el libro por su ID
+    $book = Book::findOrFail($id);
+    
+    // Si tiene imagen, eliminarla de Cloudinary (si la usaste)
+    if ($book->image_public_id) {
+        Cloudinary::destroy($book->image_public_id);
+    }
+
+    // Eliminar el libro
+    $book->delete();
+
+    // Redirigir con mensaje de éxito
+    return redirect()->route('admin.library.books.index')->with('success', 'Libro eliminado exitosamente');
+}
 
 
 }
