@@ -126,8 +126,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::prefix('books')->name('books.')->group(function () {
                 Route::get('/', [BookController::class, 'index'])->name('index'); // Listado de libros
                 Route::get('create', [BookController::class, 'create'])->name('create'); // Crear libro
-                Route::post('store', [BookController::class, 'store'])->name('store');
-                Route::get('edit/{id}', [BookController::class, 'edit'])->name('edit'); // Editar libro
+                Route::post('store', [BookController::class, 'store'])->name('store'); // Guardar libro
+                Route::get('edit/{id}', [BookController::class, 'edit'])->name('edit');
                 Route::put('update/{id}', [BookController::class, 'update'])->name('update'); // Actualizar libro
                 Route::delete('delete/{id}', [BookController::class, 'destroy'])->name('delete'); // Eliminar libro
             });
