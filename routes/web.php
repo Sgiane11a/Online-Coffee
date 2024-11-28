@@ -175,6 +175,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Logout del administrador
         Route::post('logout', [BookController::class, 'destroy'])->name('logout');
+        Route::post('logout', [AdminController::class, 'destroy'])->name('logout');
+
 
 
        
