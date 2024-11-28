@@ -34,6 +34,7 @@ class Book extends Model
     {
         return $this->belongsTo(Bookscategory::class, 'category_id');
     }
+    
 
     public function reviews()
     {

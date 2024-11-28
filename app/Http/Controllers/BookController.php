@@ -11,11 +11,38 @@ use Cloudinary\Configuration\Configuration;
 
 class BookController extends Controller
 {
-    public function index()
-{
-    $books = Book::all();  // Obtiene todos los libros desde la base de datos
-    return view('admin.library.books.index', compact('books'));
-}
+    public function index(Request $request)
+    {
+        // Obtener filtros de la solicitud
+        $search = $request->input('search');
+        $categoryId = $request->input('category_id');
+    
+        // Iniciar consulta base
+        $query = Book::query();
+    
+        // Filtrar por búsqueda (nombre o autor)
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                  ->orWhere('author', 'like', '%' . $search . '%');
+            });
+        }
+    
+        // Filtrar por categoría
+        if ($categoryId) {
+            $query->where('category_id', $categoryId);
+        }
+    
+        // Obtener resultados con relaciones
+        $books = $query->with('category')->get();
+    
+        // Obtener todas las categorías
+        $categories = Bookscategory::all();
+    
+        // Retornar vista con datos
+        return view('admin.library.books.index', compact('books', 'categories', 'search', 'categoryId'));
+    }
+    
 
 
 

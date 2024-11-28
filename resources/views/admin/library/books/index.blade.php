@@ -8,14 +8,27 @@
             </h2>
 
             <!-- Formulario de búsqueda -->
-            <form action="#" method="GET" class="mb-6">
-                <div class="flex gap-4">
-                    <input type="text" name="search" placeholder="Buscar libros..." class="px-4 py-2 w-full bg-gray-700 text-white rounded-lg">
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg">
-                        Buscar
-                    </button>
-                </div>
-            </form>
+            <!-- Formulario de búsqueda -->
+<form action="{{ route('admin.library.books.index') }}" method="GET" class="mb-6">
+    <div class="flex gap-4">
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Buscar libros..." class="px-4 py-2 w-full bg-gray-700 text-white rounded-lg">
+        
+        <!-- Menú desplegable de categorías -->
+        <select name="category_id" class="px-4 py-2 bg-gray-700 text-white rounded-lg">
+            <option value="">Todas las categorías</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
+
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg">
+            Buscar
+        </button>
+    </div>
+</form>
+
 
             <div class="flex justify-between gap-6 mb-8">
                 <div class="flex-grow flex items-center p-4 rounded-lg shadow-xs bg-gray-800">
