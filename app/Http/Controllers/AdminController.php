@@ -78,4 +78,9 @@ class AdminController extends Controller
 
         return redirect('/');
     }
+
+    public function library(): View
+    {
+        return view('admin.library.index');
+    }
 }

@@ -9,6 +9,8 @@ use App\Http\Controllers\UserController;                // CONTROLADOR DE USUARI
 use App\Http\Controllers\FooterController;              // CONTROLADOR DE PIE DE PAGINA
 use App\Http\Controllers\LibraryController;             // CONTROLADOR DE LA BILIOTECA
 use App\Http\Controllers\ReservationController;         // CONTROLADOR DE RESERVACIONES
+use App\Http\Controllers\BookController;                // CONTROLADOR DE LIBROS
+use App\Http\Controllers\CategorybookController;        // CONTROLADOR DE LIBROS
 
 // Ruta principal de bienvenida
 Route::get('/', function () {
@@ -55,12 +57,17 @@ Route::middleware([
             Route::delete('delete/{post}', [PostController::class, 'destroy'])->name('delete'); // Eliminar publicación
         });
     });
-
-
-
 });
 
-// Grupo de rutas para el administrador
+
+// ----------------------------------------------------------------
+// ----------------------------------------------------------------
+//     GRUPO DEL ADMINISTRATOR
+// ----------------------------------------------------------------
+// ----------------------------------------------------------------
+
+
+
 Route::prefix('admin')->name('admin.')->group(function () {
 
     // Rutas de administrador invitado (login)
@@ -92,6 +99,38 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('edit/{user}', [UserController::class, 'edit'])->name('edit'); // Editar usuario
             Route::put('update/{user}', [UserController::class, 'update'])->name('update'); // Actualizar usuario
             Route::delete('delete/{user}', [UserController::class, 'destroy'])->name('delete'); // Eliminar usuario
+        });
+
+        // Rutas para manejar la biblioteca
+
+        Route::prefix('library')->name('library.')->group(function () {
+            Route::get('/',[AdminController::class, 'library'])->name('index'); // Listado de libros
+
+            //RUTAS DE CATEGORIA
+
+            Route::prefix('categories')->name('categories.')->group(function () {
+                Route::get('/', [CategorybookController::class, 'index'])->name('index'); // Listado de categoria
+                Route::get('/create', [CategorybookController::class, 'create'])->name('create'); // Crear Catgeoria
+                Route::post('store', [CategorybookController::class, 'store'])->name('store'); // Guardar Catgeoria
+                Route::delete('admin/library/categories/{id}', [CategorybookController::class, 'destroy'])
+                ->name('destroy');
+                
+                
+                Route::get('edit/{id}', [CategorybookController::class, 'edit'])->name('edit'); // Editar categoría
+                Route::put('update/{id}', [CategorybookController::class, 'update'])->name('update'); // Actualizar categoría
+
+            });
+
+            //RUTAS DE LIBROS
+
+            Route::prefix('books')->name('books.')->group(function () {
+                Route::get('/', [BookController::class, 'index'])->name('index'); // Listado de libros
+                Route::get('create', [BookController::class, 'create'])->name('create'); // Crear libro
+                Route::post('store', [BookController::class, 'store'])->name('store');
+                Route::get('edit/{id}', [BookController::class, 'edit'])->name('edit'); // Editar libro
+                Route::put('update/{id}', [BookController::class, 'update'])->name('update'); // Actualizar libro
+                Route::delete('delete/{id}', [BookController::class, 'destroy'])->name('delete'); // Eliminar libro
+            });
         });
 
         // Rutas para manejar la tienda
@@ -135,7 +174,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         // Logout del administrador
-        Route::post('logout', [AdminController::class, 'destroy'])->name('logout');
+        Route::post('logout', [BookController::class, 'destroy'])->name('logout');
+
+
+       
+        
+
     });
 });
 
@@ -159,3 +203,6 @@ Route::put('/comments/{comment}', [PostController::class, 'updateComment'])->nam
 Route::delete('admin/comments/{comment}', [PostController::class, 'destroyComment'])->name('admin.comments.delete'); // Eliminar comentario desde admin
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show'); // Mostrar publicación
 Route::post('admin/comments/{post_id}', [PostComment::class, 'store'])->name('admin.comments.store'); // Guardar comentario desde admin
+
+
+

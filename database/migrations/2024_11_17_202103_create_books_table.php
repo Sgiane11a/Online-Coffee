@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('category');
             $table->string('author');
+            $table->foreignId('category_id')->constrained('book_categories')->onDelete('cascade');
+            $table->string('language')->default('es');
+            $table->integer('publication_year');
+            $table->text('description')->nullable();
+            $table->string('image_url')->nullable();
+            $table->string('image_public_id')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('books'); // Elimina la tabla completa
     }
 };
