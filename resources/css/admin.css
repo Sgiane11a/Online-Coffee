@@ -1,0 +1,63 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Tus estilos personalizados */
+body {
+    font-family: sans-serif;
+}
+
+.sidebar {
+    background-color: #ec4899;
+    height: 100vh;
+    padding: 20px;
+}
+
+.sidebar a {
+    display: block;
+    margin-top: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        height: auto; /* Ajusta la altura al contenido */
+        padding: 10px;
+    }
+
+    .sidebar a {
+        font-size: 0.875rem; /* Tamaño de texto pequeño (equivale a text-sm) */
+    }
+}
+
+@media (max-width: 768px) {
+    .d-flex {
+        display: flex;
+        flex-direction: column; /* Cambia el diseño a una columna */
+    }
+
+    .sidebar {
+        width: 100%; /* Sidebar ocupa todo el ancho */
+        text-align: center; /* Centra el texto */
+    }
+
+    .container-fluid {
+        padding: 0.5rem; /* Reduce el padding del contenido */
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        font-size: 0.75rem; /* Tamaño de texto extra pequeño (equivale a text-xs) */
+    }
+
+    h1, h2 {
+        font-size: 1rem; /* Tamaño base para los encabezados */
+    }
+}
+

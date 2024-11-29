@@ -37,11 +37,11 @@
                 </div>
             @endif
         </nav>
-
         <x-responsive />
-
     </header>
-        @yield('main')
+
+    @yield('main')
+    
         <footer class="flex flex-col items-center gap-8 bg-grape-350 border-grape-350 border-t-2 p-8 font-medium text-white">
             <section class="flex justify-between gap-2 w-full ">
                 <div class="hidden lg:flex ">

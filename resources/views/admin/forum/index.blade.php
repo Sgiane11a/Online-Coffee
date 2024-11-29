@@ -5,7 +5,7 @@
         <!-- Contenedor principal -->
         <div class="container px-6 mx-auto grid">
             <!-- Título del Foro -->
-            <h2 class="my-6 text-2xl font-semibold text-gray-200">
+            <h2 class="my-6 text-2xl font-semibold text-grape-450">
                 Foro
             </h2>
         </div>
