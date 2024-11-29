@@ -21,7 +21,6 @@
                         </p>
                     </div>
                 </div>
-                <!-- Card -->
                 <a href="{{ route('admin.users.create') }}"
                     class="flex items-center p-4 gap-4 rounded-lg shadow-xs bg-gray-800">
                     <div class="hidden lg:block">
@@ -30,7 +29,7 @@
                         </p>
                     </div>
                     <div class="p-2 rounded-full text-green-50 bg-green-600">
-                        <svg class="w-6 h-6"="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path fill="currentColor"
                                 d="M17 13h-4v4h-2v-4H7v-2h4V7h2v4h4m-5-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2" />
                         </svg>
@@ -38,7 +37,6 @@
                 </a>
             </div>
 
-            <!-- New Table -->
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
                 <div class="w-full overflow-x-auto">
                     <table class="w-full whitespace-no-wrap">
@@ -48,8 +46,9 @@
                                 <th class="px-4 py-3 hidden sm:block">Nombre</th>
                                 <th class="px-4 py-3">Correo</th>
                                 <th class="px-4 py-3 hidden lg:table-cell">Creado</th>
-                                <th class="px-4 py-3">Editar</th>
-                                <th class="px-4 py-3">Eliminar</th>
+                                <th class="px-4 py-3 hidden lg:table-cell">Carrera</th>
+                                <th class="px-4 py-3 hidden lg:table-cell">Departamento</th>
+                                <th class="px-4 py-3">Opciones</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -72,27 +71,25 @@
                                         </div>
                                     </td>
                                     <td class="px-4 py-3 text-sm">{{ $user->email }}</td>
-                                    <td class="px-4 py-3 text-sm hidden lg:table-cell">{{ $user->created_at->format('d/m/Y') }}
+                                    <td class="px-4 py-3 text-sm hidden lg:table-cell">{{ $user->created_at->format('d/m/Y') }}</td>
+                                    <td class="px-4 py-3 text-sm">
+                                        {{ $user->career ? $user->career->name : 'Sin carrera' }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
-                                        <form action="{{ route('admin.users.edit', $user->id) }}">
-                                            @csrf
-                                            <button type="submit"
-                                                class="inline-block w-auto text-yellow-50 bg-yellow-600 rounded-md p-2 ">
-                                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                    <path fill="currentColor"
-                                                        d="M4 21q-.425 0-.712-.288T3 20v-2.425q0-.4.15-.763t.425-.637L16.2 3.575q.3-.275.663-.425t.762-.15t.775.15t.65.45L20.425 5q.3.275.437.65T21 6.4q0 .4-.138.763t-.437.662l-12.6 12.6q-.275.275-.638.425t-.762.15zM17.6 7.8L19 6.4L17.6 5l-1.4 1.4z" />
-                                                </svg>
-                                            </button>
-                                        </form>
+                                        {{ $user->department ? $user->department->name : 'Sin departamento' }}
                                     </td>
-                                    <td class="px-4 py-3 text-sm">
+                                    <td class="px-4 py-3 text-sm flex space-x-2">
+                                        <a href="{{ route('admin.users.edit', $user->id) }}" class="text-yellow-50 bg-yellow-600 p-2 rounded-md">
+                                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                <path fill="currentColor"
+                                                    d="M4 21q-.425 0-.712-.288T3 20v-2.425q0-.4.15-.763t.425-.637L16.2 3.575q.3-.275.663-.425t.762-.15t.775.15t.65.45L20.425 5q.3.275.437.65T21 6.4q0 .4-.138.763t-.437.662l-12.6 12.6q-.275.275-.638.425t-.762.15zM17.6 7.8L19 6.4L17.6 5l-1.4 1.4z" />
+                                            </svg>
+                                        </a>
                                         <form action="{{ route('admin.users.delete', $user->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit"
-                                                class="inline-block w-auto text-red-50 bg-red-700 rounded-md p-2 ">
-                                                <svg class="w-5 y-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <button type="submit" class="text-red-50 bg-red-700 p-2 rounded-md">
+                                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
                                                         d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z" />
                                                 </svg>
@@ -104,8 +101,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div
-                    class="px-4 py-3 font-medium tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                <div class="px-4 py-3 font-medium tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
                     {{ $users->links() }}
                 </div>
             </div>

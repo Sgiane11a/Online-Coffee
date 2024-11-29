@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -20,6 +21,8 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->foreignId('career_id')->nullable()->constrained('careers'); // Relación con careers
+            $table->foreignId('department_id')->nullable()->constrained('departments'); // Relación con departments
             $table->timestamps();
         });
 
@@ -37,15 +40,37 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        if (!Schema::hasColumn('users', 'department_id')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->foreignId('department_id')->nullable()->constrained('departments')->onDelete('set null');
+            });
+        }
+    
+        if (!Schema::hasColumn('users', 'career_id')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->foreignId('career_id')->nullable()->constrained('careers')->onDelete('set null');
+            });
+        }
     }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
-    {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('sessions');
-    }
+{
+    // Eliminar las claves foráneas antes de eliminar las tablas
+    Schema::table('users', function (Blueprint $table) {
+        $table->dropForeign(['career_id']); // Eliminar la clave foránea de 'career_id'
+        $table->dropForeign(['department_id']); // Eliminar la clave foránea de 'department_id'
+    });
+
+    // Ahora puedes eliminar las tablas
+    Schema::dropIfExists('users');
+    Schema::dropIfExists('password_reset_tokens');
+    Schema::dropIfExists('sessions');
+    Schema::dropIfExists('careers');
+    Schema::dropIfExists('departments');
+}
+
 };

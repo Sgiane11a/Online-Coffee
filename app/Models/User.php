@@ -36,6 +36,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'department_id',
+        'career_id',
     ];
 
     /**
@@ -71,6 +73,28 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+ /**
+     * Relaciones
+     */
+    public function career()
+    {
+        return $this->belongsTo(Career::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+/**
+     * Validación para asegurarse de que el correo siga el formato adecuado
+     */
+    
+
+
+
+
 
     public function posts()
     {
