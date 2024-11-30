@@ -11,11 +11,33 @@ use App\Models\Career;
 
 class UserController extends Controller
 {
-    public function index(): View
+        public function index(Request $request): View
     {
-        $users = User::paginate(5);
-        return view('admin.users.index', compact('users'));
+        // Obtener los filtros desde el request
+        $departmentId = $request->input('department_id');
+        $careerId = $request->input('career_id');
+
+        // Construir la consulta de usuarios con filtros opcionales
+        $users = User::query()
+            ->when($departmentId, function ($query, $departmentId) {
+                $query->where('department_id', $departmentId);
+            })
+            ->when($careerId, function ($query, $careerId) {
+                $query->where('career_id', $careerId);
+            })
+            ->paginate(5);
+
+        // Obtener la cantidad total de usuarios sin filtros
+        $totalUsers = User::count();
+
+        // Obtener departamentos y carreras para los filtros
+        $departments = Department::all();
+        $careers = Career::all();
+
+        return view('admin.users.index', compact('users', 'departments', 'careers', 'departmentId', 'careerId', 'totalUsers'));
     }
+
+    
 
     public function create(): View
     {
