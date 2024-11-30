@@ -101,6 +101,10 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function reservations() {
+        return $this->hasMany(Reservation::class);
+    }
+
     // En el modelo User.php
     
     public function isAdmin()

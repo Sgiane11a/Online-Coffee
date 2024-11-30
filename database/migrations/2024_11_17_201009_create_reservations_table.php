@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->morphs('reservable');
-            $table->string('area');
             $table->date('reserved_at');
             $table->date('due_date');
-            $table->date('day_of_week');
+            $table->unsignedTinyInteger('day_of_week');
             $table->timestamps();
         });
     }

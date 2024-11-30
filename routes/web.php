@@ -43,7 +43,18 @@ Route::middleware([
 
     // Ruta para la página de reservaciones
     Route::get('/user/reservations', [ReservationController::class, 'index'])->name('reservations');
-    // Grupo de rutas para el foro autenticado
+    // Rutas para gestionar reservaciones
+    Route::prefix('reservations')->name('reservations.')->group(function () {
+        // Mostrar todas las reservas del usuario
+        Route::get('/', [ReservationController::class, 'index'])->name('index');
+        // Formulario para crear una reserva
+        Route::get('/create', [ReservationController::class, 'create'])->name('create');
+        // Guardar una nueva reserva
+        Route::post('/store', [ReservationController::class, 'store'])->name('store');
+        // (Opcional) Eliminar una reserva
+        Route::delete('/{reservation}', [ReservationController::class, 'destroy'])->name('destroy');
+    });
+        // Grupo de rutas para el foro autenticado
     Route::prefix('forum')->name('forum.')->group(function () {
         // Página principal del foro
         Route::get('/', [PostController::class, 'index'])->name('index');
@@ -186,7 +197,6 @@ Route::get('posts/{post}/comments/{comment}/edit', [PostController::class, 'edit
 Route::put('/comments/{comment}', [PostController::class, 'updateComment'])->name('comments.update'); // Actualizar comentario
 Route::delete('admin/comments/{comment}', [PostController::class, 'destroyComment'])->name('admin.comments.delete'); // Eliminar comentario desde admin
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show'); // Mostrar publicación
-Route::post('admin/comments/{post_id}', [PostComment::class, 'store'])->name('admin.comments.store'); // Guardar comentario desde admin
-
+Route::post('admin/comments/{post_id}', [PostComment::class, 'store'])->name('admin.comments.store'); // Guardar comentario desde admin
 
 

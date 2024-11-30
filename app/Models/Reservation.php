@@ -15,28 +15,27 @@ class Reservation extends Model
      * @var array<int, string>
      */
 
-    protected $fillable = [
+     protected $fillable = [
         'reservable_id',
         'reservable_type',
         'reserved_at',
-        'due_date'
+        'due_date',
+        'day_of_week',
     ];
 
-    public static $areas = [
-        'A1',
-        'A2',
-        'A3',
-        'B1',
-    ];
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 
+    
     public static $daysOfWeek = [
-        'Lunes',
-        'Martes',
-        'Miércoles',
-        'Jueves',
-        'Viernes',
-        'Sábado',
-        'Domingo',
+        0 => 'Domingo',
+        1 => 'Lunes',
+        2 => 'Martes',
+        3 => 'Miércoles',
+        4 => 'Jueves',
+        5 => 'Viernes',
+        6 => 'Sábado',
     ];
 
     public static function boot()
@@ -44,12 +43,8 @@ class Reservation extends Model
         parent::boot();
 
         static::saving(function ($model) {
-            if (!in_array($model->area, self::$areas)) {
-                throw new \Exception('Invalid area');
-            }
-
-            if (!in_array($model->day_of_week, self::$daysOfWeek)) {
-                throw new \Exception('Invalid day of week');
+            if (!array_key_exists($model->day_of_week, self::$daysOfWeek)) {
+                throw new \InvalidArgumentException('Día de la semana inválido.');
             }
         });
     }
@@ -57,5 +52,15 @@ class Reservation extends Model
     public function reservable()
     {
         return $this->morphTo();
+    }
+
+     /**
+     * Get the human-readable day of the week.
+     *
+     * @return string
+     */
+    public function getDayOfWeekNameAttribute(): string
+    {
+        return self::$daysOfWeek[$this->day_of_week] ?? 'Desconocido';
     }
 }

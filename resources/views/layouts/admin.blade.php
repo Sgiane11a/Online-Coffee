@@ -4,8 +4,7 @@
 <body class="flex h-screen bg-grape-550">
     <!-- Sidebar con imagen de fondo -->
     <aside id="navigation"
-        class="z-20 h-full hidden md:block md:w-64 overflow-y-auto bg-cover bg-center flex-shrink-0"
-        style="background-image: url('/images/adminp.png');"> <!-- Cambia 'your-image.png' por el nombre de tu archivo -->
+        class="z-20 h-full hidden md:block md:w-64 bg-grape-350 overflow-y-auto bg-cover bg-center flex-shrink-0 ">
         <div class="py-4 text-white dark:text-gray-400">
             <div class="flex justify-between mx-6">
                 <a class="text-lg font-extrabold text-white" href="{{ route('admin.dashboard') }}">
