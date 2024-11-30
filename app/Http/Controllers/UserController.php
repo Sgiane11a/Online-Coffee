@@ -25,7 +25,7 @@ class UserController extends Controller
             ->when($careerId, function ($query, $careerId) {
                 $query->where('career_id', $careerId);
             })
-            ->paginate(5);
+            ->paginate(10);
 
         // Obtener la cantidad total de usuarios sin filtros
         $totalUsers = User::count();

@@ -5,15 +5,21 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Post;
+use App\Models\Book;
 use App\Models\Bookscategory;
 use App\Models\Department;
+use App\Models\Product;
 use App\Models\Career;
 use Database\Seeders\StoreSeeder; // Usar el namespace correcto
 use Database\Seeders\CareersTableSeeder; // Usar el namespace correcto
 use Database\Seeders\DepartmentsTableSeeder; // Usar el namespace correcto
 use Database\Seeders\BookscategorySeeder;
+use Database\Seeders\BookSeeder;
+use Database\Seeders\ProductsSeeder;
+use Database\Seeders\UsersSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,21 +35,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\Bookscategory::truncate();
         \App\Models\Department::truncate();
         \App\Models\Career::truncate();
+        \App\Models\Book::truncate();
 
-        // Crear usuario OC
-        User::factory()->create([
-            'name' => 'OC',
-            'email' => 'online.coffee@tecsup.edu.pe',
-        ]);
 
-        // Crear usuarios de prueba
-        $users_number = 10;
-        for ($i = 1; $i <= $users_number; $i++) {
-            User::factory()->create([
-                'name' => "Test User $i",
-                'email' => "test$i@example.com",
-            ]);
-        }
+
+        
 
         // Crear administrador
         Admin::factory()->create([
@@ -51,12 +47,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
         ]);
 
-        // Crear un primer post
-        Post::create([
-            'user_id' => 1,
-            'title' => 'Primer Mensaje',
-            'content' => 'Hola :)',
-        ]);
+       
 
         // Llamar al seeder de departamentos
         $this->call(DepartmentsTableSeeder::class);
@@ -69,5 +60,10 @@ class DatabaseSeeder extends Seeder
 
         // Llamar al seeder de categorías de libros
         $this->call(BookscategorySeeder::class);
+        $this->call(UsersSeeder::class);
+        $this->call(BookSeeder::class);
+        $this->call(ProductsSeeder::class);
+
+
     }
 }
