@@ -10,6 +10,7 @@ use App\Http\Controllers\FooterController;              // CONTROLADOR DE PIE DE
 use App\Http\Controllers\ReservationController;         // CONTROLADOR DE RESERVACIONES
 use App\Http\Controllers\BookController;                // CONTROLADOR DE LIBROS
 use App\Http\Controllers\CategorybookController;        // CONTROLADOR DE LIBROS
+use App\Http\Controllers\LibraryController;             // CONTROLADOR DE BIBLIOTECA
 
 // Ruta principal de bienvenida
 Route::get('/', function () {
