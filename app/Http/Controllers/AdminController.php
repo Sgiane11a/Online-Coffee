@@ -79,8 +79,8 @@ class AdminController extends Controller
         return redirect('/');
     }
 
-    public function library(): View
+    public function books(): View
     {
-        return view('admin.library.index');
+        return view('admin.books.index');
     }
 }

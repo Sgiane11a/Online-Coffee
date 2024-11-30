@@ -12,36 +12,42 @@ use Cloudinary\Configuration\Configuration;
 class BookController extends Controller
 {
     public function index(Request $request)
-    {
-        // Obtener filtros de la solicitud
-        $search = $request->input('search');
-        $categoryId = $request->input('category_id');
-    
-        // Iniciar consulta base
-        $query = Book::query();
-    
-        // Filtrar por búsqueda (nombre o autor)
-        if ($search) {
-            $query->where(function ($q) use ($search) {
-                $q->where('title', 'like', '%' . $search . '%')
-                  ->orWhere('author', 'like', '%' . $search . '%');
+{
+    // Inicializar la consulta de libros
+    $query = Book::query();
+
+    // Filtrado por tipo (Generales o Departamentos)
+    if ($request->has('filter_type')) {
+        // Filtro por Generales
+        if ($request->filter_type == 'generales' && $request->has('generales')) {
+            $query->whereHas('category', function ($query) use ($request) {
+                $query->where('name', $request->generales);
             });
         }
-    
-        // Filtrar por categoría
-        if ($categoryId) {
-            $query->where('category_id', $categoryId);
+
+        // Filtro por Departamentos
+        if ($request->filter_type == 'departamentos' && $request->has('departamento')) {
+            $query->whereHas('category', function ($query) use ($request) {
+                $query->where('name', $request->departamento);
+            });
         }
-    
-        // Obtener resultados con relaciones
-        $books = $query->with('category')->get();
-    
-        // Obtener todas las categorías
-        $categories = Bookscategory::all();
-    
-        // Retornar vista con datos
-        return view('admin.library.books.index', compact('books', 'categories', 'search', 'categoryId'));
     }
+
+    // Filtrado por búsqueda (si existe)
+    if ($request->has('search') && $request->search != '') {
+        $query->where('title', 'like', '%' . $request->search . '%');
+    }
+
+    // Obtener los libros con los filtros aplicados
+    $books = $query->get();
+
+    // Obtener todas las categorías
+    $categories = Bookscategory::all();
+
+    // Retornar la vista con los libros y categorías
+    return view('admin.books.index', compact('books', 'categories'));
+}
+
     
 
 
@@ -50,7 +56,7 @@ class BookController extends Controller
     {
         // Obtener todas las categorías de libros
         $categories = Bookscategory::all();
-        return view('admin.library.books.create', compact('categories'));
+        return view('admin.books.create', compact('categories'));
     }
     public function store(Request $request)
     {
@@ -85,7 +91,7 @@ class BookController extends Controller
         $book->save();
     
         // Redirigir con un mensaje de éxito
-        return redirect()->route('admin.library.books.index')->with('success', 'Libro creado exitosamente');
+        return redirect()->route('admin.books.index')->with('success', 'Libro creado exitosamente');
     }
     
     public function edit($id)
@@ -97,7 +103,7 @@ class BookController extends Controller
         $categories = Bookscategory::all();
         
         // Pasar el libro y las categorías a la vista
-        return view('admin.library.books.update', compact('book', 'categories'));
+        return view('admin.books.update', compact('book', 'categories'));
     }
 
    
@@ -141,7 +147,7 @@ class BookController extends Controller
         $book->save();
     
         // Redirigir con un mensaje de éxito
-        return redirect()->route('admin.library.books.index')->with('success', 'Libro actualizado correctamente');
+        return redirect()->route('admin.books.index')->with('success', 'Libro actualizado correctamente');
     }
 
 
@@ -160,7 +166,7 @@ public function destroy($id)
     $book->delete();
 
     // Redirigir con mensaje de éxito
-    return redirect()->route('admin.library.books.index')->with('success', 'Libro eliminado exitosamente');
+    return redirect()->route('admin.books.index')->with('success', 'Libro eliminado exitosamente');
 }
 
 

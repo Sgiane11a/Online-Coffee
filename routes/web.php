@@ -7,7 +7,6 @@ use App\Http\Controllers\CategoryController;            // CONTROLADOR DE CATEGO
 use App\Http\Controllers\PostController;                // CONTROLADOR DE FORO
 use App\Http\Controllers\UserController;                // CONTROLADOR DE USUARIOS
 use App\Http\Controllers\FooterController;              // CONTROLADOR DE PIE DE PAGINA
-use App\Http\Controllers\LibraryController;             // CONTROLADOR DE LA BILIOTECA
 use App\Http\Controllers\ReservationController;         // CONTROLADOR DE RESERVACIONES
 use App\Http\Controllers\BookController;                // CONTROLADOR DE LIBROS
 use App\Http\Controllers\CategorybookController;        // CONTROLADOR DE LIBROS
@@ -103,34 +102,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Rutas para manejar la biblioteca
 
-        Route::prefix('library')->name('library.')->group(function () {
-            Route::get('/',[AdminController::class, 'library'])->name('index'); // Listado de libros
+        Route::prefix('books')->name('books.')->group(function () {
 
-            //RUTAS DE CATEGORIA
 
-            Route::prefix('categories')->name('categories.')->group(function () {
-                Route::get('/', [CategorybookController::class, 'index'])->name('index'); // Listado de categoria
-                Route::get('/create', [CategorybookController::class, 'create'])->name('create'); // Crear Catgeoria
-                Route::post('store', [CategorybookController::class, 'store'])->name('store'); // Guardar Catgeoria
-                Route::delete('admin/library/categories/{id}', [CategorybookController::class, 'destroy'])
-                ->name('destroy');
-                
-                
-                Route::get('edit/{id}', [CategorybookController::class, 'edit'])->name('edit'); // Editar categoría
-                Route::put('update/{id}', [CategorybookController::class, 'update'])->name('update'); // Actualizar categoría
-
-            });
-
-            //RUTAS DE LIBROS
-
-            Route::prefix('books')->name('books.')->group(function () {
                 Route::get('/', [BookController::class, 'index'])->name('index'); // Listado de libros
                 Route::get('create', [BookController::class, 'create'])->name('create'); // Crear libro
                 Route::post('store', [BookController::class, 'store'])->name('store'); // Guardar libro
                 Route::get('edit/{id}', [BookController::class, 'edit'])->name('edit');
                 Route::put('update/{id}', [BookController::class, 'update'])->name('update'); // Actualizar libro
                 Route::delete('delete/{id}', [BookController::class, 'destroy'])->name('delete'); // Eliminar libro
-            });
+            
         });
 
         // Rutas para manejar la tienda

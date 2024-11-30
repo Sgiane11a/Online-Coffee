@@ -6,7 +6,7 @@
             <h2 class="my-6 text-2xl font-semibold text-gray-200">
                 Actualizar Libro
             </h2>
-            <form action="{{ route('admin.library.books.update', $book->id) }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-4 px-4 py-3 mb-8 rounded-lg shadow-md bg-gray-800">
+            <form action="{{ route('admin.books.update', $book->id) }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-4 px-4 py-3 mb-8 rounded-lg shadow-md bg-gray-800">
                 @csrf
                 @method('PUT')
                 <div class="block mt-4 text-sm">

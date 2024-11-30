@@ -5,10 +5,14 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Post;
+use App\Models\Bookscategory;
+use App\Models\Department;
+use App\Models\Career;
 use Database\Seeders\StoreSeeder; // Usar el namespace correcto
 use Database\Seeders\CareersTableSeeder; // Usar el namespace correcto
 use Database\Seeders\DepartmentsTableSeeder; // Usar el namespace correcto
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\BookscategorySeeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +26,9 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::truncate();
         \App\Models\Admin::truncate();
         \App\Models\Post::truncate();
+        \App\Models\Bookscategory::truncate();
+        \App\Models\Department::truncate();
+        \App\Models\Career::truncate();
 
         // Crear usuario OC
         User::factory()->create([
@@ -59,5 +66,8 @@ class DatabaseSeeder extends Seeder
 
         // Llamar al seeder de carreras
         $this->call(CareersTableSeeder::class);
+
+        // Llamar al seeder de categorías de libros
+        $this->call(BookscategorySeeder::class);
     }
 }
