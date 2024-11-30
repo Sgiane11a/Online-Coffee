@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 // Ruta pública para la biblioteca
-Route::get('/biblioteca', [LibraryController::class, 'index'])->name('biblioteca');
+Route::get('/biblioteca', [LibraryController::class, 'index'])->name('biblioteca.index');
 
 // Ruta pública para las reservaciones
 Route::get('/reservaciones', [ReservationController::class, 'guestindex'])->name('reservaciones');

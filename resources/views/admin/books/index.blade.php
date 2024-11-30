@@ -6,7 +6,12 @@
         <h2 class="my-6 text-2xl font-semibold text-gray-200">
             Libros
         </h2>
-
+<!-- Botón para agregar un nuevo libro -->
+<div class="mb-6">
+            <a href="{{ route('admin.books.create') }}" class="inline-block px-6 py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+                Agregar Nuevo Libro
+            </a>
+        </div>
         <!-- Formulario de búsqueda con filtro dinámico -->
         <form action="{{ route('admin.books.index') }}" method="GET" class="mb-6" id="filter-form">
             <div class="flex gap-4">
@@ -37,6 +42,18 @@
                         <option value="Diseño y Desarrollo de Software" {{ request('departamento') == 'Diseño y Desarrollo de Software' ? 'selected' : '' }}>Diseño y Desarrollo de Software</option>
                         <option value="Administración de Redes y Comunicaciones" {{ request('departamento') == 'Administración de Redes y Comunicaciones' ? 'selected' : '' }}>Administración de Redes y Comunicaciones</option>
                         <option value="Diseño y Desarrollo de Simuladores y Videojuegos" {{ request('departamento') == 'Diseño y Desarrollo de Simuladores y Videojuegos' ? 'selected' : '' }}>Diseño y Desarrollo de Simuladores y Videojuegos</option>
+                        <option value="Modelado y Animación Digital" {{ request('departamento') == 'Modelado y Animación Digital' ? 'selected' : '' }}>Modelado y Animación Digital</option>
+                        <option value="Diseño Industrial" {{ request('departamento') == 'Diseño Industrial' ? 'selected' : '' }}>Diseño Industrial</option>
+                        <option value="Producción y Gestión Industrial" {{ request('departamento') == 'Producción y Gestión Industrial' ? 'selected' : '' }}>Producción y Gestión Industrial</option>
+                        <option value="Operaciones Mineras" {{ request('departamento') == 'Operaciones Mineras' ? 'selected' : '' }}>Operaciones Mineras</option>
+                        <option value="Procesos Químicos y Metalúrgicos" {{ request('departamento') == 'Procesos Químicos y Metalúrgicos' ? 'selected' : '' }}>Procesos Químicos y Metalúrgicos</option>
+                        <option value="Electricidad Industrial" {{ request('departamento') == 'Electricidad Industrial' ? 'selected' : '' }}>Electricidad Industrial</option>
+                        <option value="Electrónica y Automatización Industrial" {{ request('departamento') == 'Electrónica y Automatización Industrial' ? 'selected' : '' }}>Electrónica y Automatización Industrial</option>
+                        <option value="Mecatrónica Industrial" {{ request('departamento') == 'Mecatrónica Industrial' ? 'selected' : '' }}>Mecatrónica Industrial</option>
+                        <option value="estión y Mantenimiento de Maquinaria Industrial" {{ request('departamento') == 'estión y Mantenimiento de Maquinaria Industrial' ? 'selected' : '' }}>estión y Mantenimiento de Maquinaria Industrial</option>
+                        <option value="Gestión de Mantenimiento de Maquinaria Pesada" {{ request('departamento') == 'Gestión de Mantenimiento de Maquinaria Pesada' ? 'selected' : '' }}>Gestión de Mantenimiento de Maquinaria Pesada</option>
+                        <option value="Aviación y Mecánica Aeronáutica" {{ request('departamento') == 'Aviación y Mecánica Aeronáutica' ? 'selected' : '' }}>Aviación y Mecánica Aeronáutica</option>
+
                         <!-- ...más opciones de departamentos... -->
                     </select>
                 </div>
@@ -114,5 +131,7 @@
         document.getElementById('departamentos_filter').classList.toggle('hidden', filterType !== 'departamentos');
     }
     toggleFilterOptions();
+
+    
 </script>
 @endsection

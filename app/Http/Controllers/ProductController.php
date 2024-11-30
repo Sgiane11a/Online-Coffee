@@ -20,7 +20,7 @@ class ProductController extends Controller
 
     function admin()
     {
-        $products = Product::paginate(5);
+        $products = Product::paginate(8);
         return view('admin.store.products.index', compact('products'));
     }
 
