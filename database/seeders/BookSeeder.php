@@ -13,466 +13,293 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
-        // Crear libros por categoría
-        $categories = Bookscategory::all();
+// LISTO (3) IMA Diseño y desarrollo de Software
 
-        // Insertar libros según la categoría
-        foreach ($categories as $category) {
-
-            // Diseño y Desarrollo de Software
-            if ($category->name === 'Diseño y Desarrollo de Software') {
-                Book::create([
-                    'title' => 'Introducción al Desarrollo de Software',
-                    'author' => 'Juan Pérez',
-                    'category_id' => $category->id,
+            $books = [
+                [  
+                    'category_id' => 1,
+                    'title' => 'El lenguaje de programación C#',
+                    'author' => 'José Antonio González Seco',
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Un libro que cubre los principios fundamentales del desarrollo de software, incluyendo análisis, diseño y pruebas.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Software Development Essentials',
-                    'author' => 'John Doe',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'A guide to the essential principles of software development, from analysis to design and testing.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
-
-            // Administración de Redes y Comunicaciones
-            if ($category->name === 'Administración de Redes y Comunicaciones') {
-                Book::create([
-                    'title' => 'Fundamentos de Redes y Comunicaciones',
-                    'author' => 'Carlos Sánchez',
-                    'category_id' => $category->id,
+                    'publication_year' => 2010,
+                    'description' => 'El lenguaje de programación C# de José Antonio González Seco es una guía introductoria al lenguaje de programación C# que abarca temas como Microsoft.NET, características de C#, preprocesador, aspectos léxicos, clases, espacios de nombres, variables y tipos de datos, métodos, propiedades, indizadores, redefinición de operadores, delegados y eventos, estructuras, enumeraciones, interfaces e instrucciones.',
+                    'image_public_id' => 'El_lenguaje_de_programación_C_nqym6z',
+                ],
+                [
+                    'category_id' => 1,
+                    'title' => 'Introducción a JavaScript',
+                    'author' => 'Javier Eguíluz Pérez',
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Este libro cubre los conceptos básicos de redes y administración de comunicaciones en entornos empresariales.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Networking and Communications Management',
-                    'author' => 'Alice Johnson',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'A comprehensive guide to networking and communication management in business environments.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
-
-            // Diseño y Desarrollo de Simuladores y Videojuegos
-            if ($category->name === 'Diseño y Desarrollo de Simuladores y Videojuegos') {
-                Book::create([
-                    'title' => 'Desarrollo de Videojuegos para Principiantes',
-                    'author' => 'Lucía González',
-                    'category_id' => $category->id,
+                    'publication_year' => 2009,
+                    'description' => 'Introducción a JavaScript por Javier Eguíluz Pérez es una introducción al lenguaje de programación JavaScript, utilizado principalmente para crear páginas web dinámicas. Cubre desde los conceptos básicos hasta temas avanzados como el DOM, eventos y formularios.',
+                    'image_public_id' => 'Introducción_a_JavaScript_vfpvc2',
+                ],
+                [
+                    'category_id' => 1,
+                    'title' => 'Introducción a la Programación',
+                    'author' => 'Garcia, I. & Marzal, A.',
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Una introducción al diseño y desarrollo de videojuegos, cubriendo desde la creación de conceptos hasta la implementación en plataformas.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Game Development Essentials',
-                    'author' => 'Michael Roberts',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'An introduction to game design and development, covering everything from concept creation to platform implementation.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
-
-            // Modelado y Animación Digital
-            if ($category->name === 'Modelado y Animación Digital') {
-                Book::create([
-                    'title' => 'Modelado 3D para Principiantes',
-                    'author' => 'Alberto Ruiz',
-                    'category_id' => $category->id,
+                    'publication_year' => 2023,
+                    'description' => 'Curso de Matlab por Sergio Giner es un curso de introducción a Matlab, un entorno interactivo de cálculo y visualización vinculado a un lenguaje de programación de alto nivel. El curso abarca temas como diagramación, entorno Matlab, manipulación de matrices, gráficos, programación básica y avanzada, operaciones de entrada y salida, entre otros.',
+                    'image_public_id' => 'Introduccion_a_la_Programación_con_Pyton_wxtynq',
+                ],
+            
+// LISTO (2) IMA Administración de Redes y Comunicaciones
+                [
+                    'category_id' => 2,
+                    'title' => 'Comunicación y Redes de Computadoras',
+                    'author' => 'Wiliam Stallings',
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Una guía para aprender las bases del modelado 3D utilizando las herramientas más comunes en la industria.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => '3D Modeling for Beginners',
-                    'author' => 'Sarah Lee',
-                    'category_id' => $category->id,
+                    'publication_year' => 2001,
+                    'description' => 'Este libro intenta dar una visión unificada del amplio campo que abarcan las comunicaciones y redes de computadores. La organización del libro refleja un intento de estructurar este vasto campo en partes comprensibles, y de construir, poco a poco, una visión panorámica de su estado actual. El libro destaca principios básicos y temas de importancia fundamental que conciernen a la tecnología de este área; además, proporciona una discusión detallada de temas de vanguardia.',
+                    'image_public_id' => 'Comunicación_y_Redes_de_Computadoras_iawh8o',
+                ],
+                [
+                    'category_id' => 2,
+                    'title' => 'Administración y Gestión de Una Red Local',
+                    'author' => 'Anónimo',
                     'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'A beginner\'s guide to mastering 3D modeling using industry-standard tools.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+                    'publication_year' => 2012,
+                    'description' => 'Este libro intenta dar una visión unificada del amplio campo que abarcan las comunicaciones y redes de computadores. La organización del libro refleja un intento de estructurar este vasto campo en partes comprensibles, y de construir, poco a poco, una visión panorámica de su estado actual. El libro destaca principios básicos y temas de importancia fundamental que conciernen a la tecnología de este área; además, proporciona una discusión detallada de temas de vanguardia.',
+                    'image_public_id' => 'Administración_y_Gestión_de_Una_Red_Local_tfd4xq',
+                ],
+            
+// LISTO (1) IMA Diseño y Desarrollo de Simuladores y Videojuegos
 
-            // Big Data y Ciencia de Datos
-            if ($category->name === 'Big Data y Ciencia de Datos') {
-                Book::create([
-                    'title' => 'Introducción a Big Data',
-                    'author' => 'Ricardo Fernández',
-                    'category_id' => $category->id,
-                    'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Un libro que cubre los fundamentos del Big Data y las herramientas necesarias para trabajar con grandes volúmenes de datos.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Big Data and Data Science',
-                    'author' => 'Rebecca Smith',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'An in-depth look at Big Data technologies and data science techniques for analyzing large datasets.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+                [
+                    'category_id' => 3,
+                    'title' => 'Arquitectura del Motor de Videojuegos',
+                    'author' => 'Vallejo, D. & Cleto, M.',
 
-            // Diseños Industriales
-            if ($category->name === 'Diseño Industrial') {
-                Book::create([
-                    'title' => 'Fundamentos de Diseño Industrial',
-                    'author' => 'Marcos Díaz',
-                    'category_id' => $category->id,
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Este libro proporciona una visión integral sobre el diseño industrial, desde la conceptualización hasta la producción.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Industrial Design Fundamentals',
-                    'author' => 'Lina Adams',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'A comprehensive guide to industrial design, from conceptualization to production.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+                    'publication_year' => 2015,
+                    'description' => 'Este libro forma parte de una colección de cuatro volúmenes dedicados al Desarrollo de Videojuegos. Con un perfil principalmente técnico, estos cuatro libros cubren los aspectos esenciales en programación de videojuegos',
+                    'image_public_id' => 'Arquitectura_de_Motor_de_Videojuegos_fkjj9j',
+                ],
+            
+// LISTO (1) IMA Modelado y Animación Digital
+                
+                [
+                    'category_id' => 4,
+                    'title' => 'Diseño y Modelado 3D',
+                    'author' => 'Elías Pérez García',
 
-            if ($category->name === 'Producción y Gestión Industrial') {
-                Book::create([
-                    'title' => 'Gestión de la Producción Industrial',
-                    'author' => 'Laura Gómez',
-                    'category_id' => $category->id,
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Una guía completa para gestionar la producción en entornos industriales, incluyendo planificación y control.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Industrial Production and Management',
-                    'author' => 'David White',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'A comprehensive guide to managing industrial production, including planning and control.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+                    'publication_year' => 2020,
+                    'description' => 'Crear un personaje 3D (orientado a proyectos de animación). Utilizar elndesarrollo de este proyecto y los problemas que conlleve como un medio para ampliar mis habilidades, tanto de modelado 3D como de diseño de personajes. La pieza que dé como resultado este proyecto servirá para ampliar mi portafolio y contribuirá, por tanto, al desarrollo de mi carrera profesional.',
+                    'image_public_id' => 'Diseño_y_Modelado_3D_nqzttu',
+                ],
+            
+// LISTO (1) IMA Big Data y Ciencia de Datos
+                [
+                    'category_id' => 5,
+                    'title' => 'Big Data y Ciencia de Datos',
+                    'author' => 'Fernando Cava Valenciano',
 
-            // Operaciones Mineras
-            if ($category->name === 'Operaciones Mineras') {
-                Book::create([
-                    'title' => 'Introducción a la Minería y sus Operaciones',
-                    'author' => 'José Martínez',
-                    'category_id' => $category->id,
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Este libro aborda los principios fundamentales de las operaciones mineras y las mejores prácticas en la industria.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Mining Operations and Techniques',
-                    'author' => 'Ethan Taylor',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'A guide to the fundamental principles of mining operations and best practices in the industry.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+                    'publication_year' => 2021,
+                    'description' => 'Big data, data science, data analytics, transformación digital, son actualmente términos de so común que están relacionadas con la informática, las nuevas tecnologías y el gran volumen de datos que genera nuestra sociedad. Su plicación alcanza a numerosos sectores, entre ellos también la medicina y el laboratorio. ',
+                    'image_public_id' => 'Big_Data_y_Ciencia_de_Datos_a4jy3d',
+                ],
+            
+// LISTO (1) IMA Diseño Industrial
+                [
+                    'category_id' => 6,
+                    'title' => 'Ingienería Industrial',
+                    'author' => 'Niebel, B. & Freivalds',
 
-            // Procesos Químicos y Metalúrgicos
-            if ($category->name === 'Procesos Químicos y Metalúrgicos') {
-                Book::create([
-                    'title' => 'Fundamentos de Procesos Químicos',
-                    'author' => 'Ana Pérez',
-                    'category_id' => $category->id,
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Un estudio sobre los procesos químicos fundamentales, enfocado en las aplicaciones en la industria metalúrgica.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Chemical and Metallurgical Processes',
-                    'author' => 'John Wilson',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'A study of the fundamental chemical processes, focused on their applications in the metallurgical industry.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+                    'publication_year' => 2009,
+                    'description' => 'Los objetivos de la duodécima edición son casi los mismos que los de la anterior: proporcionar un libro de texto universitario práctico y actualizado que describa los métodos ingenieriles para medir, analizar y diseñar el trabajo manual.',
+                    'image_public_id' => 'Ingieneria_Industrial_zk64mc',
+                ],
+            
+// LISTO (1) IMA Producción y Gestión Industrial
+                [
+                    'category_id' => 7,
+                    'title' => 'Planificación y Control de la Producción',
+                    'author' => 'Chapnam, Stephen',
 
-            // Electricidad Industrial
-            if ($category->name === 'Electricidad Industrial') {
-                Book::create([
-                    'title' => 'Fundamentos de Electricidad Industrial',
-                    'author' => 'Carlos Ramírez',
-                    'category_id' => $category->id,
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Una introducción a los principios básicos de la electricidad en un entorno industrial, desde circuitos hasta instalaciones.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Industrial Electricity Fundamentals',
-                    'author' => 'Emily Clark',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'An introduction to the fundamental principles of electricity in an industrial setting, from circuits to installations.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+                    'publication_year' => 2006,
+                    'description' => 'En este libro se hace uso del análisis cuantitativo y cualitativo; cuantitativo, porque muchas de sus herramientas y técnicas disponible son cuantitativas y deben considerarse así; y cualitativo, porque los administradores eficaces toman los resultado de los análisis cuantitativos como punto de partida para la toma de decisiones y no como un sustituto.',
+                    'image_public_id' => 'Planificación_y_Control_de_la_Producción_rhnurz',
+                ],
+            
+// LISTO (1) IMA Operaciones Mineras
+                [
+                    'category_id' => 8,
+                    'title' => 'Términos Geológicos y Mineros',
+                    'author' => 'Arizona',
 
-            // Electrónica y Automatización Industrial
-            if ($category->name === 'Electrónica y Automatización Industrial') {
-                Book::create([
-                    'title' => 'Introducción a la Electrónica y Automatización',
-                    'author' => 'Jorge González',
-                    'category_id' => $category->id,
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Este libro proporciona los fundamentos de la electrónica y su aplicación en la automatización industrial.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Introduction to Electronics and Automation',
-                    'author' => 'Oliver Stone',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'This book covers the fundamentals of electronics and its application in industrial automation.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+                    'publication_year' => 2021,
+                    'description' => 'En este libro podemos conocer un poco más a fondo sobre los términos Geológicos y Mineros de las operaciones, facilitando así a nuestros jóvenes mineros un mejor entendimiento acerca de nuestro campo laboral.',
+                    'image_public_id' => 'Terminos_Geologicos_y_Mineros_aiolr0',
+                ],
+            
 
-            // Mecatrónica Industrial
-            if ($category->name === 'Mecatrónica Industrial') {
-                Book::create([
-                    'title' => 'Mecatrónica Industrial: Fundamentos y Aplicaciones',
-                    'author' => 'Ricardo Herrera',
-                    'category_id' => $category->id,
-                    'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Una visión integral de la mecatrónica industrial, combinando mecánica, electrónica e informática para mejorar procesos.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Industrial Mechatronics: Fundamentals and Applications',
-                    'author' => 'Stephen Harris',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'An overview of industrial mechatronics, combining mechanics, electronics, and computer science to improve processes.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+//LISTO (2) Calculo
+                [
+                    'category_id' => 16,
+                    'title' => 'Teoria y Problemas de Calculo Diferencial e Integral',
+                    'author' => 'Frank Ayres',
 
-            // Gestión y Mantenimiento de Maquinaria Industrial
-            if ($category->name === 'Gestión y Mantenimiento de Maquinaria Industrial') {
-                Book::create([
-                    'title' => 'Mantenimiento y Gestión de Maquinaria Industrial',
-                    'author' => 'María López',
-                    'category_id' => $category->id,
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Una guía práctica sobre las mejores prácticas de mantenimiento y gestión de maquinaria en el ámbito industrial.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Industrial Machinery Maintenance and Management',
-                    'author' => 'Joshua Scott',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'A practical guide to best practices in the maintenance and management of machinery in industrial settings.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+                    'publication_year' => 1971,
+                    'description' => 'El propósito de este libro sigue siendo, como en la primera edición (en inglés), proporcionar a los
+                    alumnos que inician sus estudios de cálculo una serie de problemas representativos, resueltos con tododetalle. Por sus características será asimismo de gran utilidad para los estudiantes de ciencias e ingenieria que necesiten consultar o repasar conceptos fundamentales de la teoria y encontrar el modo de resolver ciertos problemas, relacionados con alguna aplicación práctica. Por otra parte, al figurar en esta edición demostraciones de los teoremas y deducciones de las fórmulas de derivación e integración, junto con una amplia relación de problemas resueltos y propuestos, también se puede utilizar como libro de texto para desarrollar un curso de cálculo.',
+                    'image_public_id' => 'Teoria_y_Problemas_de_Calculo_Diferencial_e_Integral_gimyip',
+                ],
+                [
+                    'category_id' => 16,
+                    'title' => 'Calculo Diferencial e Integral',
+                    'author' => 'Purcell, Varberg & Rigdon',
 
-            // Gestión de Mantenimiento de Maquinaria Pesada
-            if ($category->name === 'Gestión de Mantenimiento de Maquinaria Pesada') {
-                Book::create([
-                    'title' => 'Gestión de Mantenimiento de Maquinaria Pesada',
-                    'author' => 'Héctor Díaz',
-                    'category_id' => $category->id,
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Un enfoque práctico para la gestión eficiente del mantenimiento de maquinaria pesada en entornos industriales.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Heavy Equipment Maintenance Management',
-                    'author' => 'Robert Harris',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'A practical approach to efficiently managing the maintenance of heavy machinery in industrial environments.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+                    'publication_year' => 2007,
+                    'description' => 'Para muchos, este libro aún será considerado como un texto tradicional. En su mayoría, se demuestran los teoremas, se dejan como ejercicio o se dejan sin demostrar cuando la comprobación es demasiado difícil. Cuando esto último sucede, tratamos de dar una explicación intuitiva para que el resultado sea plausible, antes de pasar al tema siguiente. En algunos casos, damos un bosquejo de una demostración, en cuyo caso explicamos por qué es un bosquejo y no una demostración rigurosa',
+                    'image_public_id' => 'Calculo_Diferencial_e_Integral_wl1y7d',
+                ],
+            
+//LISTO (2) IMA Expresion Oral
+                [
+                    'category_id' => 17,
+                    'title' => 'Expresión Oral y Escrita',
+                    'author' => 'Gabriel Alvarez Undurraga',
 
-             // Aviación y Mecánica Aeronáutica
-             if ($category->name === 'Aviación y Mecánica Aeronáutica') {
-                Book::create([
-                    'title' => 'Introducción a la Mecánica Aeronáutica',
-                    'author' => 'José López',
-                    'category_id' => $category->id,
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Este libro cubre los principios básicos de la mecánica aeronáutica, incluyendo la teoría de vuelo y mantenimiento.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Introduction to Aeronautical Mechanics',
-                    'author' => 'William Carter',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'This book covers the basic principles of aeronautical mechanics, including flight theory and maintenance.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+                    'publication_year' => 2007,
+                    'description' => 'En todas las actividades estudiantiles y laborales, el empleo de la lengua materna pasa a constituirse en un instrumento básico de su profesión. Por otra parte, las normas jurídicas establecen la legalidad del idioma castellano y los criterios de interpretación de la ley, entre los que se señalan el criterio gramatical y el criterio lógico.',
+                    'image_public_id' => 'Expresión_Oral_y_Escrita_natjtw',
+                ],
+                [
+                    'category_id' => 17,
+                    'title' => 'Expresion Oral y Escrita II',
+                    'author' => 'Directores y Profesores',
 
-            // Cálculo
-            if ($category->name === 'Cálculo') {
-                Book::create([
-                    'title' => 'Cálculo: Fundamentos y Aplicaciones',
-                    'author' => 'Carlos Fernández',
-                    'category_id' => $category->id,
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Una introducción al cálculo, cubriendo límites, derivadas e integrales, con ejemplos prácticos.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Calculus: Fundamentals and Applications',
-                    'author' => 'John Smith',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'An introduction to calculus, covering limits, derivatives, and integrals with practical examples.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+                    'publication_year' => 2016,
+                    'description' => 'Con mucha frecuencia le atribuimos a la comunicación el éxito o el fracaso de nuestra actuación en los diferentes papeles que asumimos en la vida diaria. El trabajo, los negocios, la sociedad, la política, los amigos, la familia y el estudio son algunos de los aspectos que nos obligan a emitir mensajes orales y escritos. El lenguaje es el instrumento que nos permite comunicarnos con los demás al enviar y recibir mensajes. Podemos decir que existen dos tipos de comunicación: la verbal y la no verbal.',
+                    'image_public_id' => 'Expresion_Oral_y_Escrita_II_euicrr',
+                ],
+            
+//LISTO (5) IMA Fisica
+                [
+                    'category_id' => 18,
+                    'title' => 'Física Volumen I',
+                    'author' => 'Juan Guillermo Rivera Berrío',
 
-            // Expresión Oral
-            if ($category->name === 'Expresión Oral') {
-                Book::create([
-                    'title' => 'Técnicas de Expresión Oral',
-                    'author' => 'Ana Rodríguez',
-                    'category_id' => $category->id,
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Este libro ofrece una introducción a las técnicas de comunicación oral, incluyendo oratoria y presentaciones efectivas.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Oral Expression Techniques',
-                    'author' => 'David Lee',
-                    'category_id' => $category->id,
-                    'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'This book offers an introduction to oral communication techniques, including public speaking and effective presentations.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+                    'publication_year' => 2022,
+                    'description' => 'Se ha conservado la propuesta pedagogica en los ejemplos presentados en cada uno de los capítulos, los cuales incluyen: formulación del problema, estrategia de solución, solución, explicacion o sentido de los resultados obtenidos y, en la mayoría de los ejemplos, un problema propuesto, denominado "Comprueba tu aprendizaje". Al final de cada capítulo se han incluido tanto los problemas propuestos como las respuestas.',
+                    'image_public_id' => 'Fisica_Volumen_I_sakutl',
+                ],
+                [
+                    'category_id' => 18,
+                    'title' => 'General Physics I',
+                    'author' => 'David G. Simpson',
 
-            // Física
-            if ($category->name === 'Física') {
-                Book::create([
-                    'title' => 'Fundamentos de Física',
-                    'author' => 'Ricardo Martínez',
-                    'category_id' => $category->id,
-                    'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Un enfoque básico y comprensivo de los principios de la física, desde la mecánica hasta la termodinámica.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Fundamentals of Physics',
-                    'author' => 'Henry Thompson',
-                    'category_id' => $category->id,
                     'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'A basic and comprehensive approach to the principles of physics, from mechanics to thermodynamics.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-            }
+                    'publication_year' => 2020,
+                    'description' => 'Classical Mechanics, proporciona una introducción a la física general, específicamente enfocada en la mecánica clásica. Cubre temas como unidades de medida, estrategias de resolución de problemas, densidad, cinemática en una dimensión, vectores y el producto escalar, entre otros.',
+                    'image_public_id' => 'General_Physics_I_xi0jvm',
+                ],
+                [
+                    'category_id' => 18,
+                    'title' => 'Teoría de la relatividad General',
+                    'author' => 'M.C. Escher',
 
-            // Electricidad
-            if ($category->name === 'Electricidad') {
-                Book::create([
-                    'title' => 'Principios de Electricidad',
-                    'author' => 'Luis Gómez',
-                    'category_id' => $category->id,
                     'language' => 'es',
-                    'publication_year' => 2024,
-                    'description' => 'Un libro introductorio sobre los principios de la electricidad, desde la teoría hasta las aplicaciones prácticas.',
-                    'image_url' => null,
-                    'image_public_id' => null,
-                ]);
-                Book::create([
-                    'title' => 'Principles of Electricity',
-                    'author' => 'Sarah Evans',
-                    'category_id' => $category->id,
+                    'publication_year' => 2013,
+                    'description' => 'Teoría de la Relatividad General aborda los principios de la relatividad y la física moderna, incluyendo un repaso de la teoría de Maxwell, el principio de la relatividad, la relatividad especial, álgebra de tensores y transformaciones ortogonales.',
+                    'image_public_id' => 'Teoría_de_la_relatividad_General_j7qmxk',
+                ],
+                [
+                    'category_id' => 18,
+                    'title' => 'An introduction to physics',
+                    'author' => 'Dr. Perves Hoodbhoy',
+
                     'language' => 'en',
-                    'publication_year' => 2024,
-                    'description' => 'An introductory book on the principles of electricity, from theory to practical applications.',
-                    'image_url' => null,
+                    'publication_year' => 2011,
+                    'description' => 'An introduction to physics, es una guía introductoria a la física que cubre una amplia gama de temas, desde la cinemática y las leyes de Newton hasta la física cuántica y nuclear.',
+                    'image_public_id' => 'An_introduction_to_physics_cctysj',
+                ],
+                [
+                    'category_id' => 18,
+                    'title' => 'Apuntes de los temas de Termodinamica',
+                    'author' => 'Agustín Martin Domingo',
+
+                    'language' => 'es',
+                    'publication_year' => 2015,
+                    'description' => 'Apuntes de los temas de Termodinámica es un compendio detallado sobre conceptos esenciales de termodinámica, abordando desde variables termodinámicas hasta procesos cuasiestáticos.',
+                'image_public_id' => 'Apuntes_de_los_temas_de_Termodinamica_mpq4is',
+                ],
+            
+//LISTO (5) IMA Electricidad
+                [
+                    'category_id' => 19,
+                    'title' => 'Electricidad Básica',
+                    'author' => 'Ladislao Saucedo',
+
+                    'language' => 'es',
+                    'publication_year' => 2011,
+                    'description' => 'Todos los efectos de la electricidad pueden explicarse y predecirse presumiendo la existencia de una diminuta partícula denominada electrón. Aplicando esta teoría electrónica, los hombres de ciencia han hecho predicciones y descubrimientos que pocos años atrás parecían imposibles.',
+                    'image_public_id' => 'Electricidad_Básica_eu1umx',
+                ],
+                [
+                    'category_id' => 19,
+                    'title' => 'Let s Switch On! Inglés para Electricidad y Electrónica',
+                    'author' => 'Maria Esteban',
+
+                    'language' => 'en',
+                    'publication_year' => 2015,
+                    'description' => 'Let is Switch On! is a new method specifically tailored to the needs of students studying Ciclos Formativos de la familia profesional de Electricidad y Electrónica. This course provides students with basic and necessary English to enable them to develop in today is professional world.The content of the book follows the academic syllabus of these studies and adapts to the self-reflexive demand of the Common European Framework of Reference for Languages',
+                    'image_public_id' => 'Let_s_Switch_On_Inglés_para_Electricidad_y_Electrónica_ztzcdb',
+                ],
+                [
+                    'category_id' => 19,
+                    'title' => 'Electricidad y Magnetismo',
+                    'author' => 'German Arenas Sicard',
+
+                    'language' => 'es',
+                    'publication_year' => 2008,
+                    'description' => 'Electricidad y Magnetismo, es un libro que aborda los conceptos fundamentales de la electricidad y el magnetismo. Proporciona una introducción a la electricidad, la carga eléctrica, la corriente eléctrica, las fuerzas y campos eléctricos, el potencial electrostático, las fuerzas magnéticas y los campos magnéticos.',
+                    'image_public_id' => 'Electricidad_y_Magnetismo_evu4ro',
+                ],
+                [
+                    'category_id' => 19,
+                    'title' => 'Residential Wiring and Electrical Best Practices',
+                    'author' => 'Strathcona County',
+
+                    'language' => 'en',
+                    'publication_year' => 2019,
+                    'description' => 'Residential Wiring and Electrical Best Practices, es una guía que describe métodos de instalación y prácticas recomendadas en la conexión eléctrica residencial. Se enfoca en cumplir con el Código Eléctrico Canadiense y ofrece información sobre quién puede realizar instalaciones eléctricas, requisitos de permisos, procesos de inspección y normas generales para cables y cajas de salida.',
                     'image_public_id' => null,
+                ],
+                [
+                    'category_id' => 19,
+                    'title' => 'Residential Wiring Guide',
+                    'author' => 'Anonimo',
+
+                    'language' => 'en',
+                    'publication_year' => 2018,
+                    'description' => 'Residential Wiring Guide, es una guía de instalación de cableado residencial que cumple con los estándares establecidos por el Código Eléctrico de Manitoba. Proporciona información precisa sobre los requisitos de seguridad y cumplimiento del código para evitar riesgos de choque eléctrico y incendios.',
+                    'image_public_id' => 'Residential_Wiring_Guide_hfcdxk',
+                ],
+           
+            ];
+           
+            foreach ($books as $book) {
+                Book::create([
+                    'category_id' => $book['category_id'],
+                    'title' => $book['title'],
+                    'author' => $book['author'],
+                    'language' => $book['language'],
+                    'publication_year' => $book['publication_year'],
+                    'description' => $book['description'],
+                    'image_public_id' => $book['image_public_id'],
                 ]);
             }
         }
     }
-}

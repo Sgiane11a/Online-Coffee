@@ -89,7 +89,7 @@
     <div class="results-container">
         @forelse ($books as $book)
             <div class="book-card">
-                <img src="{{ $book->image_url }}" alt="{{ $book->title }}" class="book-thumbnail">
+                <img src="https://res.cloudinary.com/doirzq4zq/image/upload/{{ $book->image_public_id }}" alt="{{ $book->title }}" class="book-thumbnail">
                 <h4>{{ $book->title }}</h4>
                 <p class="description">{{ $book->description }}</p> <!-- Descripción sin limitación de caracteres -->
             </div>
