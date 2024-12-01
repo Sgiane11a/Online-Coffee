@@ -44,18 +44,6 @@
                         <p class="text-sm">Contactos pendientes</p>
                     </div>
                 </div>
-                <!-- Otra opción -->
-                <div class="flex items-center p-4 rounded-lg shadow-xs bg-grape-500 text-white">
-                    <div class="p-3 mr-4 rounded-full bg-white text-grape-500">
-                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-2.28 0-4 1.72-4 4s1.72 4 4 4 4-1.72 4-4-1.72-4-4-4z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-lg font-semibold">24</p>
-                        <p class="text-sm">Otra opción</p>
-                    </div>
-                </div>
             </div>
 
             <!-- Tareas y estadísticas -->
