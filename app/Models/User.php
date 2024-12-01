@@ -25,6 +25,7 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasApiTokens, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable, HasRoles;
+    use HasFactory, Notifiable;
 
 
     /**
@@ -111,4 +112,10 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+
+    public function bookComments()
+    {
+        return $this->hasMany(BookComment::class);
+    }
+
 }

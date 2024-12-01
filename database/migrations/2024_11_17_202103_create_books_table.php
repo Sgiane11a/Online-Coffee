@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('image_url')->nullable();
             $table->string('image_public_id')->nullable();
+            $table->string('digital_version_link')->nullable(); // Enlace digital: Enlace para descargar el libro en formato digital
             $table->timestamps();
         });
     }

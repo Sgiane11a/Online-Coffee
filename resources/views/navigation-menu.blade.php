@@ -19,6 +19,9 @@
                     <x-nav-link href="{{ route('reservations') }}" :active="request()->routeIs('reservations')">
                         Reservaciones
                     </x-nav-link>
+                    <x-nav-link href="{{ route('biblioteca.index') }}" :active="request()->routeIs('biblioteca')">
+                        Biblioteca
+                    </x-nav-link>
                     <x-nav-link href="{{ route('forum.index') }}" :active="request()->routeIs('forum')">
                         Foro
                     </x-nav-link>

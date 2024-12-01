@@ -26,7 +26,9 @@
 /* Sección de Resultados de Libros */
 .results-section {
     grid-column: 2 / 3;
+    transform: translateY(-50px); /* Elevar la sección de resultados de libros */
 }
+
 
 /* Barra de Búsqueda */
 .search-section {
@@ -219,6 +221,8 @@
     background-color: #6a4e94; /* Color cuando está seleccionado */
     border-color: #6a4e94; /* Bordes del checkbox */
 }
+
+
 
 /* MEDIA QUERIES - Hacer el diseño responsive */
 

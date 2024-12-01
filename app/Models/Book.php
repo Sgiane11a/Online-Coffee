@@ -23,6 +23,7 @@ class Book extends Model
         'description', // Agregada la coma
         'image_url', // Agregada la coma
         'image_public_id', // Agregada la coma
+        'digital_version_link' // Agregada la coma
     ];
 
     public function reservations()
@@ -46,4 +47,8 @@ class Book extends Model
         return $this->hasMany(Booksrecommendation::class); // Revisa si la clase se llama Booksrecommendation
     }
 
+    public function bookComments()
+    {
+            return $this->hasMany(BookComment::class);
+    }
 }

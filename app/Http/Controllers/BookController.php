@@ -5,6 +5,7 @@ use App\Models\Bookscategory;  // Importar la clase Bookscategory
 use App\Models\Book;  // Asegúrate de importar también el modelo Book si lo usas
 use Illuminate\Http\Request;
 use Cloudinary\Uploader;
+use App\Models\BookComment;  // Si es necesario importar el modelo de los comentarios
 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Cloudinary\Configuration\Configuration;
@@ -168,6 +169,29 @@ public function destroy($id)
     // Redirigir con mensaje de éxito
     return redirect()->route('admin.books.index')->with('success', 'Libro eliminado exitosamente');
 }
+    
+
+public function show($bookId)
+    {
+        // Obtén el libro por su ID
+        $book = Book::find($bookId);
+
+        // Verifica si el libro existe
+        if (!$book) {
+            return redirect()->route('books.index')->with('error', 'Libro no encontrado.');
+        }
+
+        // Accede a los comentarios asociados con ese libro
+        $comments = $book->bookComments;
+
+        // Obtener libros recomendados, si los tienes
+        $relatedBooks = Book::where('category_id', $book->category_id)->limit(5)->get();
+
+        // Retorna la vista con los datos
+        return view('books.show', compact('book', 'comments', 'relatedBooks'));
+    }
+
+
 
 
 }

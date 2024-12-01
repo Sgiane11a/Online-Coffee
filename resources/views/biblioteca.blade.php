@@ -85,19 +85,20 @@
     </section>
 
     {{-- Sección de Resultados de Libros --}}
-<section class="results-section">
+    <section class="results-section">
     <div class="results-container">
         @forelse ($books as $book)
-            <div class="book-card">
+            <a href="{{ route('book.show', $book->id) }}" class="book-card"> <!-- Enlace a la página de detalles del libro -->
                 <img src="https://res.cloudinary.com/doirzq4zq/image/upload/{{ $book->image_public_id }}" alt="{{ $book->title }}" class="book-thumbnail">
                 <h4>{{ $book->title }}</h4>
                 <p class="description">{{ $book->description }}</p> <!-- Descripción sin limitación de caracteres -->
-            </div>
+            </a>
         @empty
             <p>No se encontraron libros con los filtros aplicados.</p>
         @endforelse
     </div>
 </section>
+
 
 
 </section>

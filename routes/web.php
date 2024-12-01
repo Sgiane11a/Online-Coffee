@@ -11,6 +11,7 @@ use App\Http\Controllers\ReservationController;         // CONTROLADOR DE RESERV
 use App\Http\Controllers\BookController;                // CONTROLADOR DE LIBROS
 use App\Http\Controllers\CategorybookController;        // CONTROLADOR DE LIBROS
 use App\Http\Controllers\LibraryController;             // CONTROLADOR DE BIBLIOTECA
+use App\Http\Controllers\BookCommentController;         // CONTROLADOR DE COMENTARIOS
 
 // Ruta principal de bienvenida
 Route::get('/', function () {
@@ -19,6 +20,13 @@ Route::get('/', function () {
 
 // Ruta pública para la biblioteca
 Route::get('/biblioteca', [LibraryController::class, 'index'])->name('biblioteca.index');
+Route::get('book/{book}', [BookController::class, 'show'])->name('book.show');
+Route::get('books/{book}', [BookController::class, 'show'])->name('books.show');
+
+Route::get('/book/{id}/download', [BookController::class, 'download'])->name('book.download');
+// routes/web.php
+
+Route::post('/books/{book}/comments', [BookCommentController::class, 'store'])->name('book.comment.store');
 
 // Ruta pública para las reservaciones
 Route::get('/reservaciones', [ReservationController::class, 'guestindex'])->name('reservaciones');
