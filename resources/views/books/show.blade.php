@@ -17,7 +17,10 @@
             <p><strong>Descripción:</strong> {{ $book->description }}</p>
             <p><strong>Fecha de publicación:</strong> {{ $book->publication_year }}</p>
 
-            <a href="{{ route('book.download', $book->id) }}" class="download-btn">Descargar</a>
+            @if($book->digital_version_link)
+    <a href="{{ asset('storage/' . $book->digital_version_link) }}" class="download-btn" target="_blank">Descargar PDF</a>
+@endif
+
         </div>
     </div>
 

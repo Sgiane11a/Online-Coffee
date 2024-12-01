@@ -70,6 +70,8 @@ class BookController extends Controller
             'publication_year' => 'required|integer|min:1900|max:' . date('Y'),
             'description' => 'nullable|string',
             'file' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validar el tipo de archivo
+            'pdf_file' => 'nullable|mimes:pdf|max:10240',  // Validación para PDF (máximo 10MB)
+
         ]);
     
         // Crear un nuevo libro
@@ -86,6 +88,13 @@ class BookController extends Controller
             // Obtener la URL segura y el ID público de la imagen
             $book->image_url = $uploadResult->getSecurePath(); // URL de la imagen
             $book->image_public_id = $uploadResult->getPublicId(); // ID público de la imagen
+            if ($request->hasFile('pdf_file')) {
+                $pdfFile = $request->file('pdf_file');
+                $pdfPath = $pdfFile->store('books/pdfs', 'public');  // Almacenar el archivo PDF
+                $book->digital_version_link = $pdfPath;  // Guardar el enlace al archivo PDF
+            }
+        
+
         }
     
         // Guardar el libro en la base de datos
@@ -109,47 +118,58 @@ class BookController extends Controller
 
    
     public function update(Request $request, $id)
-    {
-        // Validar los datos del formulario
-        $validatedData = $request->validate([
-            'category_id' => 'required|exists:book_categories,id', // Cambiado a book_categories
-            'title' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'language' => 'required|string|max:50',
-            'publication_year' => 'required|integer',
-            'image' => 'nullable|image|max:2048', // Validación de imagen
+{
+    // Validación de los datos
+    $validatedData = $request->validate([
+        'category_id' => 'required|exists:book_categories,id',
+        'title' => 'required|string|max:255',
+        'author' => 'required|string|max:255',
+        'language' => 'required|string|max:50',
+        'publication_year' => 'required|integer',
+        'image' => 'nullable|image|max:2048',
+        'pdf_file' => 'nullable|mimes:pdf|max:10240',  // Validación para el PDF
+    ]);
+
+    // Encontrar el libro por su ID
+    $book = Book::findOrFail($id);
+
+    // Actualizar los campos del libro
+    $book->category_id = $validatedData['category_id'];
+    $book->title = $validatedData['title'];
+    $book->author = $validatedData['author'];
+    $book->language = $validatedData['language'];
+    $book->publication_year = $validatedData['publication_year'];
+
+    // Si se proporciona una nueva imagen, actualizarla
+    if ($request->hasFile('image')) {
+        // Eliminar la imagen anterior de Cloudinary (si existe)
+        Cloudinary::destroy($book->image_public_id);
+
+        // Subir la nueva imagen a Cloudinary
+        $uploadedFile = $request->file('image');
+        $uploadResult = Cloudinary::upload($uploadedFile->getRealPath(), [
+            'folder' => 'Books'
         ]);
-    
-        // Encuentra el libro por su ID
-        $book = Book::findOrFail($id);
-    
-        // Actualiza los campos del libro
-        $book->category_id = $validatedData['category_id'];
-        $book->title = $validatedData['title'];
-        $book->author = $validatedData['author'];
-        $book->language = $validatedData['language'];
-        $book->publication_year = $validatedData['publication_year'];
-    $uploadedFile = $request->file('image');
-        // Manejar la carga de la imagen si existe
-        if ($uploadedFile) {
-            Cloudinary::destroy($book->image_public_id);
 
-            $uploadResult = Cloudinary::upload($uploadedFile->getRealPath(), [
-                'folder' => 'Books'
-            ]);
-
-            $book->update([
-                'image_url' => $uploadResult->getSecurePath(),
-                'image_public_id' => $uploadResult->getPublicId(),
-            ]);
-        }
-    
-        // Guardar los cambios en el libro
-        $book->save();
-    
-        // Redirigir con un mensaje de éxito
-        return redirect()->route('admin.books.index')->with('success', 'Libro actualizado correctamente');
+        // Actualizar los datos de la imagen
+        $book->image_url = $uploadResult->getSecurePath();
+        $book->image_public_id = $uploadResult->getPublicId();
     }
+
+    // Si se proporciona un archivo PDF, actualizar el enlace al archivo
+    if ($request->hasFile('pdf_file')) {
+        $pdfFile = $request->file('pdf_file');
+        $pdfPath = $pdfFile->store('books/pdfs', 'public');
+        $book->digital_version_link = $pdfPath;  // Guardar el enlace del PDF
+    }
+
+    // Guardar los cambios en la base de datos
+    $book->save();
+
+    // Redirigir con un mensaje de éxito
+    return redirect()->route('admin.books.index')->with('success', 'Libro actualizado correctamente');
+}
+
 
 
 

@@ -67,12 +67,21 @@
                         rows="3" placeholder="Ingresa la descripción del libro" required></textarea>
                 </div>
 
+                <!-- Campo de PDF (Archivo Digital) -->
+<div class="block text-sm">
+    <label for="pdf_file" class="text-gray-400">Archivo PDF</label>
+    <input name="pdf_file" type="file" accept=".pdf"
+        class="block w-full mt-1 text-sm text-gray-300 border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape focus:shadow-outline-gray form-input" />
+</div>
+
+
                 <!-- Campo de Imagen -->
                 <div class="block text-sm">
                     <label for="file" class="text-gray-400">Imagen</label>
                     <input name="file" type="file" accept="image/*"
                         class="block w-full mt-1 text-sm text-gray-300 border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape focus:shadow-outline-gray form-input" />
                 </div>
+
 
                 <button type="submit"
                     class="mt-4 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
