@@ -37,7 +37,7 @@ class ProductController extends Controller
     }
 
     // Obtener los productos con paginación
-    $products = $query->paginate(8);
+    $products = $query->paginate(5);
 
     // Pasar productos y categorías a la vista
     return view('admin.products.index', compact('products', 'categories'));

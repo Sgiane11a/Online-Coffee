@@ -29,7 +29,7 @@ class UserController extends Controller
                       ->orWhere('email', 'like', "%$search%");
                 });
             })
-            ->paginate(10);
+            ->paginate(5);
     
         // Obtener la cantidad total de usuarios sin filtros
         $totalUsers = User::count();
