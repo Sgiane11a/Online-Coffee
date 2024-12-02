@@ -9,13 +9,13 @@
 
             <!-- Mensajes de éxito o error -->
             @if (session('success'))
-                <div class="bg-green-500 text-white p-4 mb-4">
+                <div class="bg-green-500 text-white p-4 mb-4 rounded-md shadow-md">
                     {{ session('success') }}
                 </div>
             @endif
 
             @if ($errors->any())
-                <div class="bg-red-500 text-white p-4 mb-4">
+                <div class="bg-red-500 text-white p-4 mb-4 rounded-md shadow-md">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -109,10 +109,16 @@
                     @enderror
                 </div>
 
+                <!-- Vista previa de la imagen cargada -->
+                <div class="space-y-4">
+                    <label for="file" class="block text-sm font-medium text-gray-400">Vista Previa de Imagen</label>
+                    <img id="image-preview" src="#" alt="Vista previa" class="hidden w-32 h-32 object-cover border border-gray-300 rounded-md mt-2" />
+                </div>
+
                 <!-- Botones de acción -->
                 <div class="flex justify-between mt-6">
                     <!-- Botón de Cancelar -->
-                    <a href="{{ url()->previous() }}" class="inline-block px-4 py-2 text-white bg-gray-600 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition duration-200">
+                    <a href="{{ url()->previous() }}" class="inline-block px-6 py-2 text-white bg-gray-600 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition duration-200">
                         Cancelar
                     </a>
 
@@ -124,4 +130,22 @@
             </form>
         </div>
     </main>
+
+    <!-- Script para vista previa de la imagen -->
+    <script>
+        document.getElementById('file').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            const imagePreview = document.getElementById('image-preview');
+            
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.classList.remove('hidden');  // Muestra la imagen una vez cargada
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 @endsection

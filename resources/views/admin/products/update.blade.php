@@ -2,65 +2,82 @@
 
 @section('main')
     <main class="h-full pb-16 overflow-y-auto">
-        <div class="container px-6 mx-auto grid">
+        <div class="container px-6 mx-auto">
             <h2 class="my-6 text-2xl font-semibold text-gray-200">
                 Actualizar Producto
             </h2>
-            <form action="{{ route('admin.products.update', $product->id) }}" method="POST"
-                enctype="multipart/form-data" class="flex flex-col gap-4 px-4 py-3 mb-8 rounded-lg shadow-md bg-gray-800">
+            
+            <form action="{{ route('admin.products.update', $product->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-8 rounded-xl shadow-xl max-w-3xl mx-auto">
                 @csrf
                 @method('PUT')
-                <div class="block mt-4 text-sm">
-                    <label name="category_id" class="text-gray-400">
-                        Producto
-                    </label>
-                    <select name="category_id"
-                        class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                        required>
+                
+                <!-- Categoría -->
+                <div class="space-y-4">
+                    <label for="category_id" class="block text-sm font-medium text-gray-400">Categoría</label>
+                    <select name="category_id" id="category_id" class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" required>
                         <option value="">Selecciona una categoría</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}"
-                                {{ $product->category_id == $category->id ? 'selected' : '' }}>
-                                {{ $category->name }}
-                            </option>
+                            <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                         @endforeach
                     </select>
+                    @error('category_id')
+                        <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
-                <div class="block text-sm">
-                    <label name="name" class="text-gray-400">Nombre</label>
-                    <input name="name" type="text"
-                        class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape text-gray-300" 
-                        value="{{ $product->name }}" placeholder="Ingresa el nombre del producto" required />
-                </div>
-                <div class="block text-sm">
-                    <label name="description" class="text-gray-400">Descripción</label>
-                    <textarea name="description"
-                        class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                        rows="3" placeholder="Ingresa la descripción del producto" required>{{ $product->description }}</textarea>
-                </div>
-                <div class="block text-sm">
-                    <label name="price" class="text-gray-400">Precio</label>
-                    <input name="price" type="number"
-                        class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape text-gray-300" 
-                        value="{{ $product->price }}" placeholder="Ingresa el precio del producto" required />
-                </div>
-                <div class="block text-sm">
-    <label class="text-gray-400">Imagen</label>
-    <div class="flex mt-1 gap-4">
-        <!-- Usamos max-w-xs y max-h-40 para limitar el tamaño -->
-        <x-cld-image class="border-gray-600 max-w-xs max-h-40 object-contain" public-id="{{ $product->image_public_id }}"></x-cld-image>
-        <div class="flex w-full text-sm text-gray-300 border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape focus:shadow-outline-gray form-input">
-            <input name="file" type="file" accept="image/*"
-                class="block w-full text-sm text-gray-300 border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape focus:shadow-outline-gray form-input" />
-        </div>
-    </div>
-</div>
 
+                <!-- Nombre -->
+                <div class="space-y-4">
+                    <label for="name" class="block text-sm font-medium text-gray-400">Nombre</label>
+                    <input name="name" type="text" id="name" value="{{ $product->name }}" placeholder="Ingresa el nombre del producto" class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" required />
+                    @error('name')
+                        <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
 
-                <button type="submit"
-                    class="mt-4 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                    Actualizar Producto
-                </button>
+                <!-- Descripción -->
+                <div class="space-y-4">
+                    <label for="description" class="block text-sm font-medium text-gray-400">Descripción</label>
+                    <textarea name="description" id="description" rows="3" placeholder="Ingresa la descripción del producto" class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" required>{{ $product->description }}</textarea>
+                    @error('description')
+                        <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Precio -->
+                <div class="space-y-4">
+                    <label for="price" class="block text-sm font-medium text-gray-400">Precio</label>
+                    <input name="price" type="number" id="price" value="{{ $product->price }}" placeholder="Ingresa el precio del producto" class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" required />
+                    @error('price')
+                        <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Imagen -->
+                <div class="space-y-4">
+                    <label for="file" class="block text-sm font-medium text-gray-400">Imagen</label>
+                    <div class="flex items-center gap-4">
+                        <!-- Imagen actual -->
+                        <x-cld-image class="border-gray-600 max-w-xs max-h-40 object-contain" public-id="{{ $product->image_public_id }}"></x-cld-image>
+                        <!-- Input para nueva imagen -->
+                        <input name="file" type="file" id="file" accept="image/*" class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" />
+                    </div>
+                    @error('file')
+                        <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Botón de acción -->
+                <div class="flex justify-between mt-6">
+                    <!-- Botón de Cancelar -->
+                    <a href="{{ url()->previous() }}" class="inline-block px-4 py-2 text-white bg-gray-600 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition duration-200">
+                        Cancelar
+                    </a>
+
+                    <!-- Botón de Actualizar Producto -->
+                    <button type="submit" class="px-6 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition duration-200">
+                        Actualizar Producto
+                    </button>
+                </div>
             </form>
         </div>
     </main>

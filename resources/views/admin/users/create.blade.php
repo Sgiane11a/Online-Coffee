@@ -2,78 +2,88 @@
 
 @section('main')
     <main class="h-full pb-16 overflow-y-auto">
-        <div class="container px-6 mx-auto grid">
+        <div class="container px-6 mx-auto">
             <h2 class="my-6 text-2xl font-semibold text-gray-200">
                 Crear Usuario
             </h2>
 
-            <!-- Mensajes de éxito o error -->
-            @if (session('success'))
-                <div class="bg-green-500 text-white p-4 mb-4">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if ($errors->any())
-                <div class="bg-red-500 text-white p-4 mb-4">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <form action="{{ route('admin.users.store') }}" method="POST" class="flex flex-col gap-4 px-4 py-3 mb-8 rounded-lg shadow-md bg-gray-800">
+            <form action="{{ route('admin.users.store') }}" method="POST" class="space-y-6 bg-white p-8 rounded-xl shadow-xl max-w-3xl mx-auto">
                 @csrf
 
                 <!-- Nombre -->
-                <div class="block text-sm">
-                    <label for="name" class="text-gray-400">Nombre</label>
-                    <input name="name" type="text" class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 text-gray-300" placeholder="Ingresa un nombre" required />
+                <div class="space-y-4">
+                    <label for="name" class="block text-sm font-medium text-gray-400">Nombre</label>
+                    <input name="name" type="text" id="name" placeholder="Ingresa un nombre" class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" required />
+                    @error('name')
+                        <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- Correo -->
-                <div class="block text-sm">
-                    <label for="email" class="text-gray-400">Correo</label>
-                    <input name="email" type="email" class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 text-gray-300" placeholder="Ingresa un correo" required />
+                <div class="space-y-4">
+                    <label for="email" class="block text-sm font-medium text-gray-400">Correo</label>
+                    <input name="email" type="email" id="email" placeholder="Ingresa un correo" class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" required />
+                    @error('email')
+                        <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- Contraseña -->
-                <div>
-                    <label for="password" class="text-gray-400">Contraseña</label>
-                    <input name="password" type="password" class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 text-gray-300" placeholder="Ingresa una contraseña" required />
+                <div class="space-y-4">
+                    <label for="password" class="block text-sm font-medium text-gray-400">Contraseña</label>
+                    <input name="password" type="password" id="password" placeholder="Ingresa una contraseña" class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" required />
+                    @error('password')
+                        <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
 
-                <div>
-                    <label for="password_confirmation" class="text-gray-400">Confirmar Contraseña</label>
-                    <input name="password_confirmation" type="password" class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 text-gray-300" placeholder="Confirma tu contraseña" required />
+                <!-- Confirmar Contraseña -->
+                <div class="space-y-4">
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-400">Confirmar Contraseña</label>
+                    <input name="password_confirmation" type="password" id="password_confirmation" placeholder="Confirma tu contraseña" class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" required />
+                    @error('password_confirmation')
+                        <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- Departamento -->
-                <div class="block text-sm">
-                    <label for="department" class="text-gray-400">Departamento</label>
-                    <select id="department" name="department_id" class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 text-gray-300">
+                <div class="space-y-4">
+                    <label for="department" class="block text-sm font-medium text-gray-400">Departamento</label>
+                    <select id="department" name="department_id" class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200">
                         <option value="">Selecciona un Departamento</option>
                         @foreach ($departments as $department)
                             <option value="{{ $department->id }}">{{ $department->name }}</option>
                         @endforeach
                     </select>
+                    @error('department_id')
+                        <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
+
                 <!-- Carrera -->
-                <div class="block text-sm">
-                    <label for="career" class="text-gray-400">Carrera</label>
-                    <select id="career" name="career_id" class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 text-gray-300">
+                <div class="space-y-4">
+                    <label for="career" class="block text-sm font-medium text-gray-400">Carrera</label>
+                    <select id="career" name="career_id" class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200">
                         <option value="">Selecciona una Carrera</option>
-                        <!-- Las opciones se cargarán dinámicamente -->
                     </select>
+                    @error('career_id')
+                        <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
 
-                <button type="submit" class="mt-4 px-4 py-2 text-sm font-medium leading-5 text-white bg-purple-600 border border-transparent rounded-lg hover:bg-purple-700">
-                    Crear Usuario
-                </button>
-            </form>
+                <!-- Botones -->
+                <div class="flex justify-between mt-6">
+                    <!-- Botón de Cancelar -->
+                    <a href="{{ url()->previous() }}" class="inline-block px-4 py-2 text-white bg-gray-600 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition duration-200">
+                        Cancelar
+                    </a>
 
+                    <!-- Botón de Crear Usuario -->
+                    <button type="submit" class="px-6 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition duration-200">
+                        Crear Usuario
+                    </button>
+                </div>
+            </form>
         </div>
     </main>
 
