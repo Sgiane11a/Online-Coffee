@@ -48,45 +48,95 @@
 
             <!-- Tareas y estadísticas -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Tareas -->
-                <div class="bg-white rounded-lg shadow-md p-4">
-                    <h2 class="text-xl font-bold text-grape-450 mb-2">Tareas</h2>
-                    <hr class="my-2 border-t-3 border-grape-750 dark:border-gray-600">
-                    <ul class="space-y-2">
-                        <li class="flex justify-between items-center">
-                            <!-- Checkbox en la izquierda -->
-                            <div class="flex items-center">
-                                <input type="checkbox" class="mr-2 rounded text-teal-500 focus:ring-teal-400">
-                                <span>Publicar el anuncio de fin de año en el foro</span>
-                            </div>
-                            <x-ebutton />
-                        </li>
-                        <hr class="my-2 border-t-3 border-grape-750 dark:border-gray-600">
-                        <li class="flex justify-between items-center">
-                            <div class="flex items-center">
-                                <input type="checkbox" class="mr-2 rounded text-teal-500 focus:ring-teal-400">
-                                <span>Llamar al técnico para la computadora número 4</span>
-                            </div>
-                            <x-ebutton />
-                        </li>
-                        <hr class="my-2 border-t-3 border-grape-750 dark:border-gray-600">
-                        <li class="flex justify-between items-center">
-                            <div class="flex items-center">
-                                <input type="checkbox" class="mr-2 rounded text-teal-500 focus:ring-teal-400">
-                                <span> Pedir más sobres al proveedor</span>
-                            </div>
-                            <x-ebutton />
-                        </li>
-                        <hr class="my-2 border-t-3 border-grape-750 dark:border-gray-600">
-                        <li class="flex justify-between items-center">
-                            <div class="flex items-center">
-                                <input type="checkbox" class="mr-2 rounded text-teal-500 focus:ring-teal-400">
-                                <span> Revisar los formularios de contacto del día de hoy</span>
-                            </div>
-                            <x-ebutton />
-                        </li>
-                    </ul>
+
+            <div x-data="taskManager()" class="bg-white rounded-lg shadow-md p-4">
+            <div class="flex items-center justify-between">
+    <!-- Título -->
+    <h2 class="text-xl font-bold text-grape-450">Tareas</h2>
+    <!-- Botón pequeño y circular con icono más ajustado -->
+    <button 
+        @click="showAddTask = true" 
+        class="bg-teal-500 text-white p-2 rounded-full shadow hover:bg-teal-600 ml-auto flex items-center justify-center">
+        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 2v10h10v2H12v10h-2V14H0v-2h10V2h2z" />
+        </svg>
+    </button>
+</div>
+
+
+    <hr class="my-2 border-t-3 border-grape-750">
+
+    <!-- Modal para agregar/editar tareas -->
+    <div 
+        x-show="showAddTask" 
+        class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50"
+        x-cloak>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
+            <h3 class="text-lg font-semibold mb-4" x-text="isEditing ? 'Editar Tarea' : 'Nueva Tarea'"></h3>
+            <input 
+                type="text" 
+                x-model="taskInput" 
+                placeholder="Escribe la tarea aquí..." 
+                class="border border-gray-300 rounded p-2 w-full mb-4">
+            <div class="flex justify-end space-x-2">
+                <button 
+                    @click="cancelTask" 
+                    class="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400">
+                    Cancelar
+                </button>
+                <button 
+                    @click="saveTask" 
+                    class="bg-teal-500 text-white px-3 py-1 rounded hover:bg-teal-600">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de tareas -->
+    <ul class="space-y-2 mt-4">
+        <template x-for="(task, index) in tasks" :key="index">
+            <li class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <!-- Checkbox para marcar como completado -->
+                    <input 
+                        type="checkbox" 
+                        class="mr-2 rounded text-teal-500 focus:ring-teal-400" 
+                        x-model="task.completed">
+                    <span 
+                        :class="task.completed ? 'line-through text-gray-500' : ''"
+                        x-text="task.text">
+                    </span>
                 </div>
+                <!-- Botones para editar y eliminar -->
+                <div class="flex space-x-2">
+    <!-- Botón de Editar con icono -->
+    <button 
+        @click="editTask(index)" 
+        class="text-teal-500 text-sm hover:underline flex items-center">
+        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M4 21q-.425 0-.712-.288T3 20v-2.425q0-.4.15-.763t.425-.637L16.2 3.575q.3-.275.663-.425t.762-.15t.775.15t.65.45L20.425 5q.3.275.437.65T21 6.4q0 .4-.138.763t-.437.662l-12.6 12.6q-.275.275-.638.425t-.762.15zM17.6 7.8L19 6.4L17.6 5l-1.4 1.4z" />
+        </svg>
+        
+    </button>
+    
+    <!-- Botón de Eliminar con icono -->
+    <button 
+        @click="deleteTask(index)" 
+        class="text-red-500 text-sm hover:underline flex items-center">
+        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z" />
+        </svg>
+        
+    </button>
+</div>
+
+            </li>
+        </template>
+    </ul>
+</div>
+
+
 
             <!-- Estadísticas -->
             <div class="bg-white rounded-lg shadow-md p-6">
@@ -220,4 +270,64 @@
             </div>--}}
         </div>
     </main>
+
+
+
+
+<script>
+    function taskManager() {
+        return {
+            tasks: [
+                { text: 'Publicar el anuncio de fin de año en el foro', completed: false },
+                { text: 'Llamar al técnico para la computadora número 4', completed: false },
+                { text: 'Pedir más sobres al proveedor', completed: false },
+                { text: 'Revisar los formularios de contacto del día de hoy', completed: false }
+            ],
+            showAddTask: false,
+            isEditing: false,
+            taskInput: '',
+            editIndex: null,
+
+            // Mostrar el modal para agregar/editar tareas
+            editTask(index) {
+                this.taskInput = this.tasks[index].text;
+                this.isEditing = true;
+                this.editIndex = index;
+                this.showAddTask = true;
+            },
+
+            // Guardar nueva tarea o cambios
+            saveTask() {
+                if (this.taskInput.trim()) {
+                    if (this.isEditing) {
+                        this.tasks[this.editIndex].text = this.taskInput.trim();
+                    } else {
+                        this.tasks.push({ text: this.taskInput.trim(), completed: false });
+                    }
+                    this.resetTaskModal();
+                }
+            },
+
+            // Cancelar acción en el modal
+            cancelTask() {
+                this.resetTaskModal();
+            },
+
+            // Eliminar tarea
+            deleteTask(index) {
+                this.tasks.splice(index, 1);
+            },
+
+            // Resetear valores del modal
+            resetTaskModal() {
+                this.taskInput = '';
+                this.isEditing = false;
+                this.editIndex = null;
+                this.showAddTask = false;
+            }
+        };
+    }
+</script>
+
+
 @endsection
