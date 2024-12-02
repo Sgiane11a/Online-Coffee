@@ -11,31 +11,35 @@ use App\Models\Career;
 
 class UserController extends Controller
 {
-        public function index(Request $request): View
+    public function index(Request $request): View
     {
         // Obtener los filtros desde el request
         $departmentId = $request->input('department_id');
-        $careerId = $request->input('career_id');
-
+        $search = $request->input('search'); // Buscador por nombre o correo
+    
         // Construir la consulta de usuarios con filtros opcionales
         $users = User::query()
             ->when($departmentId, function ($query, $departmentId) {
                 $query->where('department_id', $departmentId);
             })
-            ->when($careerId, function ($query, $careerId) {
-                $query->where('career_id', $careerId);
+            ->when($search, function ($query, $search) {
+                // Buscar por nombre o correo
+                $query->where(function($q) use ($search) {
+                    $q->where('name', 'like', "%$search%")
+                      ->orWhere('email', 'like', "%$search%");
+                });
             })
             ->paginate(10);
-
+    
         // Obtener la cantidad total de usuarios sin filtros
         $totalUsers = User::count();
-
-        // Obtener departamentos y carreras para los filtros
+    
+        // Obtener departamentos para los filtros
         $departments = Department::all();
-        $careers = Career::all();
-
-        return view('admin.users.index', compact('users', 'departments', 'careers', 'departmentId', 'careerId', 'totalUsers'));
+    
+        return view('admin.users.index', compact('users', 'departments', 'departmentId', 'totalUsers', 'search'));
     }
+    
 
     
 
@@ -83,25 +87,26 @@ class UserController extends Controller
     }
 
     public function update(Request $request, User $user): RedirectResponse
-    {
-        // Validar los datos
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'career_id' => 'required|exists:careers,id', // Validación de carrera
-            'department_id' => 'required|exists:departments,id', // Validación de departamento
-        ]);
+{
+    // Validar los datos
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+        'career_id' => 'required|exists:careers,id',
+        'department_id' => 'required|exists:departments,id',
+    ]);
 
-        // Actualizar el usuario
-        $user->update([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'career_id' => $validatedData['career_id'],
-            'department_id' => $validatedData['department_id'],
-        ]);
+    // Actualizar el usuario
+    $user->update([
+        'name' => $validatedData['name'],
+        'email' => $validatedData['email'],
+        'career_id' => $validatedData['career_id'],
+        'department_id' => $validatedData['department_id'],
+    ]);
 
-        return redirect()->route('admin.users.index')->with('success', 'Usuario actualizado exitosamente.');
-    }
+    // Redirigir al índice con un mensaje de éxito
+    return redirect()->route('admin.users.index')->with('success', 'Usuario actualizado exitosamente.');
+}
 
     public function destroy(User $user): RedirectResponse
     {
