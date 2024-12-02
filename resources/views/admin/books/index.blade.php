@@ -1,71 +1,48 @@
 @extends('layouts.admin')
 
 @section('main')
-<main class="h-full overflow-y-auto">
-    <div class="container px-6 mx-auto grid">
-        <h2 class="my-6 text-2xl font-semibold text-gray-200">
-            Libros
-        </h2>
-<!-- Botón para agregar un nuevo libro -->
-<div class="mb-6">
-            <a href="{{ route('admin.books.create') }}" class="inline-block px-6 py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+<main class="h-full overflow-y-auto bg-gray-100">
+    <div class="container px-6 mx-auto grid mt-4">
+
+        <!-- Encabezado con filtros y botones -->
+        <div class="flex flex-col lg:flex-row justify-between items-center gap-6 mb-6 bg-white p-6 rounded-lg shadow-md">
+            <!-- Filtros -->
+            <form id="filters-form" method="GET" action="{{ route('admin.books.index') }}" class="flex flex-wrap gap-4 w-full lg:w-auto">
+                <!-- Filtro por Nombre -->
+                <div class="flex-1">
+                    <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Buscar por nombre:</label>
+                    <input type="text" name="search" id="search" value="{{ request('search') }}"
+                        class="w-full px-4 py-2 rounded-lg bg-gray-50 text-gray-700 border-gray-300 focus:border-indigo-500 focus:outline-none" 
+                        placeholder="Nombre del libro">
+                </div>
+
+                <!-- Filtro por categoría -->
+                <div class="flex-1">
+                    <label for="category_filter" class="block text-sm font-medium text-gray-700 mb-1">Filtrar por categoría:</label>
+                    <select name="category_filter" id="category_filter" class="w-full px-4 py-2 rounded-lg bg-gray-50 text-gray-700 border-gray-300 focus:border-indigo-500 focus:outline-none" onchange="this.form.submit();">
+                        <option value="">Selecciona una categoría</option>
+                        @foreach($bookscategories as $category)
+                            <option value="{{ $category->id }}" {{ request('category_filter') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </form>
+
+            <!-- Botón de Crear Libro -->
+            <a href="{{ route('admin.books.create') }}" class="flex items-center px-6 py-3 rounded-lg bg-pink-400 text-white hover:bg-pink-500 shadow-md">
+                <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M17 13h-4v4h-2v-4H7v-2h4V7h2v4h4m-5-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2" />
+                </svg>
                 Agregar Nuevo Libro
             </a>
         </div>
-        <!-- Formulario de búsqueda con filtro dinámico -->
-        <form action="{{ route('admin.books.index') }}" method="GET" class="mb-6" id="filter-form">
-            <div class="flex gap-4">
-                <!-- Campo de búsqueda por título -->
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Buscar libros..." class="px-4 py-2 w-full bg-gray-700 text-white rounded-lg" onchange="this.form.submit()">
-                
-                <!-- Filtro principal: Generales o Departamento -->
-                    <select name="filter_type" id="filter_type" class="px-4 py-2 bg-gray-700 text-white rounded-lg" onchange="this.form.submit(); toggleFilterOptions()">
-                        <option value="">Selecciona un filtro</option>
-                        <option value="generales" {{ request('filter_type') == 'generales' ? 'selected' : '' }}>Generales</option>
-                        <option value="departamentos" {{ request('filter_type') == 'departamentos' ? 'selected' : '' }}>Departamentos</option>
-                    </select>
 
-                <!-- Filtro dinámico que depende de la selección -->
-                <div id="generales_filter" class="filter-option hidden">
-                    <select name="generales" class="px-4 py-2 bg-gray-700 text-white rounded-lg" onchange="this.form.submit()">
-                        <option value="">Selecciona un curso de Generales</option>
-                        <option value="Cálculo" {{ request('generales') == 'Cálculo' ? 'selected' : '' }}>Cálculo</option>
-                        <option value="Expresión Oral" {{ request('generales') == 'Expresión Oral' ? 'selected' : '' }}>Expresión Oral</option>
-                        <option value="Física" {{ request('generales') == 'Física' ? 'selected' : '' }}>Física</option>
-                        <option value="Electricidad" {{ request('generales') == 'Electricidad' ? 'selected' : '' }}>Electricidad</option>
-                    </select>
-                </div>
-
-                <div id="departamentos_filter" class="filter-option hidden">
-                    <select name="departamento" class="px-4 py-2 bg-gray-700 text-white rounded-lg" onchange="this.form.submit()">
-                        <option value="">Selecciona un departamento</option>
-                        <option value="Diseño y Desarrollo de Software" {{ request('departamento') == 'Diseño y Desarrollo de Software' ? 'selected' : '' }}>Diseño y Desarrollo de Software</option>
-                        <option value="Administración de Redes y Comunicaciones" {{ request('departamento') == 'Administración de Redes y Comunicaciones' ? 'selected' : '' }}>Administración de Redes y Comunicaciones</option>
-                        <option value="Diseño y Desarrollo de Simuladores y Videojuegos" {{ request('departamento') == 'Diseño y Desarrollo de Simuladores y Videojuegos' ? 'selected' : '' }}>Diseño y Desarrollo de Simuladores y Videojuegos</option>
-                        <option value="Modelado y Animación Digital" {{ request('departamento') == 'Modelado y Animación Digital' ? 'selected' : '' }}>Modelado y Animación Digital</option>
-                        <option value="Diseño Industrial" {{ request('departamento') == 'Diseño Industrial' ? 'selected' : '' }}>Diseño Industrial</option>
-                        <option value="Producción y Gestión Industrial" {{ request('departamento') == 'Producción y Gestión Industrial' ? 'selected' : '' }}>Producción y Gestión Industrial</option>
-                        <option value="Operaciones Mineras" {{ request('departamento') == 'Operaciones Mineras' ? 'selected' : '' }}>Operaciones Mineras</option>
-                        <option value="Procesos Químicos y Metalúrgicos" {{ request('departamento') == 'Procesos Químicos y Metalúrgicos' ? 'selected' : '' }}>Procesos Químicos y Metalúrgicos</option>
-                        <option value="Electricidad Industrial" {{ request('departamento') == 'Electricidad Industrial' ? 'selected' : '' }}>Electricidad Industrial</option>
-                        <option value="Electrónica y Automatización Industrial" {{ request('departamento') == 'Electrónica y Automatización Industrial' ? 'selected' : '' }}>Electrónica y Automatización Industrial</option>
-                        <option value="Mecatrónica Industrial" {{ request('departamento') == 'Mecatrónica Industrial' ? 'selected' : '' }}>Mecatrónica Industrial</option>
-                        <option value="estión y Mantenimiento de Maquinaria Industrial" {{ request('departamento') == 'estión y Mantenimiento de Maquinaria Industrial' ? 'selected' : '' }}>estión y Mantenimiento de Maquinaria Industrial</option>
-                        <option value="Gestión de Mantenimiento de Maquinaria Pesada" {{ request('departamento') == 'Gestión de Mantenimiento de Maquinaria Pesada' ? 'selected' : '' }}>Gestión de Mantenimiento de Maquinaria Pesada</option>
-                        <option value="Aviación y Mecánica Aeronáutica" {{ request('departamento') == 'Aviación y Mecánica Aeronáutica' ? 'selected' : '' }}>Aviación y Mecánica Aeronáutica</option>
-
-                        <!-- ...más opciones de departamentos... -->
-                    </select>
-                </div>
-            </div>
-        </form>
-
-        <!-- Mostrar libros (tabla) -->
-        <div class="w-full overflow-hidden rounded-lg shadow-xs">
+        <!-- Tabla de Libros -->
+        <div class="w-full overflow-hidden rounded-lg shadow-md bg-white">
             <div class="w-full overflow-x-auto">
-                <table class="w-full whitespace-no-wrap">
+                <table class="w-full text-sm text-gray-700">
                     <thead>
-                        <tr class="text-sm font-semibold tracking-wide text-left uppercase border-b border-gray-700 text-gray-400 bg-gray-800">
+                        <tr class="text-left uppercase tracking-wide border-b border-gray-300">
                             <th class="px-4 py-3">Nombre</th>
                             <th class="px-4 py-3">Autor</th>
                             <th class="px-4 py-3">Categoría</th>
@@ -76,41 +53,38 @@
                             <th class="px-4 py-3">Eliminar</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                    <tbody class="divide-y divide-gray-200">
                         @foreach ($books as $book)
-                        <tr class="text-gray-400">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <div class="relative hidden w-8 h-8 mr-3 rounded-full lg:block">
-                                        <x-cld-image class="object-cover w-full h-full rounded-full" public-id="{{ $book->image_public_id }}" width="300" height="300"></x-cld-image>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">{{ $book->title }}</p>
-                                    </div>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-4 flex items-center space-x-3">
+                                <div class="w-10 h-10">
+                                    <x-cld-image 
+                                        public-id="{{ $book->image_public_id }}" 
+                                        width="40" height="40"
+                                        class="object-cover w-full h-full rounded-full shadow-md" 
+                                        alt="Imagen del libro" loading="lazy" />
                                 </div>
+                                <span class="text-sm font-medium text-gray-700">{{ $book->title }}</span>
                             </td>
-                            <td class="px-4 py-3 text-sm">{{ $book->author }}</td>
-                            <td class="px-4 py-3 text-sm">{{ $book->category->name ?? 'Sin categoría' }}</td>
-                            <td class="px-4 py-3 text-sm">{{ $book->language }}</td>
-                            <td class="px-4 py-3 text-sm">{{ $book->publication_year }}</td>
-                            <td class="px-4 py-3 text-sm hidden lg:table-cell">{{ $book->created_at->format('d-m-Y') }}</td>
-                            <td class="px-4 py-3 text-sm">
-                                <form action="{{ route('admin.books.edit', $book->id) }}">
-                                    @csrf
-                                    <button type="submit" class="inline-block w-auto text-yellow-50 bg-yellow-600 rounded-md p-2">
-                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path fill="currentColor" d="M4 21h16v-2H4v2zM3 3v12h18V3H3zm6 10V7h8v6H9z"></path>
-                                        </svg>
-                                    </button>
-                                </form>
+                            <td class="px-4 py-2 text-sm">{{ $book->author }}</td>
+                            <td class="px-4 py-2 text-sm">{{ $book->category->name ?? 'Sin categoría' }}</td>
+                            <td class="px-4 py-2 text-sm">{{ $book->language }}</td>
+                            <td class="px-4 py-2 text-sm">{{ $book->publication_year }}</td>
+                            <td class="px-4 py-2 text-sm hidden lg:table-cell">{{ $book->created_at->format('d/m/Y') }}</td>
+                            <td class="px-4 py-2 text-sm">
+                                <a href="{{ route('admin.books.edit', $book->id) }}" class="text-yellow-600 hover:text-yellow-700 p-2 rounded-md">
+                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M4 21q-.425 0-.712-.288T3 20v-2.425q0-.4.15-.763t.425-.637L16.2 3.575q.3-.275.663-.425t.762-.15t.775.15t.65.45L20.425 5q.3.275.437.65T21 6.4q0 .4-.138.763t-.437.662l-12.6 12.6q-.275.275-.638.425t-.762.15zM17.6 7.8L19 6.4L17.6 5l-1.4 1.4z" />
+                                    </svg>
+                                </a>
                             </td>
-                            <td class="px-4 py-3 text-sm">
-                                <form action="{{ route('admin.books.delete', $book->id) }}" method="POST" class="inline-block">
+                            <td class="px-4 py-2 text-sm">
+                                <form action="{{ route('admin.books.delete', $book->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="inline-block w-auto text-red-50 bg-red-600 rounded-md p-2">
+                                    <button type="submit" class="text-red-600 hover:text-red-700 p-2 rounded-md">
                                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path fill="currentColor" d="M19 6h-2V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7 0h-4V4h4v2z"></path>
+                                            <path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z" />
                                         </svg>
                                     </button>
                                 </form>
@@ -120,18 +94,11 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="px-4 py-3 font-medium tracking-wide text-gray-600 uppercase border-t bg-gray-100">
+                {{ $books->links() }}
+            </div>
         </div>
     </div>
 </main>
-
-<script>
-    function toggleFilterOptions() {
-        const filterType = document.getElementById('filter_type').value;
-        document.getElementById('generales_filter').classList.toggle('hidden', filterType !== 'generales');
-        document.getElementById('departamentos_filter').classList.toggle('hidden', filterType !== 'departamentos');
-    }
-    toggleFilterOptions();
-
-    
-</script>
 @endsection

@@ -18,16 +18,36 @@ class ProductController extends Controller
         return view('products', compact('products', 'categories'));
     }
 
-    function admin()
-    {
-        $products = Product::paginate(8);
-        return view('admin.store.products.index', compact('products'));
+    public function admin(Request $request)
+{
+    // Obtener todas las categorías
+    $categories = Category::all();
+
+    // Comenzar la consulta de productos
+    $query = Product::query();
+
+    // Filtrar por nombre si está presente
+    if ($request->filled('search')) {
+        $query->where('name', 'like', '%' . $request->search . '%');
     }
+
+    // Filtrar por categoría si está presente
+    if ($request->filled('category')) {
+        $query->where('category_id', $request->category);
+    }
+
+    // Obtener los productos con paginación
+    $products = $query->paginate(8);
+
+    // Pasar productos y categorías a la vista
+    return view('admin.products.index', compact('products', 'categories'));
+}
+
 
     function create()
     {
         $categories = Category::all();
-        return view('admin.store.products.create', compact('categories'));
+        return view('admin.products.create', compact('categories'));
     }
 
     function store(Request $request)
@@ -53,13 +73,13 @@ class ProductController extends Controller
             'image_public_id' => $image_public_id,
         ]);
 
-        return redirect()->route('admin.store.products.index')->with('success', 'Producto creado exitosamente.');
+        return redirect()->route('admin.products.index')->with('success', 'Producto creado exitosamente.');
     }
 
     function edit(Product $product): View
     {
         $categories = Category::all();
-        return view('admin.store.products.update', compact('product', 'categories'));
+        return view('admin.products.update', compact('product', 'categories'));
     }
 
     function update(Request $request, Product $product): RedirectResponse
@@ -86,7 +106,7 @@ class ProductController extends Controller
             'price' => $request->price,
         ]);
 
-        return redirect()->route('admin.store.products.index')->with('success', 'Producto actualizado exitosamente.');
+        return redirect()->route('admin.products.index')->with('success', 'Producto actualizado exitosamente.');
     }
 
     function destroy(Product $product): RedirectResponse

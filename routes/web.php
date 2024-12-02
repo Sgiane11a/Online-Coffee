@@ -134,22 +134,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             
         });
 
-        // Rutas para manejar la tienda
-        Route::prefix('store')->name('store.')->group(function () {
-
-            // Tienda principal
-            Route::get('/', [AdminController::class, 'shop'])->name('index');
-
-            // Rutas para categorías
-            Route::prefix('categories')->name('categories.')->group(function () {
-                Route::get('/', [CategoryController::class, 'index'])->name('index'); // Listar categorías
-                Route::get('create', [CategoryController::class, 'create'])->name('create'); // Crear categoría
-                Route::post('store', [CategoryController::class, 'store'])->name('store'); // Guardar categoría
-                Route::get('edit/{category}', [CategoryController::class, 'edit'])->name('edit'); // Editar categoría
-                Route::put('update/{category}', [CategoryController::class, 'update'])->name('update'); // Actualizar categoría
-                Route::delete('delete/{category}', [CategoryController::class, 'destroy'])->name('delete'); // Eliminar categoría
-            });
-
             // Rutas para productos
             Route::prefix('products')->name('products.')->group(function () {
                 Route::get('/', [ProductController::class, 'admin'])->name('index'); // Listar productos
@@ -159,7 +143,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 Route::put('update/{product}', [ProductController::class, 'update'])->name('update'); // Actualizar producto
                 Route::delete('delete/{product}', [ProductController::class, 'destroy'])->name('delete'); // Eliminar producto
             });
-        });
+        
 
         // Rutas para manejo de reservaciones
         Route::prefix('reservation')->name('reservation.')->group(function () {

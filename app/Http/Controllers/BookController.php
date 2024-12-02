@@ -9,46 +9,26 @@ use App\Models\BookComment;  // Si es necesario importar el modelo de los coment
 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Cloudinary\Configuration\Configuration;
-
 class BookController extends Controller
-{
+{ 
     public function index(Request $request)
-{
-    // Inicializar la consulta de libros
-    $query = Book::query();
-
-    // Filtrado por tipo (Generales o Departamentos)
-    if ($request->has('filter_type')) {
-        // Filtro por Generales
-        if ($request->filter_type == 'generales' && $request->has('generales')) {
-            $query->whereHas('category', function ($query) use ($request) {
-                $query->where('name', $request->generales);
-            });
-        }
-
-        // Filtro por Departamentos
-        if ($request->filter_type == 'departamentos' && $request->has('departamento')) {
-            $query->whereHas('category', function ($query) use ($request) {
-                $query->where('name', $request->departamento);
-            });
-        }
+    {
+        $search = $request->input('search');
+        $category_filter = $request->input('category_filter');
+    
+        $books = Book::when($search, function ($query, $search) {
+            return $query->where('title', 'like', '%' . $search . '%');
+        })
+        ->when($category_filter, function ($query, $category_filter) {
+            return $query->where('category_id', $category_filter);
+        })
+        ->paginate(10); // Paginate the results, showing 10 books per page.
+    
+        $bookscategories = Bookscategory::all();
+    
+        return view('admin.books.index', compact('books', 'bookscategories'));
     }
-
-    // Filtrado por búsqueda (si existe)
-    if ($request->has('search') && $request->search != '') {
-        $query->where('title', 'like', '%' . $request->search . '%');
-    }
-
-    // Obtener los libros con los filtros aplicados
-    $books = $query->get();
-
-    // Obtener todas las categorías
-    $categories = Bookscategory::all();
-
-    // Retornar la vista con los libros y categorías
-    return view('admin.books.index', compact('books', 'categories'));
-}
-
+    
     
 
 
