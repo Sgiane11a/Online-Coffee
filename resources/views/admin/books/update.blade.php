@@ -3,17 +3,21 @@
 @section('main')
     <main class="h-full pb-16 overflow-y-auto">
         <div class="container px-6 mx-auto grid">
-            <h2 class="my-6 text-2xl font-semibold text-gray-200">
+            <h3 class="my-6 text-2xl font-semibold text-gray-200">
                 Actualizar Libro
-            </h2>
-            <form action="{{ route('admin.books.update', $book->id) }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-4 px-4 py-3 mb-8 rounded-lg shadow-md bg-gray-800">
+            </h3>
+
+            <!-- Formulario -->
+            <form action="{{ route('admin.books.update', $book->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-8 rounded-xl shadow-xl max-w-3xl mx-auto" style="min-width: 600px;">
                 @csrf
                 @method('PUT')
 
                 <!-- Categoría -->
-                <div class="block mt-4 text-sm">
-                    <label name="category_id" class="text-gray-400">Categoría</label>
-                    <select name="category_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" required>
+                <div class="space-y-4">
+                    <label for="category_id" class="block text-sm font-medium text-gray-400">Categoría</label>
+                    <select name="category_id" id="category_id" 
+                        class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" 
+                        required>
                         <option value="">Selecciona una categoría</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}" {{ $book->category_id == $category->id ? 'selected' : '' }}>
@@ -24,74 +28,91 @@
                 </div>
 
                 <!-- Título -->
-                <div class="block text-sm">
-                    <label name="title" class="text-gray-400">Título</label>
-                    <input name="title" type="text" class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape text-gray-300" value="{{ $book->title }}" placeholder="Ingresa el título del libro" required />
+                <div class="space-y-4">
+                    <label for="title" class="block text-sm font-medium text-gray-400">Título</label>
+                    <input type="text" name="title" id="title" value="{{ old('title', $book->title) }}" 
+                        class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" 
+                        required>
                 </div>
 
                 <!-- Autor -->
-                <div class="block text-sm">
-                    <label name="author" class="text-gray-400">Autor</label>
-                    <input name="author" type="text" class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape text-gray-300" value="{{ $book->author }}" placeholder="Ingresa el autor del libro" required />
+                <div class="space-y-4">
+                    <label for="author" class="block text-sm font-medium text-gray-400">Autor</label>
+                    <input type="text" name="author" id="author" value="{{ old('author', $book->author) }}" 
+                        class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" 
+                        required>
                 </div>
 
                 <!-- Idioma -->
-                <div class="block text-sm">
-                    <label name="language" class="text-gray-400">Idioma</label>
-                    <input name="language" type="text" class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape text-gray-300" value="{{ $book->language }}" placeholder="Ingresa el idioma del libro" required />
+                <div class="space-y-4">
+                    <label for="language" class="block text-sm font-medium text-gray-400">Idioma</label>
+                    <input type="text" name="language" id="language" value="{{ old('language', $book->language) }}" 
+                        class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" 
+                        required>
                 </div>
 
                 <!-- Año de Publicación -->
-                <div class="block text-sm">
-                    <label name="publication_year" class="text-gray-400">Año de Publicación</label>
-                    <input name="publication_year" type="number" class="block w-full mt-1 text-sm border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape text-gray-300" value="{{ $book->publication_year }}" placeholder="Ingresa el año de publicación del libro" required />
+                <div class="space-y-4">
+                    <label for="publication_year" class="block text-sm font-medium text-gray-400">Año de Publicación</label>
+                    <input type="number" name="publication_year" id="publication_year" value="{{ old('publication_year', $book->publication_year) }}" 
+                        class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" 
+                        required>
                 </div>
 
                 <!-- Imagen -->
-                <div class="block text-sm">
-                    <label class="text-gray-400">Imagen</label>
-                    <div class="flex mt-1">
-                        <img id="image-preview" src="{{ $book->image_url ? asset('storage/' . $book->image_url) : '' }}" class="border-gray-600" width="150" height="150" alt="Vista previa de la imagen" />
+                <div class="flex mt-4 gap-4">
+                    <!-- Vista previa de la imagen -->
+                    <div class="relative">
+                        <x-cld-image class="border border-gray-600 max-w-xs max-h-40 object-contain rounded-md" public-id="{{ $book->image_public_id }}"></x-cld-image>
+                    </div>
 
-                        <div class="flex w-full text-sm text-gray-300 border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape focus:shadow-outline-gray form-input">
-                            <input id="image-input" name="image" type="file" accept="image/*" class="block w-full text-sm text-gray-300 border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape focus:shadow-outline-gray form-input" />
-                        </div>
+                    <!-- Campo de carga de nueva imagen -->
+                    <div class="w-full">
+                        <label for="image-input" class="block text-sm font-medium text-gray-400">Cargar nueva imagen</label>
+                        <input name="file" type="file" accept="image/*"
+                            class="block w-full text-sm px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200" />
                     </div>
                 </div>
 
                 <!-- PDF -->
-                <div class="block text-sm">
-                    <label class="text-gray-400">Archivo PDF</label>
-                    <div class="flex mt-1">
-                        <input id="pdf-input" name="pdf_file" type="file" accept=".pdf" class="block w-full text-sm text-gray-300 border-gray-600 bg-gray-700 focus:border-grape-400 focus:outline-none focus:shadow-outline-grape focus:shadow-outline-gray form-input" />
-                    </div>
-
-                    <!-- Si el libro ya tiene un archivo PDF -->
+                <div class="space-y-4">
+                    <label for="pdf_file" class="block text-sm font-medium text-gray-400">Archivo PDF</label>
+                    <input id="pdf-input" name="pdf_file" type="file" accept=".pdf" 
+                        class="block w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200">
                     @if($book->digital_version_link)
-                        <a href="{{ asset('storage/' . $book->digital_version_link) }}" class="mt-2 text-blue-500" target="_blank">Ver archivo PDF actual</a>
+                        <a href="{{ asset('storage/' . $book->digital_version_link) }}" class="text-blue-500" target="_blank">Ver archivo PDF actual</a>
                     @endif
                 </div>
 
-                <button type="submit" class="mt-4 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                    Actualizar Libro
-                </button>
+                <!-- Botones de acción -->
+                <div class="flex justify-between mt-6">
+                    <a href="{{ url()->previous() }}" 
+                        class="inline-block px-4 py-2 text-white bg-gray-600 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition duration-200">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" 
+                        class="px-6 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition duration-200">
+                        Actualizar Libro
+                    </button>
+                </div>
             </form>
         </div>
     </main>
 
-<script>
-    // Vista previa de la imagen cuando el usuario selecciona un archivo
-    document.getElementById('image-input').addEventListener('change', function(event) {
-        const file = event.target.files[0]; 
-        const reader = new FileReader();
+    <!-- Script para la vista previa de la imagen -->
+    <script>
+        document.getElementById('image-input').addEventListener('change', function(event) {
+            const file = event.target.files[0]; 
+            const reader = new FileReader();
 
-        reader.onload = function(e) {
-            document.getElementById('image-preview').src = e.target.result;
-        };
+            reader.onload = function(e) {
+                document.getElementById('image-preview').src = e.target.result;
+            };
 
-        if (file) {
-            reader.readAsDataURL(file); 
-        }
-    });
-</script>
+            if (file) {
+                reader.readAsDataURL(file); 
+            }
+        });
+    </script>
 @endsection
