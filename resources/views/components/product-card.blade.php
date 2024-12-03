@@ -1,6 +1,6 @@
 <li class="bg-white p-2 text-black rounded-sm">
 <img class="rounded-md" 
-     src="https://res.cloudinary.com/doirzq4zq/image/upload/{{ $product->image_public_id }}" 
+    src="https://res.cloudinary.com/doirzq4zq/image/upload/{{ $products->image_public_id }}.jpg" 
      alt="{{ $text }}">
 
     <div class="flex justify-between p-2">
