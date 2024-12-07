@@ -172,24 +172,31 @@ public function destroy($id)
     
 
 public function show($bookId)
-    {
-        // Obtén el libro por su ID
-        $book = Book::find($bookId);
+{
+    // Obtén el libro por su ID
+    $book = Book::find($bookId);
 
-        // Verifica si el libro existe
-        if (!$book) {
-            return redirect()->route('books.index')->with('error', 'Libro no encontrado.');
-        }
+    // Verifica si el libro existe
+    if (!$book) {
+        return redirect()->route('books.index')->with('error', 'Libro no encontrado.');
+    }
 
-        // Accede a los comentarios asociados con ese libro
-        $comments = $book->bookComments;
+    // Accede a los comentarios asociados con ese libro
+    $comments = $book->bookComments;
 
-        // Obtener libros recomendados, si los tienes
-        $relatedBooks = Book::where('category_id', $book->category_id)->limit(5)->get();
+    // Obtener libros recomendados, si los tienes
+    $relatedBooks = Book::where('category_id', $book->category_id)->limit(5)->get();
 
-        // Retorna la vista con los datos
+    // Verifica si el usuario está autenticado
+    if (auth()->check()) {
+        // Si el usuario está autenticado, se muestra una vista para usuarios registrados
+        return view('user.library.show', compact('book', 'comments', 'relatedBooks'));
+    } else {
+        // Si el usuario no está autenticado, se muestra una vista para visitantes
         return view('books.show', compact('book', 'comments', 'relatedBooks'));
     }
+}
+
 
 
 

@@ -75,6 +75,16 @@ Route::middleware([
             Route::delete('delete/{post}', [PostController::class, 'destroy'])->name('delete'); // Eliminar publicación
         });
     });
+
+//Grupo de rutas para biblioteca
+
+    Route::prefix('user/library')->name('user.library.')->group(function () {
+        // Ruta para la biblioteca (página principal)
+        Route::get('/', [LibraryController::class, 'index'])->name('index');
+        
+        // Ruta para ver el libro
+        Route::get('book/{book}', [BookController::class, 'show'])->name('show');
+    });
 });
 
 /*

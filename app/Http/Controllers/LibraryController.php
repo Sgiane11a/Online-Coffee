@@ -41,13 +41,20 @@ class LibraryController extends Controller
             $query->where('title', 'like', '%' . $request->search . '%');
         }
 
-        // Mostrar la consulta SQL para depuración
-        // dd($query->toSql(), $query->getBindings()); // Esto te permite ver la consulta generada
-
         // Obtener los libros con los filtros aplicados
         $books = $query->get();
 
-        // Pasar los libros filtrados a la vista
+        // Verificar si el usuario está autenticado
+        if (auth()->check()) {
+            // Si está autenticado, devolver la vista para el usuario
+            return view('user.library.index', compact('books'));
+        }
+
+        // Si no está autenticado, devolver la vista para el visitante
         return view('biblioteca', compact('books'));
     }
+    
+
 }
+
+
