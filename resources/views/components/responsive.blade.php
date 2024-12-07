@@ -3,7 +3,7 @@
         <x-header-link url="{{route('products')}}" text="Productos" />
         <x-header-link url="/reservas" text="Reservas" />
         <x-header-link url="/biblioteca" text="Biblioteca" />
-        <x-header-link url="/foro" text="Foro" />
+        <x-header-link url="/foro" text="Comunidad" />
     </ul>
 </div>
 

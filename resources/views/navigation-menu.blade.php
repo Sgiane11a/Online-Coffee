@@ -23,7 +23,7 @@
                         Biblioteca
                     </x-nav-link>
                     <x-nav-link href="{{ route('forum.index') }}" :active="request()->routeIs('forum')">
-                        Foro
+                        Comunidad
                     </x-nav-link>
                 </div>
             </div>

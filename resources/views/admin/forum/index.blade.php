@@ -4,9 +4,9 @@
     <main class="h-full pb-16 overflow-y-auto">
         <!-- Contenedor principal -->
         <div class="container px-6 mx-auto grid">
-            <!-- Título del Foro -->
+            <!-- Título del Comunidad -->
             <h2 class="my-6 text-2xl font-semibold text-grape-450">
-                Foro
+                Publicaciones
             </h2>
         </div>
 
