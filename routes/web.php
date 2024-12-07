@@ -55,7 +55,7 @@ Route::middleware([
 
     // Ruta para la página de reservaciones
     Route::get('/user/reservations', [ReservationController::class, 'index'])->name('reservations');
-<<<<<<< HEAD
+//---------------------------
     // Mostrar los equipos y cubiculos disponibles
     Route::get('/equipos/disponibles', [ReservationController::class, 'showAvailableEquipments'])->name('equipos.disponibles');
     Route::get('/cubiculos/disponibles', [ReservationController::class, 'showAvailableCubicles'])->name('cubiculos.disponibles');
@@ -64,19 +64,18 @@ Route::middleware([
     Route::post('/buscar-reservas', [ReservationController::class, 'buscarReservas'])->name('buscar.reservas');
 
     // Rutas para gestionar reservaciones
-=======
 
 // Rutas para gestionar reservaciones
-    
->>>>>>> 988dd627c717b1e689f233b56a2057452d26a007
-    Route::prefix('reservations')->name('reservations.')->group(function () {
+//---------------------------------------    
+
+Route::prefix('reservations')->name('reservations.')->group(function () {
         Route::get('/', [ReservationController::class, 'index'])->name('index'); // Mostrar
         Route::get('/create', [ReservationController::class, 'create'])->name('create'); // Crear
         Route::post('/store', [ReservationController::class, 'store'])->name('store'); // Guardar
         Route::delete('/{reservation}', [ReservationController::class, 'destroy'])->name('destroy'); // Eliminar
     });
 
-<<<<<<< HEAD
+//--------------------------------------------HEAD
     
 
     /*// Rutas para equpos y reservaciones
@@ -87,10 +86,10 @@ Route::middleware([
     });*/
 
     // Grupo de rutas para el foro autenticado
-=======
+//-------------------------------------------------------------------
 // Grupo de rutas para el foro autenticado
 
->>>>>>> 988dd627c717b1e689f233b56a2057452d26a007
+//----------------------------------------- HEAD 988dd627c717b1e689f233b56a2057452d26a007
     Route::prefix('forum')->name('forum.')->group(function () {
 
         // Página principal del foro
@@ -253,8 +252,8 @@ Route::get('posts/{post}/comments/{comment}/edit', [PostController::class, 'edit
 Route::put('/comments/{comment}', [PostController::class, 'updateComment'])->name('comments.update'); // Actualizar comentario
 Route::delete('admin/comments/{comment}', [PostController::class, 'destroyComment'])->name('admin.comments.delete'); // Eliminar comentario desde admin
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show'); // Mostrar publicación
-<<<<<<< HEAD
+//------------------------------------------------
 Route::post('admin/comments/{post_id}', [PostComment::class, 'store'])->name('admin.comments.store'); // Guardar comentario desde admin
-=======
+//-------------------
 Route::post('admin/comments/{post_id}', [PostComment::class, 'store'])->name('admin.comments.store'); // Guardar comentario desde admin
->>>>>>> 988dd627c717b1e689f233b56a2057452d26a007
+// >>>>>>> 988dd627c717b1e689f233b56a2057452d26a007
