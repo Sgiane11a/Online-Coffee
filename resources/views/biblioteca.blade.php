@@ -43,27 +43,84 @@
                 </div>
 
                 {{-- Filtro de Carreras --}}
-                <div class="filter-group">
-                    <h4>Carreras:</h4>
-                    <div class="carreras-grid">
-                    <label><input type="checkbox" name="carrera[]" value="Diseño y Desarrollo de Software" {{ in_array('Diseño y Desarrollo de Software', (array) request('carrera', [])) ? 'checked' : '' }} >C-24</label>
-    <label><input type="checkbox" name="carrera[]" value="Administración de Redes y Comunicaciones" {{ in_array('Administración de Redes y Comunicaciones', (array) request('carrera', [])) ? 'checked' : '' }} > C-20</label>
-    <label><input type="checkbox" name="carrera[]" value="Diseño y Desarrollo de Simuladores y Videojuegos" {{ in_array('Diseño y Desarrollo de Simuladores y Videojuegos', (array) request('carrera', [])) ? 'checked' : '' }} >C-26</label>
-    <label><input type="checkbox" name="carrera[]" value="Modelado y Animación Digital" {{ in_array('Modelado y Animación Digital', (array) request('carrera', [])) ? 'checked' : '' }} >F</label>
-    <label><input type="checkbox" name="carrera[]" value="Big Data y Ciencia de Datos" {{ in_array('Big Data y Ciencia de Datos', (array) request('carrera', [])) ? 'checked' : '' }} > C-28</label>
-    <label><input type="checkbox" name="carrera[]" value="Diseño Industrial" {{ in_array('Diseño Industrial', (array) request('carrera', [])) ? 'checked' : '' }} >F</label>
-    <label><input type="checkbox" name="carrera[]" value="Producción y Gestión Industrial" {{ in_array('Producción y Gestión Industrial', (array) request('carrera', [])) ? 'checked' : '' }} >C-12</label>
-    <label><input type="checkbox" name="carrera[]" value="Operaciones Mineras" {{ in_array('Operaciones Mineras', (array) request('carrera', [])) ? 'checked' : '' }} >C-11</label>
-    <label><input type="checkbox" name="carrera[]" value="Procesos Químicos y Metalúrgicos" {{ in_array('Procesos Químicos y Metalúrgicos', (array) request('carrera', [])) ? 'checked' : '' }} >C-1</label>
-    <label><input type="checkbox" name="carrera[]" value="Electricidad Industrial" {{ in_array('Electricidad Industrial', (array) request('carrera', [])) ? 'checked' : '' }} > C-23</label>
-    <label><input type="checkbox" name="carrera[]" value="Electrónica y Automatización Industrial" {{ in_array('Electrónica y Automatización Industrial', (array) request('carrera', [])) ? 'checked' : '' }} > C-5</label>
-    <label><input type="checkbox" name="carrera[]" value="Mecatrónica Industrial" {{ in_array('Mecatrónica Industrial', (array) request('carrera', [])) ? 'checked' : '' }} > C-16</label>
-    <label><input type="checkbox" name="carrera[]" value="Gestión y Mantenimiento de Maquinaria Industrial" {{ in_array('Gestión y Mantenimiento de Maquinaria Industrial', (array) request('carrera', [])) ? 'checked' : '' }} >C-22</label>
-    <label><input type="checkbox" name="carrera[]" value="Gestión de Mantenimiento de Maquinaria Pesada" {{ in_array('Gestión de Mantenimiento de Maquinaria Pesada', (array) request('carrera', [])) ? 'checked' : '' }} > C-21</label>
-    <label><input type="checkbox" name="carrera[]" value="Aviación y Mecánica Aeronáutica" {{ in_array('Aviación y Mecánica Aeronáutica', (array) request('carrera', [])) ? 'checked' : '' }} >C-14</label>
+                <h4 class="text-lg font-semibold text-purple-700 mb-4">Carreras:</h4>
+                    <div class="flex flex-col gap-3">
+                    <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Diseño y Desarrollo de Software" 
+                                {{ in_array('Diseño y Desarrollo de Software', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Diseño y Desarrollo de Software
+                        </label>
+                        <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Administración de Redes y Comunicaciones" 
+                                {{ in_array('Administración de Redes y Comunicaciones', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Administración de Redes y Comunicaciones
+                        </label>
+                        <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Diseño y Desarrollo de Simuladores y Videojuegos" 
+                                {{ in_array('Diseño y Desarrollo de Simuladores y Videojuegos', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Diseño y Desarrollo de Simuladores y Videojuegos
+                        </label>
+                        <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Modelado y Animación Digital" 
+                                {{ in_array('Modelado y Animación Digital', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Modelado y Animación Digital
+                        </label>
+                        <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Big Data y Ciencia de Datos" 
+                                {{ in_array('Big Data y Ciencia de Datos', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Big Data y Ciencia de Datos
+                        </label>
+                        <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Diseño Industrial" 
+                                {{ in_array('Diseño Industrial', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Diseño Industrial
+                        </label>
+                        <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Producción y Gestión Industrial" 
+                                {{ in_array('Producción y Gestión Industrial', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Producción y Gestión Industrial
+                        </label>
+                        <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Operaciones Mineras" 
+                                {{ in_array('Operaciones Mineras', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Operaciones Mineras
+                        </label>
+                        <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Procesos Químicos y Metalúrgicos" 
+                                {{ in_array('Procesos Químicos y Metalúrgicos', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Procesos Químicos y Metalúrgicos
+                        </label>
+                        <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Electricidad Industrial" 
+                                {{ in_array('Electricidad Industrial', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Electricidad Industrial
+                        </label>
+                        <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Electrónica y Automatización Industrial" 
+                                {{ in_array('Electrónica y Automatización Industrial', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Electrónica y Automatización Industrial
+                        </label>
+                        <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Mecatrónica Industrial" 
+                                {{ in_array('Mecatrónica Industrial', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Mecatrónica Industrial
+                        </label>
+                        <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Gestión y Mantenimiento de Maquinaria Industrial" 
+                                {{ in_array('Gestión y Mantenimiento de Maquinaria Industrial', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Gestión y Mantenimiento de Maquinaria Industrial
+                        </label>
+                        <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Gestión de Mantenimiento de Maquinaria Pesada" 
+                                {{ in_array('Gestión de Mantenimiento de Maquinaria Pesada', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Gestión de Mantenimiento de Maquinaria Pesada
+                        </label>
+                        <label class="text-gray-700">
+                            <input type="checkbox" name="carrera[]" value="Aviación y Mecánica Aeronáutica" 
+                                {{ in_array('Aviación y Mecánica Aeronáutica', (array) request('carrera', [])) ? 'checked' : '' }} >
+                            Aviación y Mecánica Aeronáutica
+                        </label>
                     </div>
-                </div>
-
                 {{-- Filtro de Idioma --}}
                 <div class="filter-group">
                     <h4>Idioma:</h4>
