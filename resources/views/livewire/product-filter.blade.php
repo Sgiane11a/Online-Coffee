@@ -1,14 +1,12 @@
 <div>
     <ul class="flex gap-10 justify-center">
-        <!-- Botón para mostrar todos los productos -->
-        <button onclick="filterByCategory(0)" 
++        <button onclick="filterByCategory(0)" 
         class="w-32 font-semibold {{ request('category') == 0 || !request('category') ? 'bg-grape-350 border-raspberry-500 border text-white p-3 rounded-xl' : 'bg-white border-gray-300 border text-black p-3 rounded-xl' }}"
         id="filter-all">
     Todos
 </button>
 
 
-        <!-- Botones para las categorías -->
         @foreach ($categories as $category)
             <button onclick="filterByCategory({{ $category->id }})" 
                     class="w-32 font-semibold bg-white border-gray-300 border text-black p-3 rounded-xl hover:bg-raspberry-400 transition-colors"
