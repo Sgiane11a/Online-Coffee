@@ -11,12 +11,24 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    function index()
-    {
-        $categories = Category::all();
-        $products = Product::all();
-        return view('products', compact('products', 'categories'));
+    public function index()
+{
+    // Obtener todas las categorías
+    $categories = Category::all();
+
+    // Obtener todos los productos
+    $products = Product::all();
+
+    // Verificar si el usuario está autenticado
+    if (auth()->check()) {
+        // Si el usuario está logueado, se muestran los productos en la vista 'user.products'
+        return view('user.products', compact('products', 'categories'));
     }
+
+    // Si el usuario no está logueado, se muestran los productos en la vista 'products'
+    return view('products', compact('products', 'categories'));
+}
+
 
     public function admin(Request $request)
 {

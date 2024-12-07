@@ -18,9 +18,9 @@
             @if (Route::has('login'))
                 <div class="flex justify-center gap-4">
                     @auth('web')
-                        <a href="{{ url('/dashboard') }}"
+                        <a href="{{ url('/Inicio') }}"
                             class="bg-raspberry-600 text-white rounded-full font-semibold px-4 py-2 hover:bg-raspberry-700">
-                            Dashboard
+                            Inicio
                         </a>
                     @else
                         <x-auth-header-button url="{{ route('login') }}" text="Iniciar sesión" />

@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::get('/biblioteca', [LibraryController::class, 'index'])->name('biblioteca.index');
 Route::get('book/{book}', [BookController::class, 'show'])->name('book.show');
 Route::get('books/{book}', [BookController::class, 'show'])->name('books.show');
+Route::get('book/{book}', [BookController::class, 'show'])->name('book.show');
 
 Route::get('/book/{id}/download', [BookController::class, 'download'])->name('book.download');
 // routes/web.php
@@ -38,7 +39,6 @@ Route::get('/reservaciones', [ReservationController::class, 'ReservationsPage'])
 // Ruta pública para productos
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 
-
 // Ruta pública para mostrar publicaciones del foro
 Route::get('/forum/posts', [PostController::class, 'guest'])->name('forum.guest');
 
@@ -49,12 +49,13 @@ Route::middleware([
     'verified',
 ])->group(function () {
     // Ruta para el dashboard principal
-    Route::get('/dashboard', function () {
+    Route::get('/Inicio', function () {
         return view('dashboard');
-    })->name('dashboard');
+    })->name('Inicio');
 
     // Ruta para la página de reservaciones
     Route::get('/user/reservations', [ReservationController::class, 'index'])->name('reservations');
+<<<<<<< HEAD
     // Mostrar los equipos y cubiculos disponibles
     Route::get('/equipos/disponibles', [ReservationController::class, 'showAvailableEquipments'])->name('equipos.disponibles');
     Route::get('/cubiculos/disponibles', [ReservationController::class, 'showAvailableCubicles'])->name('cubiculos.disponibles');
@@ -63,17 +64,19 @@ Route::middleware([
     Route::post('/buscar-reservas', [ReservationController::class, 'buscarReservas'])->name('buscar.reservas');
 
     // Rutas para gestionar reservaciones
+=======
+
+// Rutas para gestionar reservaciones
+    
+>>>>>>> 988dd627c717b1e689f233b56a2057452d26a007
     Route::prefix('reservations')->name('reservations.')->group(function () {
-        // Mostrar todas las reservas del usuario
-        Route::get('/', [ReservationController::class, 'index'])->name('index');
-        // Formulario para crear una reserva
-        Route::get('/create', [ReservationController::class, 'create'])->name('create');
-        // Guardar una nueva reserva
-        Route::post('/store', [ReservationController::class, 'store'])->name('store');
-        // (Opcional) Eliminar una reserva
-        Route::delete('/{reservation}', [ReservationController::class, 'destroy'])->name('destroy');
+        Route::get('/', [ReservationController::class, 'index'])->name('index'); // Mostrar
+        Route::get('/create', [ReservationController::class, 'create'])->name('create'); // Crear
+        Route::post('/store', [ReservationController::class, 'store'])->name('store'); // Guardar
+        Route::delete('/{reservation}', [ReservationController::class, 'destroy'])->name('destroy'); // Eliminar
     });
 
+<<<<<<< HEAD
     
 
     /*// Rutas para equpos y reservaciones
@@ -84,6 +87,10 @@ Route::middleware([
     });*/
 
     // Grupo de rutas para el foro autenticado
+=======
+// Grupo de rutas para el foro autenticado
+
+>>>>>>> 988dd627c717b1e689f233b56a2057452d26a007
     Route::prefix('forum')->name('forum.')->group(function () {
 
         // Página principal del foro
@@ -98,16 +105,29 @@ Route::middleware([
             Route::delete('delete/{post}', [PostController::class, 'destroy'])->name('delete'); // Eliminar publicación
         });
     });
+
+//Grupo de rutas para biblioteca
+
+    Route::prefix('user/library')->name('user.library.')->group(function () {
+        // Ruta para la biblioteca (página principal)
+        Route::get('/', [LibraryController::class, 'index'])->name('index');
+        
+        // Ruta para ver el libro
+        Route::get('book/{book}', [BookController::class, 'show'])->name('show');
+    });
+
+    // Ruta protegida por autenticación
+    Route::get('/user/products', [ProductController::class, 'index'])->name('user.products.index');
+
 });
 
-
-// ----------------------------------------------------------------
-// ----------------------------------------------------------------
-//     GRUPO DEL ADMINISTRATOR
-// ----------------------------------------------------------------
-// ----------------------------------------------------------------
-
-
+/*
+----------------------------------------------------------------
+----------------------------------------------------------------
+                GRUPO DEL ADMINISTRADPR
+----------------------------------------------------------------
+----------------------------------------------------------------
+*/
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -126,7 +146,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         // Dashboard del administrador
-        Route::get('dashboard', [AdminController::class, 'dashboard'])
+        Route::get('Inicio', [AdminController::class, 'dashboard'])
             ->middleware(['verified'])->name('dashboard');
 
         // Panel principal del administrador
@@ -168,11 +188,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
         // Rutas para manejo de reservaciones
-        Route::prefix('reservation')->name('reservation.')->group(function () {
+
+
+        Route::prefix('reservations')->name('reservations.')->group(function () {
+            Route::get('/', [AdminController::class, 'index'])->name('index'); // admin.reservations.index
+            Route::get('/create', [ReservationController::class, 'create'])->name('create'); // admin.reservations.create
+            Route::post('/', [ReservationController::class, 'store'])->name('store'); // admin.reservations.store
+        });
+        /*
+        Route::prefix('reservation')->name('reservations.')->group(function () {
             Route::prefix('products')->name('products.')->group(function () {
                 Route::get('/', [AdminController::class, 'products'])->name('index'); // Productos en reservaciones
             });
         });
+        */
 
         // Rutas para el manejo de los equipos y cubiculos
         /*Route::resource('equipos', EquipoController::class);
@@ -190,7 +219,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
-// Rutas públicas del footer
+
+/*
+----------------------------------------------------------------
+----------------------------------------------------------------
+                Rutas Publica del Footer
+----------------------------------------------------------------
+----------------------------------------------------------------
+*/
+
 Route::prefix('/')->group(function () {
     Route::get('/acercaDe', [FooterController::class, 'acercaDe'])->name('acercaDe'); // Página Acerca de
     Route::get('/privacidad', [FooterController::class, 'privacidad'])->name('privacidad'); // Página de privacidad
@@ -201,7 +238,14 @@ Route::prefix('/')->group(function () {
     Route::get('/ubicacion', [FooterController::class, 'mapa'])->name('ubicacion'); // Mapa de ubicación
 });
 
-// Rutas relacionadas con las publicaciones
+/*
+----------------------------------------------------------------
+----------------------------------------------------------------
+            Rutas relacionadas con las publicaciones
+----------------------------------------------------------------
+----------------------------------------------------------------
+*/
+
 Route::post('/posts/{post}/react', [PostController::class, 'react'])->name('posts.react'); // Reaccionar a una publicación
 Route::post('/posts/{post}/comments', [PostController::class, 'storeComment'])->name('comments.store'); // Guardar comentario
 Route::delete('/posts/{post}/comments/{comment}', [PostController::class, 'destroyComment'])->name('posts.destroyComment'); // Eliminar comentario
@@ -209,4 +253,8 @@ Route::get('posts/{post}/comments/{comment}/edit', [PostController::class, 'edit
 Route::put('/comments/{comment}', [PostController::class, 'updateComment'])->name('comments.update'); // Actualizar comentario
 Route::delete('admin/comments/{comment}', [PostController::class, 'destroyComment'])->name('admin.comments.delete'); // Eliminar comentario desde admin
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show'); // Mostrar publicación
+<<<<<<< HEAD
 Route::post('admin/comments/{post_id}', [PostComment::class, 'store'])->name('admin.comments.store'); // Guardar comentario desde admin
+=======
+Route::post('admin/comments/{post_id}', [PostComment::class, 'store'])->name('admin.comments.store'); // Guardar comentario desde admin
+>>>>>>> 988dd627c717b1e689f233b56a2057452d26a007
