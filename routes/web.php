@@ -47,7 +47,7 @@ Route::middleware([
     // Ruta para el dashboard principal
     Route::get('/Inicio', function () {
         return view('dashboard');
-    })->name('dashboard');
+    })->name('Inicio');
 
     // Ruta para la página de reservaciones
     Route::get('/user/reservations', [ReservationController::class, 'index'])->name('reservations');
@@ -78,14 +78,11 @@ Route::middleware([
     });
 });
 
-
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 //     GRUPO DEL ADMINISTRATOR
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
-
-
 
 Route::prefix('admin')->name('admin.')->group(function () {
 

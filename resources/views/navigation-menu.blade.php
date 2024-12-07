@@ -4,13 +4,13 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                        <a href="{{ route('dashboard') }}" class="text-raspberry-600 font-extrabold leading-none">
+                        <a href="{{ route('Inicio') }}" class="text-raspberry-600 font-extrabold leading-none">
                             <div class=" text-grape-350 text-3xl">ONLINE</div>
                             <div class="text-grape-450 text-2x1 text-center">COFFEE</div></a>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('Inicio') }}" :active="request()->routeIs('Inicio')">
                         Inicio
                     </x-nav-link>
                     <x-nav-link href="" :active="request()->routeIs('')">
@@ -160,8 +160,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link href="{{ route('Inicio') }}" :active="request()->routeIs('Inicio')">
+                {{ __('Inicio') }}
             </x-responsive-nav-link>
         </div>
 
