@@ -10,6 +10,7 @@ use Illuminate\View\View;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Post;
+use App\Models\Reservation;
 
 
 class AdminController extends Controller
@@ -82,5 +83,17 @@ class AdminController extends Controller
     public function books(): View
     {
         return view('admin.books.index');
+    }
+
+    //---------------------------------------------------------------
+    //RESERVACIONES
+    //---------------------------------------------------------------
+
+    function index()
+    {
+        // Obtiene todas las reservas
+        $reservations = Reservation::all();
+
+        return view('admin.reservations.index', compact('reservations'));
     }
 }

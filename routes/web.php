@@ -146,11 +146,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
 
         // Rutas para manejo de reservaciones
-        Route::prefix('reservation')->name('reservation.')->group(function () {
+
+
+        Route::prefix('reservations')->name('reservations.')->group(function () {
+            Route::get('/', [AdminController::class, 'index'])->name('index'); // admin.reservations.index
+            Route::get('/create', [ReservationController::class, 'create'])->name('create'); // admin.reservations.create
+            Route::post('/', [ReservationController::class, 'store'])->name('store'); // admin.reservations.store
+        });
+        /*
+        Route::prefix('reservation')->name('reservations.')->group(function () {
             Route::prefix('products')->name('products.')->group(function () {
                 Route::get('/', [AdminController::class, 'products'])->name('index'); // Productos en reservaciones
             });
         });
+        */
 
         // Rutas para manejar el foro en el panel administrativo
         Route::prefix('forum')->name('forum.')->group(function () {
