@@ -8,18 +8,6 @@
 
             <!-- Sección de estadísticas -->
             <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-                <!-- Nuevos comentarios -->
-                <div class="flex items-center p-4 rounded-lg shadow-xs bg-pink-500 text-white">
-                    <div class="p-3 mr-4 rounded-full bg-white text-pink-500">
-                        <svg class="h-8 w-8 text-pink-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  
-                            <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-lg font-semibold">{{ $totalPublicaciones }}</p>
-                        <p class="text-sm">Nuevos comentarios</p>
-                    </div>
-                </div>
                 <!-- Nuevas reservas -->
                 <div class="flex items-center p-4 rounded-lg shadow-xs bg-blue-500 text-white">
                     <div class="p-3 mr-4 rounded-full bg-white text-blue-500">
@@ -42,6 +30,18 @@
                     <div>
                         <p class="text-lg font-semibold">2</p>
                         <p class="text-sm">Contactos pendientes</p>
+                    </div>
+                </div>
+                <!-- Nuevos comentarios -->
+                <div class="flex items-center p-4 rounded-lg shadow-xs bg-pink-500 text-white">
+                    <div class="p-3 mr-4 rounded-full bg-white text-pink-500">
+                        <svg class="h-8 w-8 text-pink-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  
+                            <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold">{{ $totalPublicaciones }}</p>
+                        <p class="text-sm">Nuevos comentarios</p>
                     </div>
                 </div>
             </div>
