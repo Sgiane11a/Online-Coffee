@@ -86,6 +86,10 @@ Route::middleware([
         // Ruta para ver el libro
         Route::get('book/{book}', [BookController::class, 'show'])->name('show');
     });
+
+    // Ruta protegida por autenticación
+    Route::get('/user/products', [ProductController::class, 'index'])->name('user.products.index');
+
 });
 
 /*

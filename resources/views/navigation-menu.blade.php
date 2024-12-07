@@ -13,7 +13,7 @@
                     <x-nav-link href="{{ route('Inicio') }}" :active="request()->routeIs('Inicio')">
                         Inicio
                     </x-nav-link>
-                    <x-nav-link href="" :active="request()->routeIs('')">
+                    <x-nav-link href="{{ route('user.products.index') }}" :active="request()->routeIs('Products')">
                         Productos
                     </x-nav-link>
                     <x-nav-link href="{{ route('reservations') }}" :active="request()->routeIs('reservations')">
