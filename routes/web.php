@@ -45,7 +45,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     // Ruta para el dashboard principal
-    Route::get('/dashboard', function () {
+    Route::get('/Inicio', function () {
         return view('dashboard');
     })->name('dashboard');
 
@@ -104,7 +104,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         // Dashboard del administrador
-        Route::get('dashboard', [AdminController::class, 'dashboard'])
+        Route::get('Inicio', [AdminController::class, 'dashboard'])
             ->middleware(['verified'])->name('dashboard');
 
         // Panel principal del administrador
