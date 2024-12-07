@@ -26,30 +26,33 @@
     <div class="book-details-content">
         <!-- Comentarios y Libros recomendados al costado -->
         <div class="comments-section">
-            <h2>Comentarios</h2>
-            @if ($comments->isNotEmpty())
-                @foreach ($comments as $comment)
-                    <div class="comment">
-                        <p><strong>{{ $comment->user->name }}</strong></p>
-                        <p>{{ $comment->content }}</p>
-                    </div>
-                @endforeach
-            @else
-                <p>No hay comentarios para este libro.</p>
-            @endif
+    <h2>Comentarios</h2>
+    <div id="comments-list">
+        @if ($comments->isNotEmpty())
+            @foreach ($comments as $comment)
+                <div class="comment">
+                    <p><strong>{{ $comment->user->name }}</strong></p>
+                    <p>{{ $comment->content }}</p>
+                </div>
+            @endforeach
+        @else
+            <p>No hay comentarios para este libro.</p>
+        @endif
+    </div>
 
-            @auth
-            <div class="add-comment-container">
-                <form action="{{ route('book.comment.store', $book->id) }}" method="POST">
-                    @csrf
-                    <textarea name="content" placeholder="Escribe tu comentario..." rows="4" required></textarea>
-                    <button type="submit" class="submit-comment-btn">Enviar comentario</button>
-                </form>
-            </div>
-            @else
-                <p><a href="{{ route('login') }}">Inicia sesión</a> para comentar.</p>
-            @endauth
+    @auth
+        <div class="add-comment-container">
+            <form id="comment-form" action="{{ route('book.comment.store', $book->id) }}" method="POST">
+                @csrf
+                <textarea name="content" placeholder="Escribe tu comentario..." rows="4" required></textarea>
+                <button type="submit" class="submit-comment-btn">Enviar comentario</button>
+            </form>
         </div>
+    @else
+        <p><a href="{{ route('login') }}">Inicia sesión</a> para comentar.</p>
+    @endauth
+</div>
+
 
         <!-- Libros recomendados -->
         <div class="recommended-books">
@@ -225,4 +228,39 @@
         font-size: 1rem;
     }
 </style>
+<script>
+    $(document).ready(function() {
+        // Manejo del envío del formulario de comentarios con AJAX
+        $('#comment-form').on('submit', function(e) {
+            e.preventDefault();  // Evitar que se recargue la página
+
+            var formData = $(this).serialize();  // Recoger todos los datos del formulario
+
+            $.ajax({
+                url: $(this).attr('action'),  // Utilizar la URL del formulario
+                method: 'POST',
+                data: formData,
+                success: function(response) {
+                    // Crear el nuevo comentario en formato HTML
+                    var newComment = `
+                        <div class="comment">
+                            <p><strong>${response.user_name}</strong></p>
+                            <p>${response.content}</p>
+                        </div>
+                    `;
+                    // Agregar el nuevo comentario al final de la lista de comentarios
+                    $('#comments-list').append(newComment);
+
+                    // Limpiar el campo de texto del formulario
+                    $('textarea[name="content"]').val('');
+                },
+                error: function(error) {
+                    console.log("Error al agregar el comentario:", error);
+                }
+            });
+        });
+    });
+</script>
+
+
 </x-app-layout>  
