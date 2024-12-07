@@ -34,7 +34,6 @@ Route::get('/reservaciones', [ReservationController::class, 'guestindex'])->name
 // Ruta pública para productos
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 
-
 // Ruta pública para mostrar publicaciones del foro
 Route::get('/forum/posts', [PostController::class, 'guest'])->name('forum.guest');
 
@@ -51,18 +50,18 @@ Route::middleware([
 
     // Ruta para la página de reservaciones
     Route::get('/user/reservations', [ReservationController::class, 'index'])->name('reservations');
-    // Rutas para gestionar reservaciones
+
+// Rutas para gestionar reservaciones
+    
     Route::prefix('reservations')->name('reservations.')->group(function () {
-        // Mostrar todas las reservas del usuario
-        Route::get('/', [ReservationController::class, 'index'])->name('index');
-        // Formulario para crear una reserva
-        Route::get('/create', [ReservationController::class, 'create'])->name('create');
-        // Guardar una nueva reserva
-        Route::post('/store', [ReservationController::class, 'store'])->name('store');
-        // (Opcional) Eliminar una reserva
-        Route::delete('/{reservation}', [ReservationController::class, 'destroy'])->name('destroy');
+        Route::get('/', [ReservationController::class, 'index'])->name('index'); // Mostrar
+        Route::get('/create', [ReservationController::class, 'create'])->name('create'); // Crear
+        Route::post('/store', [ReservationController::class, 'store'])->name('store'); // Guardar
+        Route::delete('/{reservation}', [ReservationController::class, 'destroy'])->name('destroy'); // Eliminar
     });
-        // Grupo de rutas para el foro autenticado
+
+// Grupo de rutas para el foro autenticado
+
     Route::prefix('forum')->name('forum.')->group(function () {
         // Página principal del foro
         Route::get('/', [PostController::class, 'index'])->name('index');
@@ -78,11 +77,13 @@ Route::middleware([
     });
 });
 
-// ----------------------------------------------------------------
-// ----------------------------------------------------------------
-//     GRUPO DEL ADMINISTRATOR
-// ----------------------------------------------------------------
-// ----------------------------------------------------------------
+/*
+----------------------------------------------------------------
+----------------------------------------------------------------
+                GRUPO DEL ADMINISTRADPR
+----------------------------------------------------------------
+----------------------------------------------------------------
+*/
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -176,7 +177,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
-// Rutas públicas del footer
+
+/*
+----------------------------------------------------------------
+----------------------------------------------------------------
+                Rutas Publica del Footer
+----------------------------------------------------------------
+----------------------------------------------------------------
+*/
+
 Route::prefix('/')->group(function () {
     Route::get('/acercaDe', [FooterController::class, 'acercaDe'])->name('acercaDe'); // Página Acerca de
     Route::get('/privacidad', [FooterController::class, 'privacidad'])->name('privacidad'); // Página de privacidad
@@ -187,7 +196,14 @@ Route::prefix('/')->group(function () {
     Route::get('/ubicacion', [FooterController::class, 'mapa'])->name('ubicacion'); // Mapa de ubicación
 });
 
-// Rutas relacionadas con las publicaciones
+/*
+----------------------------------------------------------------
+----------------------------------------------------------------
+            Rutas relacionadas con las publicaciones
+----------------------------------------------------------------
+----------------------------------------------------------------
+*/
+
 Route::post('/posts/{post}/react', [PostController::class, 'react'])->name('posts.react'); // Reaccionar a una publicación
 Route::post('/posts/{post}/comments', [PostController::class, 'storeComment'])->name('comments.store'); // Guardar comentario
 Route::delete('/posts/{post}/comments/{comment}', [PostController::class, 'destroyComment'])->name('posts.destroyComment'); // Eliminar comentario
@@ -196,5 +212,3 @@ Route::put('/comments/{comment}', [PostController::class, 'updateComment'])->nam
 Route::delete('admin/comments/{comment}', [PostController::class, 'destroyComment'])->name('admin.comments.delete'); // Eliminar comentario desde admin
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show'); // Mostrar publicación
 Route::post('admin/comments/{post_id}', [PostComment::class, 'store'])->name('admin.comments.store'); // Guardar comentario desde admin
-
-
