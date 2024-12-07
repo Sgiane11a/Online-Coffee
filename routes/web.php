@@ -22,6 +22,7 @@ Route::get('/', function () {
 Route::get('/biblioteca', [LibraryController::class, 'index'])->name('biblioteca.index');
 Route::get('book/{book}', [BookController::class, 'show'])->name('book.show');
 Route::get('books/{book}', [BookController::class, 'show'])->name('books.show');
+Route::get('book/{book}', [BookController::class, 'show'])->name('book.show');
 
 Route::get('/book/{id}/download', [BookController::class, 'download'])->name('book.download');
 // routes/web.php
