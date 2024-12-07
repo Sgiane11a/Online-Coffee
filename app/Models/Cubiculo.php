@@ -5,26 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Equipo extends Model
+class Cubiculo extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'nombre',
-        'type',
+        'aforo',
         'descripcion',
         'image_url',
         'image_public_id',
         'disponible',
     ];
 
-    // Relación con las reservas de computadoras y laptops
+    // Relación con las reservas de cubículos
     public function reservas()
     {
         return $this->morphMany(Reservation::class, 'reservable');
     }
 
-    // Método para comprobar si un equipo está disponible para una fecha y hora
+    // Método para comprobar si un cubículo está disponible para una fecha y hora
     public function scopeDisponibleParaFecha($query, $fechaReserva)
     {
         return $query->where('disponible', true)

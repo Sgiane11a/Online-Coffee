@@ -10,6 +10,8 @@ use App\Models\Bookscategory;
 use App\Models\Department;
 use App\Models\Product;
 use App\Models\Career;
+use App\Models\Cubiculo;
+use App\Models\Equipo;
 use Database\Seeders\StoreSeeder; // Usar el namespace correcto
 use Database\Seeders\CareersTableSeeder; // Usar el namespace correcto
 use Database\Seeders\DepartmentsTableSeeder; // Usar el namespace correcto
@@ -17,6 +19,8 @@ use Database\Seeders\BookscategorySeeder;
 use Database\Seeders\BookSeeder;
 use Database\Seeders\ProductsSeeder;
 use Database\Seeders\UsersSeeder;
+use Database\Seeders\CubiculoSeeder;
+use Database\Seeders\EquipoSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -36,10 +40,9 @@ class DatabaseSeeder extends Seeder
         \App\Models\Department::truncate();
         \App\Models\Career::truncate();
         \App\Models\Book::truncate();
+        \App\Models\Equipo::truncate();
+        \App\Models\Cubiculo::truncate();
 
-
-
-        
 
         // Crear administrador
         Admin::factory()->create([
@@ -63,6 +66,12 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersSeeder::class);
         $this->call(BookSeeder::class);
         $this->call(ProductsSeeder::class);
+
+        //Llamar al seeder de equipos
+        $this->call(EquipoSeeder::class);
+
+        //Llamar al seeder de cubiculos
+        $this->call(CubiculoSeeder::class);
 
 
     }

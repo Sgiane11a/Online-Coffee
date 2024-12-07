@@ -12,6 +12,7 @@ use App\Http\Controllers\BookController;                // CONTROLADOR DE LIBROS
 use App\Http\Controllers\CategorybookController;        // CONTROLADOR DE LIBROS
 use App\Http\Controllers\LibraryController;             // CONTROLADOR DE BIBLIOTECA
 use App\Http\Controllers\BookCommentController;         // CONTROLADOR DE COMENTARIOS
+use App\Http\Controllers\EquipoController;              // CONTROLADOR DE EQUIPO
 
 // Ruta principal de bienvenida
 Route::get('/', function () {
@@ -28,8 +29,11 @@ Route::get('/book/{id}/download', [BookController::class, 'download'])->name('bo
 
 Route::post('/books/{book}/comments', [BookCommentController::class, 'store'])->name('book.comment.store');
 
-// Ruta pública para las reservaciones
-Route::get('/reservaciones', [ReservationController::class, 'guestindex'])->name('reservaciones');
+// Ruta pública para consultar equipos disponibles
+Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index');
+
+// Ruta pública para reservaciones
+Route::get('/reservaciones', [ReservationController::class, 'ReservationsPage'])->name('reservaciones');
 
 // Ruta pública para productos
 Route::get('/products', [ProductController::class, 'index'])->name('products');
@@ -51,6 +55,13 @@ Route::middleware([
 
     // Ruta para la página de reservaciones
     Route::get('/user/reservations', [ReservationController::class, 'index'])->name('reservations');
+    // Mostrar los equipos y cubiculos disponibles
+    Route::get('/equipos/disponibles', [ReservationController::class, 'showAvailableEquipments'])->name('equipos.disponibles');
+    Route::get('/cubiculos/disponibles', [ReservationController::class, 'showAvailableCubicles'])->name('cubiculos.disponibles');
+
+    // Ruta para buscar reservaciones
+    Route::post('/buscar-reservas', [ReservationController::class, 'buscarReservas'])->name('buscar.reservas');
+
     // Rutas para gestionar reservaciones
     Route::prefix('reservations')->name('reservations.')->group(function () {
         // Mostrar todas las reservas del usuario
@@ -62,8 +73,19 @@ Route::middleware([
         // (Opcional) Eliminar una reserva
         Route::delete('/{reservation}', [ReservationController::class, 'destroy'])->name('destroy');
     });
-        // Grupo de rutas para el foro autenticado
+
+    
+
+    /*// Rutas para equpos y reservaciones
+    Route::prefix('reservas')->name('reservas.')->group(function () {
+        Route::get('/', [ReservationController::class, 'index'])->name('index'); // Vista de reservas del usuario
+        Route::get('/available', [ReservationController::class, 'showAvailableEquipments'])->name('available'); // Equipos disponibles
+        Route::post('/', [ReservationController::class, 'store'])->name('store'); // Crear una nueva reserva
+    });*/
+
+    // Grupo de rutas para el foro autenticado
     Route::prefix('forum')->name('forum.')->group(function () {
+
         // Página principal del foro
         Route::get('/', [PostController::class, 'index'])->name('index');
 
@@ -125,25 +147,25 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::prefix('books')->name('books.')->group(function () {
 
 
-                Route::get('/', [BookController::class, 'index'])->name('index'); // Listado de libros
-                Route::get('create', [BookController::class, 'create'])->name('create'); // Crear libro
-                Route::post('store', [BookController::class, 'store'])->name('store'); // Guardar libro
-                Route::get('edit/{id}', [BookController::class, 'edit'])->name('edit');
-                Route::put('update/{id}', [BookController::class, 'update'])->name('update'); // Actualizar libro
-                Route::delete('delete/{id}', [BookController::class, 'destroy'])->name('delete'); // Eliminar libro
-            
+            Route::get('/', [BookController::class, 'index'])->name('index'); // Listado de libros
+            Route::get('create', [BookController::class, 'create'])->name('create'); // Crear libro
+            Route::post('store', [BookController::class, 'store'])->name('store'); // Guardar libro
+            Route::get('edit/{id}', [BookController::class, 'edit'])->name('edit');
+            Route::put('update/{id}', [BookController::class, 'update'])->name('update'); // Actualizar libro
+            Route::delete('delete/{id}', [BookController::class, 'destroy'])->name('delete'); // Eliminar libro
+
         });
 
-            // Rutas para productos
-            Route::prefix('products')->name('products.')->group(function () {
-                Route::get('/', [ProductController::class, 'admin'])->name('index'); // Listar productos
-                Route::get('create', [ProductController::class, 'create'])->name('create'); // Crear producto
-                Route::post('store', [ProductController::class, 'store'])->name('store'); // Guardar producto
-                Route::get('edit/{product}', [ProductController::class, 'edit'])->name('edit'); // Editar producto
-                Route::put('update/{product}', [ProductController::class, 'update'])->name('update'); // Actualizar producto
-                Route::delete('delete/{product}', [ProductController::class, 'destroy'])->name('delete'); // Eliminar producto
-            });
-        
+        // Rutas para productos
+        Route::prefix('products')->name('products.')->group(function () {
+            Route::get('/', [ProductController::class, 'admin'])->name('index'); // Listar productos
+            Route::get('create', [ProductController::class, 'create'])->name('create'); // Crear producto
+            Route::post('store', [ProductController::class, 'store'])->name('store'); // Guardar producto
+            Route::get('edit/{product}', [ProductController::class, 'edit'])->name('edit'); // Editar producto
+            Route::put('update/{product}', [ProductController::class, 'update'])->name('update'); // Actualizar producto
+            Route::delete('delete/{product}', [ProductController::class, 'destroy'])->name('delete'); // Eliminar producto
+        });
+
 
         // Rutas para manejo de reservaciones
         Route::prefix('reservation')->name('reservation.')->group(function () {
@@ -151,6 +173,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 Route::get('/', [AdminController::class, 'products'])->name('index'); // Productos en reservaciones
             });
         });
+
+        // Rutas para el manejo de los equipos y cubiculos
+        /*Route::resource('equipos', EquipoController::class);
+          Route::resource('cubiculos', CubiculoController::class);*/
 
         // Rutas para manejar el foro en el panel administrativo
         Route::prefix('forum')->name('forum.')->group(function () {
@@ -161,12 +187,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Logout del administrador
         Route::post('logout', [BookController::class, 'destroy'])->name('logout');
         Route::post('logout', [AdminController::class, 'destroy'])->name('logout');
-
-
-
-       
-        
-
     });
 });
 
@@ -190,5 +210,3 @@ Route::put('/comments/{comment}', [PostController::class, 'updateComment'])->nam
 Route::delete('admin/comments/{comment}', [PostController::class, 'destroyComment'])->name('admin.comments.delete'); // Eliminar comentario desde admin
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show'); // Mostrar publicación
 Route::post('admin/comments/{post_id}', [PostComment::class, 'store'])->name('admin.comments.store'); // Guardar comentario desde admin
-
-

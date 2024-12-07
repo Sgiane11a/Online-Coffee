@@ -102,7 +102,7 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function reservations() {
+    public function reservation() {
         return $this->hasMany(Reservation::class);
     }
 
