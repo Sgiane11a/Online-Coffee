@@ -107,7 +107,7 @@ body {
 
 
 
-
+/* Ajusta 
 
 .cajapro{
 
@@ -119,8 +119,8 @@ body {
     background: #ffffff;
     padding: 8px;
     border-radius: 8px;
-    max-width: 80%; /* Ajusta  */
-    margin: 0 auto; /* Centrar*/
+    max-width: 80%; /* Ajusta  
+    margin: 0 auto; /* Centrar
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -128,13 +128,13 @@ body {
 .titulo0::before {
     content: '';
     position: absolute;
-    top: 15px;  /* hacia abajo */
-    left: 192px; /*  hacia la derecha */
+    top: 15px;  /* hacia abajo 
+    left: 192px; /*  hacia la derecha 
     width: 38%;
     height: 25%;
-    background: #B4198B; /* Color de la "sombra" */
-    border-radius: 8px; /* Igual que el borde del título */
-    z-index: -1; /* Coloca detrás del título */
+    background: #B4198B; /* Color de la "sombra"
+    border-radius: 8px; /* Igual que el borde del título 
+    z-index: -1; /* Coloca detrás del título 
 }
 
 
@@ -151,13 +151,6 @@ body {
 
 
 
-.titulo0{
-    background: #ffffff;
-    padding: 8px;
-    border-radius: 4px;
-
-
-}
 
 
 /* Contiene todo el formulario de las reservas*/
