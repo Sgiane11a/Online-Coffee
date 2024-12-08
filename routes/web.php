@@ -13,12 +13,14 @@ use App\Http\Controllers\CategorybookController;        // CONTROLADOR DE LIBROS
 use App\Http\Controllers\LibraryController;             // CONTROLADOR DE BIBLIOTECA
 use App\Http\Controllers\BookCommentController;         // CONTROLADOR DE COMENTARIOS
 use App\Http\Controllers\EquipoController;              // CONTROLADOR DE EQUIPO
+use App\Http\Controllers\FileUploadController;
+
 
 // Ruta principal de bienvenida
 Route::get('/', function () {
     return view('welcome');
 });
-
+route::post('/upload-pdf', [FileUploadController::class, 'uploadPdf']);
 // Ruta pública para la biblioteca
 Route::get('/biblioteca', [LibraryController::class, 'index'])->name('biblioteca.index');
 Route::get('book/{book}', [BookController::class, 'show'])->name('book.show');
@@ -55,7 +57,7 @@ Route::middleware([
 
     // Ruta para la página de reservaciones
     Route::get('/user/reservations', [ReservationController::class, 'index'])->name('reservations');
-//---------------------------
+    
     // Mostrar los equipos y cubiculos disponibles
     Route::get('/equipos/disponibles', [ReservationController::class, 'showAvailableEquipments'])->name('equipos.disponibles');
     Route::get('/cubiculos/disponibles', [ReservationController::class, 'showAvailableCubicles'])->name('cubiculos.disponibles');
@@ -64,32 +66,17 @@ Route::middleware([
     Route::post('/buscar-reservas', [ReservationController::class, 'buscarReservas'])->name('buscar.reservas');
 
     // Rutas para gestionar reservaciones
-
-// Rutas para gestionar reservaciones
-//---------------------------------------    
-
-Route::prefix('reservations')->name('reservations.')->group(function () {
+    Route::prefix('reservations')->name('reservations.')->group(function () {
         Route::get('/', [ReservationController::class, 'index'])->name('index'); // Mostrar
         Route::get('/create', [ReservationController::class, 'create'])->name('create'); // Crear
         Route::post('/store', [ReservationController::class, 'store'])->name('store'); // Guardar
         Route::delete('/{reservation}', [ReservationController::class, 'destroy'])->name('destroy'); // Eliminar
+        Route::get('/{reservation}/edit', [ReservationController::class, 'edit'])->name('edit');
+        Route::put('/{reservation}', [ReservationController::class, 'update'])->name('update');
+
     });
 
-//--------------------------------------------HEAD
-    
-
-    /*// Rutas para equpos y reservaciones
-    Route::prefix('reservas')->name('reservas.')->group(function () {
-        Route::get('/', [ReservationController::class, 'index'])->name('index'); // Vista de reservas del usuario
-        Route::get('/available', [ReservationController::class, 'showAvailableEquipments'])->name('available'); // Equipos disponibles
-        Route::post('/', [ReservationController::class, 'store'])->name('store'); // Crear una nueva reserva
-    });*/
-
     // Grupo de rutas para el foro autenticado
-//-------------------------------------------------------------------
-// Grupo de rutas para el foro autenticado
-
-//----------------------------------------- HEAD 988dd627c717b1e689f233b56a2057452d26a007
     Route::prefix('forum')->name('forum.')->group(function () {
 
         // Página principal del foro
@@ -252,8 +239,5 @@ Route::get('posts/{post}/comments/{comment}/edit', [PostController::class, 'edit
 Route::put('/comments/{comment}', [PostController::class, 'updateComment'])->name('comments.update'); // Actualizar comentario
 Route::delete('admin/comments/{comment}', [PostController::class, 'destroyComment'])->name('admin.comments.delete'); // Eliminar comentario desde admin
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show'); // Mostrar publicación
-//------------------------------------------------
 Route::post('admin/comments/{post_id}', [PostComment::class, 'store'])->name('admin.comments.store'); // Guardar comentario desde admin
-//-------------------
-Route::post('admin/comments/{post_id}', [PostComment::class, 'store'])->name('admin.comments.store'); // Guardar comentario desde admin
-// >>>>>>> 988dd627c717b1e689f233b56a2057452d26a007
+

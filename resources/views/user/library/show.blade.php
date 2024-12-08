@@ -17,8 +17,8 @@
             <p><strong>Fecha de publicación:</strong> {{ $book->publication_year }}</p>
 
             @if($book->digital_version_link)
-    <a href="{{ asset('storage/' . $book->digital_version_link) }}" class="download-btn" target="_blank">Descargar PDF</a>
-@endif
+            <a href="{{ $book->digital_version_link }}" class="download-btn" target="_blank">Descargar PDF</a>
+            @endif
 
         </div>
     </div>

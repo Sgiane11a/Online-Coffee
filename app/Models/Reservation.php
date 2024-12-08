@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Reservation extends Model
 {
@@ -16,6 +17,8 @@ class Reservation extends Model
         'reserved_at',
         'due_date',
     ];
+
+    protected $dates = ['reserved_at', 'due_date']; // Asegúrate de que estos campos sean tratados como fechas
 
     // Relación polimórfica con Equipo o Cubiculo
     public function reservable()

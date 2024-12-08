@@ -79,10 +79,12 @@
                     <label for="pdf_file" class="block text-sm font-medium text-gray-400">Archivo PDF</label>
                     <input id="pdf-input" name="pdf_file" type="file" accept=".pdf" 
                         class="block w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent transition duration-200">
+                    
                     @if($book->digital_version_link)
-                        <a href="{{ asset('storage/' . $book->digital_version_link) }}" class="text-blue-500" target="_blank">Ver archivo PDF actual</a>
+                        <a href="{{ $book->digital_version_link }}" class="text-blue-500" target="_blank">Ver archivo PDF actual</a>
                     @endif
                 </div>
+
 
                 <!-- Botones de acción -->
                 <div class="flex justify-between mt-6">
