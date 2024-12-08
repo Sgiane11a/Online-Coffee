@@ -46,11 +46,11 @@
     <section class="filters-books-section">
     <form action="{{ route('biblioteca.index') }}" method="GET" class="filters" id="filter-form" onsubmit="return false;">
     <div class="filter-container">
-                <h3>Filtros</h3>
+
 
                 {{-- Filtro de Generales --}}
                 <div class="filter-group">
-                    <h4>Generales:</h4>
+                    <h4 class="text-lg font-extrabold text-grape-925 mb-4">Filtros Generales:</h4>
                     <label><input type="checkbox" name="general[]" value="Cálculo" {{ in_array('Cálculo', request('general', [])) ? 'checked' : '' }} > Cálculo</label>
                     <label><input type="checkbox" name="general[]" value="Física" {{ in_array('Física', request('general', [])) ? 'checked' : '' }} > Física</label>
                     <label><input type="checkbox" name="general[]" value="Electricidad" {{ in_array('Electricidad', request('general', [])) ? 'checked' : '' }} > Electricidad</label>
@@ -58,7 +58,7 @@
                 </div>
 
                 {{-- Filtro de Carreras --}}
-                <h4 class="text-lg font-semibold text-purple-700 mb-4">Carreras:</h4>
+                <h4 class="text-lg font-extrabold text-grape-925 mb-4">Carreras:</h4>
                     <div class="flex flex-col gap-3">
                     <label class="text-gray-700">
                             <input type="checkbox" name="carrera[]" value="Diseño y Desarrollo de Software" 
@@ -137,18 +137,13 @@
                         </label>
                     </div>
                 {{-- Filtro de Idioma --}}
+                <h4 class="text-lg font-extrabold text-grape-925 mb-4">Idioma:</h4>
                 <div class="filter-group">
-                    <h4>Idioma:</h4>
                     <label><input type="radio" name="idioma" value="Español" {{ request('idioma') == 'Español' ? 'checked' : '' }} > Español</label>
                     <label><input type="radio" name="idioma" value="Inglés" {{ request('idioma') == 'Inglés' ? 'checked' : '' }} > Inglés</label>
                 </div>
 
-                {{-- Filtro de Fecha --}}
-                <div class="filter-group">
-                    <h4>Fecha de publicación:</h4>
-                    <input type="range" name="publication_year" id="publication-range" min="1980" max="2024" value="{{ request('publication_year', 2024) }}" oninput="updateRangeValue()">
-                    <span id="range-value">{{ request('publication_year', 2024) }} </span>
-                </div>
+
 
                 {{-- Botón de Aplicar Filtros --}}
                 <button type="button" id="filter-button">Aplicar Filtros</button>

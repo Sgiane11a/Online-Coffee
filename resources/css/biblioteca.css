@@ -12,16 +12,7 @@
     padding: 20px;
 }
 
-/* Sección de Filtros */
-.filters-books-section {
-    grid-column: 1 / 2;
-    transform: translateY(-50px);
-    border: 2px solid #6a4e94;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+
 
 /* Sección de Resultados de Libros */
 .results-section {
@@ -94,7 +85,6 @@
 .filter-group label {
     display: block;
     margin-bottom: 10px;
-    font-weight: bold;
     font-size: 1.1rem;
     color: #333;
 }
