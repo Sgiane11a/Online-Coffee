@@ -50,7 +50,7 @@ class BookController extends Controller
             'publication_year' => 'required|integer|min:1900|max:' . date('Y'),
             'description' => 'nullable|string',
             'file' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validar el tipo de archivo
-            'pdf_file' => 'nullable|mimes:pdf|max:10240',  // Validación para PDF (máximo 10MB)
+            'pdf_file' => 'nullable|mimes:pdf|max:51200',  // Validación para PDF (máximo 10MB)
 
         ]);
     
@@ -73,10 +73,20 @@ class BookController extends Controller
                 $pdfPath = $pdfFile->store('books/pdfs', 'public');  // Almacenar el archivo PDF
                 $book->digital_version_link = $pdfPath;  // Guardar el enlace al archivo PDF
             }
-        
-
         }
-    
+        // Verificar si se ha subido un archivo PDF
+        if ($request->hasFile('pdf_file')) {
+            // Subir el PDF a Cloudinary
+            $pdfFile = $request->file('pdf_file');
+            $uploadPdfResult = Cloudinary::uploadFile($pdfFile->getRealPath(), [
+                'folder' => 'Books/PDFs',
+                'resource_type' => 'raw' // Cloudinary necesita este tipo para archivos no multimedia
+            ]);
+
+            // Guardar la URL segura del PDF
+            $book->digital_version_link = $uploadPdfResult->getSecurePath();
+        }
+        
         // Guardar el libro en la base de datos
         $book->save();
     
