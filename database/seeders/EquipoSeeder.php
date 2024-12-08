@@ -18,7 +18,7 @@ class EquipoSeeder extends Seeder
                 'nombre' => 'Computadora N°1',
                 'type' => 'computadora',
                 'descripcion' => 'Computadora de escritorio con monitor Full HD',
-                'image_public_id' => 'comp_eeonru', // Ruta relativa a tu carpeta de imágenes
+                'image_public_id' => 'computadora_vohmy8', // Ruta relativa a tu carpeta de imágenes
                 'disponible' => true,
             ],
 
@@ -26,7 +26,7 @@ class EquipoSeeder extends Seeder
                 'nombre' => 'Laptop N°1',
                 'type' => 'laptop',
                 'descripcion' => 'Laptop Lenovo Core i7',
-                'image_public_id' => 'lapt1_gisiev',
+                'image_public_id' => 'laptop2_zhckl4',
                 'disponible' => true,
             ],
         ];
@@ -43,3 +43,6 @@ class EquipoSeeder extends Seeder
         } 
     }
 }
+
+
+

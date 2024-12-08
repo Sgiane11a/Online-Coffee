@@ -8,6 +8,7 @@ use App\Models\Equipo;
 use App\Models\Cubiculo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
@@ -18,64 +19,103 @@ class ReservationController extends Controller
     }
 
     // Vista de reservas para usuarios autenticados
-    public function index()
-    {
-        $reservas = auth()->user()->reservation()->with('reservable')->get();
-        return view('user.reservation.index', compact('reservas'));
+    public function index() {
+    $reservas = Reservation::where('user_id', auth()->id())
+        ->with('reservable') // Carga la relación polimórfica
+        ->get();
+
+    return view('user.reservation.index', compact('reservas'));
     }
 
     // Método para buscar y mostrar reservas disponibles según tipo, fecha y hora
-    public function buscarReservas(Request $request)
-    {
-        $tipoReserva = $request->input('tipo_reserva');
-        $fechaReserva = $request->input('fecha_reserva') . ' ' . $request->input('hora_reserva') . ':00'; // Fecha completa con hora
+    public function buscarReservas(Request $request) {
+        $request->validate([
+            'tipo_reserva' => 'required',
+            'fecha_reserva' => 'required|date',
+            'hora_reserva' => 'required',
+        ]);
+        
+        $tipoReserva = $request->tipo_reserva;
+        $fechaReserva = $request->fecha_reserva . ' ' . $request->hora_reserva;
 
-        $equiposDisponibles = null;
-        $cubiculosDisponibles = null;
-
-        // Buscar computadoras o laptops disponibles
+        $userId = auth()->id();
+        $reservas = Reservation::where('user_id', $userId)
+            ->with('reservable') // Carga la relación polimórfica
+            ->get();
+            
         if ($tipoReserva == 'computadora' || $tipoReserva == 'laptop') {
-            $equiposDisponibles = Equipo::where('type', $tipoReserva)
-                ->where('disponible', true)
-                ->whereDoesntHave('reservas', function ($query) use ($fechaReserva) {
-                    $query->where('reserved_at', $fechaReserva); // Solo no mostrar equipos ya reservados en la fecha seleccionada
+            $equiposDisponibles = Equipo::where('tipo', $tipoReserva)
+                ->whereNotIn('id', function ($query) use ($fechaReserva) {
+                    $query->select('reservable_id')
+                        ->from('reservations')
+                        ->where('reserved_at', '<=', $fechaReserva)
+                        ->where('due_date', '>=', $fechaReserva);
                 })
                 ->get();
-        }
 
-        // Buscar cubículos disponibles
+            return view('user.reservation.index', compact('equiposDisponibles', 'fechaReserva'));
+        }
+        
         if ($tipoReserva == 'cubiculo') {
-            $cubiculosDisponibles = Cubiculo::where('disponible', true)
-                ->whereDoesntHave('reservas', function ($query) use ($fechaReserva) {
-                    $query->where('reserved_at', $fechaReserva); // Solo no mostrar cubículos ya reservados
-                })
-                ->get();
+            $cubiculosDisponibles = Cubiculo::whereNotIn('id', function ($query) use ($fechaReserva) {
+                $query->select('reservable_id')
+                    ->from('reservations')
+                    ->where('reserved_at', '<=', $fechaReserva)
+                    ->where('due_date', '>=', $fechaReserva);
+            })->get();
+            
+            return view('user.reservation.index', compact('cubiculosDisponibles', 'fechaReserva'));
         }
-
-        // Pasar las variables a la vista
-        return view('user.reservation.index', compact('equiposDisponibles', 'cubiculosDisponibles', 'fechaReserva'));
+        
+        return view('user.reservation.index');
     }
 
-    // Mostrar equipos disponibles para hacer reservas
-    public function showAvailableEquipments()
-    {
-        $computadorasDisponibles = Equipo::where('type', 'computadora')
-            ->where('disponible', true)  // Solo los disponibles
-            ->get();
 
-        $laptopsDisponibles = Equipo::where('type', 'laptop')
-            ->where('disponible', true)
-            ->get();
-
-        return view('user.reservation.available', compact('computadorasDisponibles', 'laptopsDisponibles'));
+    // Editar una reserva
+    public function edit(Reservation $reservation) {
+    // Verificar si la reserva pertenece al usuario
+    if ($reservation->user_id !== auth()->id()) {
+        abort(403, 'No tienes permiso para modificar esta reserva.');
     }
 
-    // Mostrar cubículos disponibles para hacer reservas
-    public function showAvailableCubicles()
-    {
-        $cubiculosDisponibles = Cubiculo::where('disponible', true)->get(); // Asegúrate de tener un campo 'disponible'
+    return view('user.reservation.edit', compact('reservation'));
+    }
+    
+    
+    public function update(Request $request, $id) {
+        
+        $reservation = Reservation::findOrFail($id);
+        
+        // Obtiene la fecha y hora por separado
+        $reserved_at_date = $request->input('reserved_at_date');
+        $reserved_at_time = $request->input('reserved_at_time');
+    
+        // Combina la fecha y la hora para obtener el timestamp completo
+        $reserved_at = Carbon::parse($reserved_at_date . ' ' . $reserved_at_time);
 
-        return view('user.reservation.available_cubicles', compact('cubiculosDisponibles'));
+        // Si se proporciona la hora de vencimiento, combina también
+        $due_date_time = $request->input('due_date_time');
+        $due_date = $due_date_time ? Carbon::parse($reserved_at_date . ' ' . $due_date_time) : null;
+
+        // Actualiza la reserva
+        $reservation->reserved_at = $reserved_at;
+        $reservation->due_date = $due_date;
+        
+        $reservation->save();
+        
+        return redirect()->route('reservations.index')->with('success', 'Reserva actualizada correctamente.');
+    }
+
+
+    // Eliminar una reserva
+    public function destroy(Reservation $reservation) {
+    if ($reservation->user_id !== auth()->id()) {
+        abort(403, 'No tienes permiso para eliminar esta reserva.');
+    }
+
+    $reservation->delete();
+
+    return redirect()->route('reservations.index')->with('success', 'Reserva eliminada correctamente.');
     }
 
     // Crear una reserva
