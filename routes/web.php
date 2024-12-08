@@ -13,12 +13,14 @@ use App\Http\Controllers\CategorybookController;        // CONTROLADOR DE LIBROS
 use App\Http\Controllers\LibraryController;             // CONTROLADOR DE BIBLIOTECA
 use App\Http\Controllers\BookCommentController;         // CONTROLADOR DE COMENTARIOS
 use App\Http\Controllers\EquipoController;              // CONTROLADOR DE EQUIPO
+use App\Http\Controllers\FileUploadController;
+
 
 // Ruta principal de bienvenida
 Route::get('/', function () {
     return view('welcome');
 });
-
+route::post('/upload-pdf', [FileUploadController::class, 'uploadPdf']);
 // Ruta pública para la biblioteca
 Route::get('/biblioteca', [LibraryController::class, 'index'])->name('biblioteca.index');
 Route::get('book/{book}', [BookController::class, 'show'])->name('book.show');
