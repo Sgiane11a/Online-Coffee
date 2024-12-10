@@ -174,13 +174,23 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
         // Rutas para manejo de reservaciones
-
-
-        Route::prefix('reservations')->name('reservations.')->group(function () {
+        Route::prefix('reservations')->name('reservations.')->group(function () { 
+            // Listado general de reservas
             Route::get('/', [AdminController::class, 'index'])->name('index'); // admin.reservations.index
-            Route::get('/create', [ReservationController::class, 'create'])->name('create'); // admin.reservations.create
-            Route::post('/', [ReservationController::class, 'store'])->name('store'); // admin.reservations.store
+        
+            // Crear nueva reserva
+            Route::get('/create', [ReservationController::class, 'createReservation'])->name('create'); // admin.reservations.create
+            Route::post('/', [ReservationController::class, 'storeReservation'])->name('store'); // admin.reservations.store
+        
+            // Editar una reserva
+            Route::get('/{id}/edit', [AdminController::class, 'edit'])->name('edit'); // admin.reservations.edit
+            Route::put('/{id}', [AdminController::class, 'update'])->name('update'); // admin.reservations.update
+        
+            // Eliminar una reserva
+            Route::delete('/{id}', [AdminController::class, 'deleteReservation'])->name('delete'); // admin.reservations.destroy
         });
+        
+        
         /*
         Route::prefix('reservation')->name('reservations.')->group(function () {
             Route::prefix('products')->name('products.')->group(function () {

@@ -11,12 +11,13 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Post;
 use App\Models\Reservation;
+use App\Models\Cubiculo;
+use App\Models\Equipo;
 
 
 class AdminController extends Controller
 {
-    public function dashboard(): View
-    {
+    public function dashboard(): View {
         $totalUsers = User::count();
         $totalPublicaciones = Post::count();
         $totalPrecio = 0;
@@ -85,15 +86,100 @@ class AdminController extends Controller
         return view('admin.books.index');
     }
 
-    //---------------------------------------------------------------
+    //---------------------------------------------------
     //RESERVACIONES
-    //---------------------------------------------------------------
+    //---------------------------------------------------
 
-    function index()
-    {
-        // Obtiene todas las reservas
-        $reservations = Reservation::all();
-
+    public function index(Request $request) {
+        // Filtro por nombre de usuario y rango de fechas
+        $query = Reservation::query();
+    
+        if ($request->has('usuario') && $request->usuario) {
+            $query->whereHas('user', function ($subQuery) use ($request) {
+                $subQuery->where('name', 'like', '%' . $request->usuario . '%');
+            });
+        }
+    
+        if ($request->has('fecha_inicio') && $request->fecha_inicio) {
+            $query->where('reserved_at', '>=', $request->fecha_inicio);
+        }
+    
+        if ($request->has('fecha_fin') && $request->fecha_fin) {
+            $query->where('reserved_at', '<=', $request->fecha_fin);
+        }
+    
+        $reservations = $query->paginate();
+    
         return view('admin.reservations.index', compact('reservations'));
     }
+
+    public function createReservation() {
+        // Obtener datos necesarios para el formulario (usuarios, equipos y cubículos)
+        $usuarios = User::all();
+        $equipos = Equipo::all();
+        $cubiculos = Cubiculo::all();
+    
+        return view('admin.reservations.create', compact('usuarios', 'equipos', 'cubiculos'));
+    }
+    
+    public function storeReservation(Request $request) {
+        // Validar los datos ingresados
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'reservable_id' => 'required',
+            'reservable_type' => 'required|in:App\Models\Equipo,App\Models\Cubiculo',
+            'reserved_at' => 'required|date',
+            'due_date' => 'nullable|date|after_or_equal:reserved_at',
+            'status' => 'required|in:Pendiente,Confirmado,Cancelado',
+        ]);
+    
+        // Crear la reserva
+        Reservation::create([
+            'user_id' => $request->user_id,
+            'reservable_id' => $request->reservable_id,
+            'reservable_type' => $request->reservable_type,
+            'reserved_at' => $request->reserved_at,
+            'due_date' => $request->due_date,
+            'status' => $request->status,
+        ]);
+    
+        return redirect()->route('reservations.index')->with('success', 'Reserva creada correctamente.');
+    }
+    
+    
+    public function edit($id) {
+        // Buscar la reserva por ID
+        $reservation = Reservation::findOrFail($id);
+    
+        return view('admin.reservations.edit', compact('reservation'));
+    }
+    
+    public function update(Request $request, $id) {
+        // Validar los datos de la reserva
+        $request->validate([
+            'reserved_at' => 'required|date',
+            'due_date' => 'nullable|date|after_or_equal:reserved_at',
+            'status' => 'required|in:Pendiente,Confirmado,Cancelado',
+        ]);
+    
+        // Actualizar la reserva
+        $reservation = Reservation::findOrFail($id);
+        $reservation->update([
+            'reserved_at' => $request->reserved_at,
+            'due_date' => $request->due_date,
+            'status' => $request->status,
+        ]);
+    
+        return redirect()->route('reservations.index')->with('success', 'Reserva actualizada correctamente.');
+    }
+    
+    public function deleteReservation($id) {
+        // Eliminar la reserva
+        $reservation = Reservation::findOrFail($id);
+        $reservation->delete();
+    
+        return redirect()->route('reservations.index')->with('success', 'Reserva eliminada correctamente.');
+    }
+    
+
 }
