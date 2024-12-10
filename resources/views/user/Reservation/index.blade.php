@@ -30,6 +30,8 @@
 <form action="{{ route('buscar.reservas') }}" method="POST" class="max-w-lg mx-auto p-6 border-2 border-gray-300 rounded-lg bg-white shadow-lg mt-8">
     @csrf
     <div class="space-y-4">
+        <h2 class="text-2xl font-semibold mb-4 text-center">Busca tu Reserva</h2>
+
         <div>
             <label for="tipo_reserva" class="block text-gray-700 font-semibold">Tipo de reserva:</label>
             <select name="tipo_reserva" id="tipo_reserva" class="w-full p-2 border border-gray-300 rounded-md">
@@ -73,56 +75,65 @@
         @endforeach
     </div>
 @endif
-{{----}}
+{{--cubiiculos disponibles--}}
         
-    @if(isset($cubiculosDisponibles) && $cubiculosDisponibles->isNotEmpty())
-        <h3>Cubículos Disponibles</h3>
-    @foreach($cubiculosDisponibles as $cubiculo)
-        <div>
-            <img src="{{ $cubiculo->image_public_id }}" alt="{{ $cubiculo->nombre }}">
-            <h4>{{ $cubiculo->nombre }}</h4>
-            <p>{{ $cubiculo->descripcion }}</p>
-            <form action="{{ route('reservations.store') }}" method="POST">
-                @csrf
-                <input type="hidden" name="reservable_id" value="{{ $cubiculo->id }}">
-                <input type="hidden" name="reservable_type" value="App\Models\Cubiculo">
-                <input type="hidden" name="reserved_at" value="{{ $fechaReserva }}">
-                <button type="submit">Reservar</button>
-            </form>
+@if(isset($cubiculosDisponibles) && $cubiculosDisponibles->isNotEmpty())
+    <h3 class="text-xl font-semibold mb-4 text-center">Cubículos Disponibles</h3>
+    <div class="cubiculos-container">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($cubiculosDisponibles as $cubiculo)
+                <div class="cubiculo-card">
+                    <img src="{{ $cubiculo->image_public_id }}" alt="{{ $cubiculo->nombre }}" class="cubiculo-image">
+                    <div class="cubiculo-content">
+                        <h4 class="cubiculo-title">{{ $cubiculo->nombre }}</h4>
+                        <p class="cubiculo-description">{{ $cubiculo->descripcion }}</p>
+                        <form action="{{ route('reservations.store') }}" method="POST" class="mt-4">
+                            @csrf
+                            <input type="hidden" name="reservable_id" value="{{ $cubiculo->id }}">
+                            <input type="hidden" name="reservable_type" value="App\Models\Cubiculo">
+                            <input type="hidden" name="reserved_at" value="{{ $fechaReserva }}">
+                            <button type="submit" class="cubiculo-button">Reservar</button>
+                        </form>
+                    </div>
+                </div>
+            @endforeach
         </div>
-    @endforeach
-    @endif
+    </div>
+@endif
 
 
-    <section>
-        @if(isset($reservas) && $reservas->isNotEmpty())
-            <h2 class="text-2xl font-semibold mb-4">Mis Reservas</h2>
+<section>
+    @if(isset($reservas) && $reservas->isNotEmpty())
+        <div class="reservas-title-container">
+            <h2 class="reservas-title">Mis Reservas</h2>
+        </div>
+        <div class="reservas-container">
             <div class="overflow-x-auto">
-                <table class="min-w-full table-auto border-collapse">
+                <table class="reservas-table">
                     <thead>
-                        <tr class="bg-gray-200">
-                            <th class="py-2 px-4 border text-left">Tipo de Reserva</th>
-                            <th class="py-2 px-4 border text-left">Nombre del Elemento</th>
-                            <th class="py-2 px-4 border text-left">Fecha de Reserva</th>
-                            <th class="py-2 px-4 border text-left">Hora de Inicio</th>
-                            <th class="py-2 px-4 border text-left">Hora de Fin</th>
-                            <th class="py-2 px-4 border text-left">Acciones</th>
+                        <tr>
+                            <th>Tipo de Reserva</th>
+                            <th>Nombre del Elemento</th>
+                            <th>Fecha de Reserva</th>
+                            <th>Hora de Inicio</th>
+                            <th>Hora de Fin</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($reservas as $reserva)
                             <tr>
-                                <td class="py-2 px-4 border">{{ $reserva->reservable_type == 'App\Models\Equipo' ? 'Equipo' : 'Cubículo' }}</td>
-                                <td class="py-2 px-4 border">{{ $reserva->reservable->nombre }}</td>
-                                <td class="py-2 px-4 border">{{ \Carbon\Carbon::parse($reserva->reserved_at)->format('d-m-Y') }}</td>
-                                <td class="py-2 px-4 border">{{ \Carbon\Carbon::parse($reserva->reserved_at)->format('H:i') }}</td>
-                                <td class="py-2 px-4 border">{{ $reserva->due_date ? \Carbon\Carbon::parse($reserva->due_date)->format('H:i') : 'N/A' }}</td>
-                                <td class="py-2 px-4 border">
-                                    <a href="{{ route('reservations.edit', $reserva->id) }}" class="text-blue-500 hover:underline">Modificar</a>
+                                <td>{{ $reserva->reservable_type == 'App\Models\Equipo' ? 'Equipo' : 'Cubículo' }}</td>
+                                <td>{{ $reserva->reservable->nombre }}</td>
+                                <td>{{ \Carbon\Carbon::parse($reserva->reserved_at)->format('d-m-Y') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($reserva->reserved_at)->format('H:i') }}</td>
+                                <td>{{ $reserva->due_date ? \Carbon\Carbon::parse($reserva->due_date)->format('H:i') : 'N/A' }}</td>
+                                <td>
+                                    <a href="{{ route('reservations.edit', $reserva->id) }}" class="edit-btn">Modificar</a>
                                     <form action="{{ route('reservations.destroy', $reserva->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-500 hover:underline ml-2">Eliminar</button>
+                                        <button type="submit" class="delete-btn">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>
@@ -130,12 +141,15 @@
                     </tbody>
                 </table>
             </div>
-        @else
-            <p class="text-center text-gray-600">No tienes reservas en este momento.</p>
-        @endif
-    </section>
-    
+        </div>
+    @else
+        <p class="text-center text-gray-600">No tienes reservas en este momento.</p>
+    @endif
+</section>
 
+</section>
+
+    
 </x-app-layout>
 
 
@@ -147,6 +161,7 @@
 
 
 <style>
+    
 
     /* stylo*/
     .descripcion0 {
@@ -222,5 +237,306 @@ form button:hover {
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Contenedor principal para la tabla */
+.reservas-container {
+    max-width: 1200px; /* Ancho máximo de la tabla */
+    margin: 0 auto; /* Centramos el contenedor */
+    padding: 0 16px; /* Espacio adicional a los lados */
+    box-sizing: border-box;
+}
+
+/* Contenedor general de la tabla */
+.reservas-table {
+    width: 100%; /* La tabla ocupa todo el ancho del contenedor */
+    border-collapse: collapse;
+    margin: 30px 0;
+    font-size: 16px;
+    text-align: left;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Encabezado de la tabla */
+.reservas-table thead tr {
+    background-color: #B4198B;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.reservas-table thead th {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+/* Filas del cuerpo de la tabla */
+.reservas-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.reservas-table tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+
+.reservas-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.reservas-table tbody td {
+    padding: 12px 15px;
+    text-align: center;
+    color: #555555;
+}
+
+/* Botones de acción */
+.edit-btn {
+    color: #4CAF50;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+}
+
+.edit-btn:hover {
+    color: #2e7d32;
+}
+
+.delete-btn {
+    color: #F44336;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.delete-btn:hover {
+    color: #c62828;
+}
+
+
+/* Contenedor para el título */
+.reservas-title-container {
+    max-width: 500px;
+    margin: 0 auto 10px; /* Reducido el margen inferior a 10px */
+    padding: 10px 16px;
+    background-color: #B4198B; /* Color de fondo */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    text-align: center;
+}
+
+/* Título dentro del contenedor */
+.reservas-title {
+    color: #ffffff; /* Color del texto */
+    font-size: 1.5rem; /* Tamaño del texto */
+    font-weight: bold;
+    margin: 0; /* Sin márgenes adicionales */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Contenedor principal de las tarjetas */
+.cubiculos-container {
+    max-width: 1200px; /* Ancho máximo para mantenerlas centradas */
+    margin: 0 auto; /* Centrar el contenedor */
+    padding: 0 16px; /* Agregar espacio a los lados (izquierda y derecha) */
+    box-sizing: border-box; /* Incluye padding en el cálculo del ancho */
+}
+
+/* Tarjeta individual de los cubículos */
+.cubiculo-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cubiculo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen de cubículo */
+.cubiculo-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Contenido del cubículo */
+.cubiculo-content {
+    padding: 16px;
+    text-align: center;
+}
+
+/* Título del cubículo */
+.cubiculo-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Descripción del cubículo */
+.cubiculo-description {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+/* Botón para reservar cubículo */
+.cubiculo-button {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #B4198B;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cubiculo-button:hover {
+    background-color: #7B1FA2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*cubiculos disponibles*/
+
+/* Contenedor de la tarjeta de cubículo */
+.cubiculo-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cubiculo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen de cubículo */
+.cubiculo-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Contenido del cubículo */
+.cubiculo-content {
+    padding: 16px;
+    text-align: center;
+}
+
+/* Título del cubículo */
+.cubiculo-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Descripción del cubículo */
+.cubiculo-description {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+/* Botón para reservar cubículo */
+.cubiculo-button {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #B4198B;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cubiculo-button:hover {
+    background-color: #7B1FA2;
+}
 
 </style>
