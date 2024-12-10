@@ -1,15 +1,36 @@
+{{--RESERVA USUARIO--}} 
+
 <x-app-layout>
-    <div class="container-imagen0">
-        {{--Encabezado(Logo)--}}
-        <section class="relative text-left bg-cover h-50 sm:h-60 md:h-[270px]" style="background-image: url('{{ asset('images/RESERVAS.png') }}');">
-            <div class="absolute inset-0 "></div> <!-- Filtro oscuro encima del fondo -->
-            <div class="relative z-10 flex flex-col gap-4 px-4 py-8 max-w-3xl mx-auto text-center">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl text-grape-350  font-extrabold leading-tight titulo0">Reservas</h1>
-                <p class="text-lg sm:text-xl text-BLACK max-w-lg mx-auto">Reserva herramientas y espacios para complementar tus estudios con un solo clic.</p>
+
+
+{{--Encabezado--}} 
+<section class="relative bg-cover h-50 sm:h-60 md:h-[270px]" style="background-image: url('{{ asset('images/RESERVAS.png') }}');">
+    <div class="absolute inset-0"></div> <!-- Filtro oscuro encima del fondo -->
+
+    <div class="relative z-10 flex flex-row items-center justify-between px- py-9 max-w-5xl mx-auto  ">
+        <div class="grid grid-cols-4 items-center">
+                <!-- Espacio vacío a la izquierda -->
+                <div></div>
+                <!-- Contenedor del Título -->
+                <div class="text-center">
+                    <h1 class="sm:text-7xl titulo0">Reserva</h1>
+                </div>
+            
+                <!-- Contenedor de la Descripción -->
+                <div class=" text-center relative w-96" style="left: 15rem; top: -2rem;">
+                    <p class="text-BLACK descripcion0">
+                        Reserva herramientas y espacios para complementar tus estudios con un solo clic.
+                    </p>
+                    <div class="mt-4">
+                        <x-auth-header-button url="{{ route('login') }}" text="Comienza aquí" />
+                    </div>    
+                </div>
             </div>
-        </section>
-    </div>
-    
+            
+</section>
+{{--Encabezado --}} 
+
+
     <form action="{{ route('buscar.reservas') }}" method="POST">
         @csrf
         <label for="tipo_reserva">Tipo de reserva:</label>
@@ -113,7 +134,7 @@
             </tbody>
         </table>
         @else
-        <p>No tienes reservas en este momento.</p>
+        <center><p>No tienes reservas en este momento.</p></center>
         @endif
     </section>
 
@@ -122,3 +143,113 @@
 
     
     
+
+
+
+
+
+<style>
+
+
+/* Contenedor general del formulario */
+form {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+
+/* Labels */
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Inputs y select */
+form select,
+form input[type="date"],
+form input[type="time"] {
+    width: calc(100% - 10px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Botón buscar */
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #B4198B;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #7B1FA2;
+}
+
+
+
+
+
+
+
+
+
+
+    /* stylo*/
+.descripcion0 {
+    margin-top: 10px;
+    color: #000000;
+    max-width: 500px; /* Reducir el ancho máximo */
+    padding-right: 5px; /* Controla la cantidad de espacio a la derecha */
+    padding: 30px;
+}
+
+
+
+/* Título dentro del encabezado */
+.titulo0 {
+    position: relative;
+    background: #ffffff;
+    padding: 25px 50px;
+    border-radius: 8px;
+    display: inline-block;
+
+    font-weight: bolder;
+    color: #B4198B;
+    margin-bottom: 100px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.titulo0::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -15px;
+    width: 100%;
+    height: 100%;
+    background: #B4198B;
+    z-index: -1;
+    border-radius: 8px;
+    transform: translate(-5%, 5%);
+}
+
+.cate{
+    margin-bottom: 10px;
+}
+
+</style>
