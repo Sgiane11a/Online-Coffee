@@ -78,7 +78,9 @@
 {{--cubiiculos disponibles--}}
         
 @if(isset($cubiculosDisponibles) && $cubiculosDisponibles->isNotEmpty())
-    <h3 class="text-xl font-semibold mb-4 text-center">Cubículos Disponibles</h3>
+    <div class="reservas-title-container">
+        <h2 class="reservas-title">Cubículos Disponibles</h2>
+    </div>
     <div class="cubiculos-container">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($cubiculosDisponibles as $cubiculo)
@@ -352,7 +354,7 @@ form button:hover {
 /* Contenedor para el título */
 .reservas-title-container {
     max-width: 500px;
-    margin: 0 auto 10px; /* Reducido el margen inferior a 10px */
+    margin: 30px auto 10px; /* Incrementado el margen superior a 30px para más separación del formulario */
     padding: 10px 16px;
     background-color: #B4198B; /* Color de fondo */
     border-radius: 8px; /* Bordes redondeados */
@@ -368,7 +370,11 @@ form button:hover {
     margin: 0; /* Sin márgenes adicionales */
 }
 
-
+/* Contenedor del formulario */
+form {
+    background-color: #ffffff;
+    margin-bottom: 40px; /* Separación del formulario con las siguientes secciones */
+}
 
 
 
@@ -538,5 +544,56 @@ form button:hover {
 .cubiculo-button:hover {
     background-color: #7B1FA2;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Contenedor para el título */
+.reservas-title-container {
+    max-width: 300px;
+    margin: 30px auto 10px; /* Incrementado el margen superior a 30px para más separación del formulario */
+    padding: 10px 16px;
+    background-color: #B4198B; /* Color de fondo */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    text-align: center;
+}
+
+/* Título dentro del contenedor */
+.reservas-title {
+    color: #ffffff; /* Color del texto */
+    font-size: 1.5rem; /* Tamaño del texto */
+    font-weight: bold;
+    margin: 0; /* Sin márgenes adicionales */
+}
+
 
 </style>
