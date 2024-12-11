@@ -30,7 +30,7 @@
 <form action="{{ route('buscar.reservas') }}" method="POST" class="max-w-lg mx-auto p-6 border-2 border-gray-300 rounded-lg bg-white shadow-lg mt-8">
     @csrf
     <div class="space-y-4">
-        <h2 class="text-2xl font-semibold mb-4 text-center">Busca tu Reserva</h2>
+        <h2 class="text-2xl font-semibold mb-4 text-center text-black">Busca tu Reserva</h2>
 
         <div>
             <label for="tipo_reserva" class="block text-gray-700 font-semibold">Tipo de reserva:</label>
