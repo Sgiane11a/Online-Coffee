@@ -32,7 +32,7 @@
     <div class="space-y-4">
         <h2 class="text-2xl font-semibold mb-4 text-center text-black">Busca tu Reserva</h2>
 
-        <div>
+        <div class="text-black">
             <label for="tipo_reserva" class="block text-gray-700 font-semibold">Tipo de reserva:</label>
             <select name="tipo_reserva" id="tipo_reserva" class="w-full p-2 border border-gray-300 rounded-md">
                 <option value="">Seleccione</option>
@@ -43,13 +43,13 @@
         </div>
 
         <div>
-            <label for="fecha_reserva" class="block text-gray-700 font-semibold">Fecha:</label>
-            <input type="date" name="fecha_reserva" id="fecha_reserva" required class="w-full p-2 border border-gray-300 rounded-md">
+            <label for="fecha_reserva" class="block text-gray-700 font-semibold ">Fecha:</label>
+            <input type="date" name="fecha_reserva" id="fecha_reserva " required class="w-full p-2 border border-gray-300 rounded-md text-black">
         </div>
 
         <div>
             <label for="hora_reserva" class="block text-gray-700 font-semibold">Hora:</label>
-            <input type="time" name="hora_reserva" id="hora_reserva" required class="w-full p-2 border border-gray-300 rounded-md">
+            <input type="time" name="hora_reserva" id="hora_reserva" required class="w-full p-2 border border-gray-300 rounded-md text-black">
         </div>
 
         <button type="submit" class="w-full py-2 bg-purple-700 text-white font-bold rounded-md hover:bg-purple-600 transition-colors">Buscar</button>
@@ -87,7 +87,7 @@
                 <div class="cubiculo-card">
                     <img src="{{ $cubiculo->image_public_id }}" alt="{{ $cubiculo->nombre }}" class="cubiculo-image">
                     <div class="cubiculo-content">
-                        <h4 class="cubiculo-title">{{ $cubiculo->nombre }}</h4>
+                        <h4 class="cubiculo-title text-black">{{ $cubiculo->nombre }}</h4>
                         <p class="cubiculo-description">{{ $cubiculo->descripcion }}</p>
                         <form action="{{ route('reservations.store') }}" method="POST" class="mt-4">
                             @csrf
