@@ -21,17 +21,7 @@
                     </div>
                 </div>
                 <!-- Contactos pendientes -->
-                <div class="flex items-center p-4 rounded-lg shadow-xs bg-teal-500 text-white">
-                    <div class="p-3 mr-4 rounded-full bg-white text-teal-500">
-                        <svg class="h-8 w-8 text-teal-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
-                          </svg>
-                    </div>
-                    <div>
-                        <p class="text-lg font-semibold">2</p>
-                        <p class="text-sm">Contactos pendientes</p>
-                    </div>
-                </div>
+                
                 <!-- Nuevos comentarios -->
                 <div class="flex items-center p-4 rounded-lg shadow-xs bg-pink-500 text-white">
                     <div class="p-3 mr-4 rounded-full bg-white text-pink-500">

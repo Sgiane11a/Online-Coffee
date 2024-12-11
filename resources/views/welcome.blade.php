@@ -89,7 +89,7 @@
                 </div>
             </div>
             <aside class="flex flex-col justify-center items-center gap-6 mt-8">
-                <h1 class="text-2xl font-bold">Nuestros servicios</h1>
+                <h1 class="text-2xl font-bold text-black">Nuestros servicios</h1>
                 <p class="text-center text-blue-600">Online Coffee pone a disposición de sus usuarios una amplia 
                     gama de servicios, con instalaciones pensadas para diferentes necesidades: un área de videojuegos, 
                     un espacio de estudio, computadoras disponibles para uso, y, por supuesto, su tradicional y acogedora 
@@ -100,7 +100,7 @@
         {{--Carrusel reservas--}}
         <section id="reservas" class="py-16 bg-white-100">
             <div class="max-w-7xl mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-8">Reservas</h2>
+                <h2 class="text-3xl font-bold text-center mb-8 text-black">Reservas</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     
                     <div class="flex flex-col items-center">
@@ -150,24 +150,24 @@
         {{--Productos lista--}}
 
         <section class="py-16 px-8 bg-white">
-            <div class="max-w-7xl mx-auto">
-                <h2 class="text-2xl font-bold text-center mb-8">Algunos de nuestros productos</h2>
-                <ul class="space-y-4">
-                    <li class="bg-gray p-4 shadow rounded-lg flex items-center justify-between">
-                        <span>Frapp de Cookies & Cream</span>
-                        <span>S/. 16.00</span>
-                    </li>
-                    <li class="bg-gray p-4 shadow rounded-lg flex items-center justify-between">
-                        <span>Pie de manzana</span>
-                        <span>S/. 5.00</span>
-                    </li>
-                    <li class="bg-gray p-4 shadow rounded-lg flex items-center justify-between">
-                        <span>Cappucchino</span>
-                        <span>S/. 7.00</span>
-                    </li>
-                </ul>
-            </div>
-        </section>        
-        
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-2xl font-bold text-center mb-8 text-black">Algunos de nuestros productos</h2>
+        <ul class="space-y-4">
+            <li class="bg-gray p-4 shadow rounded-lg flex items-center justify-between">
+                <span class="text-black">Frapp de Cookies & Cream</span>
+                <span class="text-black">S/. 16.00</span>
+            </li>
+            <li class="bg-gray p-4 shadow rounded-lg flex items-center justify-between">
+                <span class="text-black">Pie de manzana</span>
+                <span class="text-black">S/. 5.00</span>
+            </li>
+            <li class="bg-gray p-4 shadow rounded-lg flex items-center justify-between">
+                <span class="text-black">Cappucchino</span>
+                <span class="text-black">S/. 7.00</span>
+            </li>
+        </ul>
+    </div>
+</section>
+
     </main>
 @endsection

@@ -1,9 +1,8 @@
 <x-app-layout>
 
 <div class="book-details-container">
-    <div class="back-button-container">
-        <button onclick="window.history.back()" class="back-button">← Regresar</button>
-    </div>
+    <br>
+    <br>
 
     <div class="book-header">
         <div class="book-thumbnail-container">
@@ -17,8 +16,8 @@
             <p><strong>Fecha de publicación:</strong> {{ $book->publication_year }}</p>
 
             @if($book->digital_version_link)
-            <a href="{{ $book->digital_version_link }}" class="download-btn" target="_blank">Descargar PDF</a>
-            @endif
+    <a href="{{ asset( $book->digital_version_link) }}" class="download-btn" target="_blank">Descargar PDF</a>
+@endif
 
         </div>
     </div>
@@ -74,19 +73,21 @@
 <style>
     body {
         font-family: 'Lora', serif;
-        background-color: #f4ede0;
-        color: #2c2c2c;
+        background-color: #ffffff; /* Fondo blanco */
+        color: #4a154b; /* Texto rosa oscuro */
         margin: 0;
         padding: 0;
+        overflow-x: hidden; /* Evitar desplazamiento horizontal */
     }
 
     .book-details-container {
-        max-width: 1200px;
-        margin: 20px auto;
+        width: 100%; /* Ancho completo */
+        max-width: 100%; /* Elimina el límite de ancho máximo */
+        margin: 0; /* Sin márgenes */
         padding: 20px;
-        background-color: #fffaf0;
-        border-radius: 12px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff; /* Fondo blanco */
+        border-radius: 1px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra ligera */
     }
 
     .back-button-container {
@@ -96,8 +97,8 @@
     .back-button {
         padding: 10px 20px;
         background-color: transparent;
-        color: #8d6e63;
-        border: 2px solid #8d6e63;
+        color: #4a154b; /* Texto rosa oscuro */
+        border: 2px solid #4a154b;
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
@@ -105,7 +106,7 @@
     }
 
     .back-button:hover {
-        background-color: #8d6e63;
+        background-color: #4a154b;
         color: white;
     }
 
@@ -121,7 +122,7 @@
         max-width: 300px;
         border-radius: 10px;
         overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra ligera */
     }
 
     .book-thumbnail {
@@ -136,7 +137,7 @@
     .book-info-container h1 {
         font-size: 2rem;
         margin-bottom: 20px;
-        color: #4e342e;
+        color: #4a154b; /* Texto rosa oscuro */
     }
 
     .book-info-container p {
@@ -149,8 +150,8 @@
         display: inline-block;
         padding: 10px 20px;
         background-color: transparent;
-        color: #795548;
-        border: 2px solid #795548;
+        color: #4a154b; /* Texto rosa oscuro */
+        border: 2px solid #4a154b;
         border-radius: 5px;
         font-weight: bold;
         text-transform: uppercase;
@@ -159,7 +160,7 @@
     }
 
     .download-btn:hover {
-        background-color: #795548;
+        background-color: #4a154b;
         color: white;
     }
 
@@ -167,6 +168,7 @@
         display: flex;
         gap: 40px;
         flex-wrap: wrap;
+        width: 100%;
     }
 
     .comments-section, .recommended-books {
@@ -177,7 +179,7 @@
     .comments-section h2, .recommended-books h2 {
         font-size: 1.8rem;
         margin-bottom: 15px;
-        color: #4e342e;
+        color: #4a154b; /* Texto rosa oscuro */
     }
 
     .related-books-container {
@@ -194,20 +196,20 @@
     .related-book-image {
         width: 100%;
         border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
     }
 
     .related-book-card p {
         margin-top: 10px;
         font-size: 0.9rem;
-        color: #4e342e;
+        color: #4a154b; /* Texto rosa oscuro */
     }
 
     .submit-comment-btn {
         padding: 10px 20px;
         background-color: transparent;
-        color: #795548;
-        border: 2px solid #795548;
+        color: #4a154b; /* Texto rosa oscuro */
+        border: 2px solid #4a154b;
         border-radius: 5px;
         font-weight: bold;
         text-transform: uppercase;
@@ -215,7 +217,7 @@
     }
 
     .submit-comment-btn:hover {
-        background-color: #795548;
+        background-color: #4a154b;
         color: white;
     }
 
@@ -242,15 +244,14 @@
                 data: formData,
                 success: function(response) {
                     // Crear el nuevo comentario en formato HTML
-                    var newComment = `
-                        <div class="comment">
-                            <p><strong>${response.user_name}</strong></p>
-                            <p>${response.content}</p>
-                        </div>
-                    `;
+                    var newComment = ``
+                    <div class="comment">
+                        <p><strong>${response.user_name}</strong></p>
+                        <p>${response.content}</p>
+                    </div>
                     // Agregar el nuevo comentario al final de la lista de comentarios
                     $('#comments-list').append(newComment);
-
+                    
                     // Limpiar el campo de texto del formulario
                     $('textarea[name="content"]').val('');
                 },
@@ -263,4 +264,4 @@
 </script>
 
 
-</x-app-layout>  
+</x-app-layout>

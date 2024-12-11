@@ -21,8 +21,7 @@ class BookController extends Controller
         })
         ->when($category_filter, function ($query, $category_filter) {
             return $query->where('category_id', $category_filter);
-        })
-        ->paginate(10); // Paginate the results, showing 10 books per page.
+        });
     
         $bookscategories = Bookscategory::all();
     
